@@ -1,0 +1,41 @@
+{
+    "tasks": {
+        "dev" : "deno run --watch -A Source/App.ts"
+    },
+
+    "lint": {
+        "rules": {
+        "tags": [
+            "fresh",
+            "recommended"
+        ]
+        }
+    },
+
+    "imports": {
+
+        "Render": "https://esm.sh/*preact-render-to-string@6.2.0" ,
+        "Deno/": "https://deno.land/std@0.196.0/" ,
+
+        "Preact/": "https://esm.sh/preact@10.15.1/",
+        "Preact": "https://esm.sh/preact@10.15.1" ,
+
+        "preact/": "https://esm.sh/preact@10.15.1/",
+        "preact": "https://esm.sh/preact@10.15.1" ,
+
+        "Oak" : "https://deno.land/x/oak@v12.6.0/mod.ts"
+    },
+
+    "compilerOptions" : {
+
+        "jsxImportSource": "preact" ,
+        "jsx" : "react-jsx" ,
+
+        "lib": [
+            "deno.window" ,
+            "deno" ,
+            "dom" ,
+            "es2023"
+        ]
+    }
+}
