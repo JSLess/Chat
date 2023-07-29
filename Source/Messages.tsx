@@ -1,15 +1,16 @@
 
 export { renderMessages }
 
-import { Message } from './Types.ts'
-import { messages , users } from './State.ts'
+import { Message , User } from './Types.ts'
+import { messages } from './State.ts'
 import { render } from 'Render'
 
 
 interface Props {
     messages : Array<Message>
-    millis : string
+    user : User
 }
+
 
 function Component ( props : Props ){
 
@@ -19,37 +20,57 @@ function Component ( props : Props ){
 
         <div class = 'Message' >
 
-            { message.message }
+            { message.time.toLocaleTimeString(undefined,{ timeStyle : 'short' }) } : { message.message }
 
         </div>
     ))
 
     return <>
 
-        <div id = { props.millis } >
+        <link
+            href = '/Assets/Messages.css'
+            rel = 'stylesheet'
+        />
+
+        <div class = 'Messages' >
             { elements }
         </div>
+
+        <iframe name = 'void' />
+
+        <form
+            encType = 'multipart/form-data'
+            target = 'void'
+            action = '/post'
+            method = 'post'
+            id = 'Input'
+        >
+
+            <input
+                value = { props.user.userId }
+                type = 'hidden'
+                name = 'userId'
+            />
+
+            <input
+                placeholder = 'Message'
+                spellCheck = { true }
+                required = { true }
+                name = 'message'
+                type = 'text'
+            />
+
+        </form>
     </>
 }
 
 
-function renderMessages ( ){
-
-    const timestamp = new Date()
-
-    const millis = '_' + timestamp
-        .getMilliseconds()
-        .toString()
+function renderMessages ( user : User ){
 
     const msgs = [ ... messages.values() ]
 
     const element =
-        <Component messages = { msgs } millis = { millis } />
+        <Component messages = { msgs } user = { user } />
 
-    const html = render(element)
-
-    return `<style>
-        body > :not(#${ millis }){ display : none }
-        body > #${ millis }{ display : block }
-    </style>${ html }`
+    return render(element)
 }

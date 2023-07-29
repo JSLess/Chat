@@ -14,7 +14,7 @@ class AsyncResponse implements Deno.Reader {
         this.promise = deferred<string>()
     }
 
-    async read ( p : Uint8Array ){
+    async read ( data : Uint8Array ){
 
         if( this.done )
             return null
@@ -25,11 +25,11 @@ class AsyncResponse implements Deno.Reader {
 
         const encoder = new TextEncoder
 
-        const encoded = encoder.encode(value)
+        const bytes = encoder.encode(value)
 
-        p.set(encoded)
+        data.set(bytes)
 
-        return encoded.length
+        return bytes.length
     }
 
     write ( html : string ){

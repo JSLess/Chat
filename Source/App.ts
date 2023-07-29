@@ -1,12 +1,14 @@
 
-
 import { Application , Router } from 'Oak'
 import { messages , users } from './State.ts'
-import { AsyncResponse } from './AsyncResponse.ts'
 import { renderMessages } from './Messages.tsx'
+import { AsyncResponse } from './AsyncResponse.ts'
 import { crypto } from 'Deno/crypto/mod.ts'
 import { render } from 'Render'
 import { Page } from './Page.tsx'
+
+import Favicon from './Favicon.ts'
+
 
 const { debug } = console
 
@@ -15,13 +17,34 @@ debug(`Starting HTML-Only Chat`)
 
 function redraw (){
 
-    for ( const user of users.values() )
-        user.response.write(renderMessages())
+    for ( const user of users.values() ){
+        user.response.write(`<meta http-equiv = refresh content = 0 />`)
+        user.response.close()
+    }
 }
 
 
-
 const router = new Router
+
+router.get('/Assets/:path+',async ( context ) => {
+
+    const root = `${ Deno.cwd() }/Source/Static`
+
+    const path = context.request.url.pathname.replace(/^\/Assets\//,'')
+
+    console.log('root',root,path)
+
+
+    try {
+
+        await context.send({ root , path })
+
+    } catch {
+        context.response.status = 404
+    }
+
+})
+
 
 router.get('/',( context ) => {
 
@@ -43,32 +66,26 @@ router.get('/',( context ) => {
         user : user
     }))
 
+
     context.response.body = `
+
         <!DOCTYPE html>
         <html>
             <head>
+
                 <title> Chat </title>
 
-                <style>
+                <link
+                    href = '/Assets/Style.css'
+                    rel = stylesheet
+                />
 
-                    body {
-                        flex-direction : column ;
-                        align-items : center ;
-                        display : flex ;
-                        padding : 4rem ;
-                        margin : 0 ;
-                    }
+                <link
+                    href = '${ Favicon }'
+                    type = image/x-icon
+                    rel = icon
+                />
 
-                    #Messages {
-                        max-width : 800px ;
-                        width : 100% ;
-                    }
-
-                    iframe[ name = void ]{
-                        display : none ;
-                    }
-
-                </style>
             <head>
             <body>
                 ${ body }
@@ -80,12 +97,7 @@ router.get('/',( context ) => {
 router.get('/chat',( context ) => {
 
     const { response } = context
-    const { headers } = response
 
-    headers.set('Content-Type','text/html;charset=utf-8')
-    headers.set('Transfer-Encoding','chunked')
-    headers.set('Content-Encoding','chunked')
-    headers.set('Connection','keep-alive')
 
     const userId = new URL(context.request.url).searchParams.get('userId')
 
@@ -118,8 +130,15 @@ router.get('/chat',( context ) => {
     }
 
 
-    response.body = user.response
-    user.response.write(renderMessages())
+    const { headers } = response
+
+    headers.set('Content-Type','text/html;charset=utf-8')
+    headers.set('Transfer-Encoding','chunked')
+    headers.set('Content-Encoding','chunked')
+    headers.set('Connection','keep-alive')
+
+    response.body = user.response = new AsyncResponse
+    user.response.write(renderMessages(user))
 })
 
 
@@ -187,9 +206,30 @@ router.post('/post',async ( context ) => {
 })
 
 
-const app = new Application
+const app = new Application({
+    logErrors : false
+})
+
 app.use(router.routes())
 app.use(router.allowedMethods())
 
-await app.listen({ port: 8000 })
+
+app.addEventListener('error',( event ) => {
+
+    event.stopImmediatePropagation()
+    event.preventDefault()
+
+    if( event.message === `connection closed before message completed` )
+        return
+
+    if( event.error instanceof Error ){
+
+        if( event.error.message === `connection closed before message completed` )
+            return
+    }
+
+    console.error(event)
+})
+
+await app.listen({ port : 8000 })
 

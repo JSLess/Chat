@@ -13,34 +13,10 @@ function Component ( props : Props ){
     return <>
 
         <iframe
-            loading = 'eager'
+            allowFullScreen = { false }
+            loading = 'lazy'
             src = { `/chat?userId=${ props.user.userId }` }
             id = 'Messages'
         />
-
-        <iframe name = 'void' />
-
-        <form
-            encType = 'multipart/form-data'
-            target = 'void'
-            action = '/post'
-            method = 'post'
-        >
-
-            <input
-                value = { props.user.userId }
-                type = 'hidden'
-                name = 'userId'
-            />
-
-            <textarea
-                placeholder = 'Message'
-                required = { true }
-                name = 'message'
-            />
-
-            <button> Post </button>
-
-        </form>
     </>
 }
