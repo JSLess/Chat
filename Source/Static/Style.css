@@ -11,6 +11,11 @@
 * {
     font-family : monospace ;
     font-size : 18px ;
+    color : var( --text ) ;
+}
+
+h1 {
+    font-size : 2rem ;
 }
 
 
@@ -38,4 +43,7 @@ body {
     border : none ;
 }
 
+iframe {
+    border : none ;
+}
 

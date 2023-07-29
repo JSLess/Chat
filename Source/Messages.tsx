@@ -37,30 +37,6 @@ function Component ( props : Props ){
         </div>
 
         <iframe name = 'void' />
-
-        <form
-            encType = 'multipart/form-data'
-            target = 'void'
-            action = '/post'
-            method = 'post'
-            id = 'Input'
-        >
-
-            <input
-                value = { props.user.userId }
-                type = 'hidden'
-                name = 'userId'
-            />
-
-            <input
-                placeholder = 'Message'
-                spellCheck = { true }
-                required = { true }
-                name = 'message'
-                type = 'text'
-            />
-
-        </form>
     </>
 }
 

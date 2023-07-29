@@ -5,6 +5,7 @@ import { renderMessages } from './Messages.tsx'
 import { AsyncResponse } from './AsyncResponse.ts'
 import { crypto } from 'Deno/crypto/mod.ts'
 import { render } from 'Render'
+import { Input } from './Input.tsx'
 import { Page } from './Page.tsx'
 
 import Favicon from './Favicon.ts'
@@ -60,6 +61,20 @@ router.get('/',( context ) => {
         response : reader
     }
 
+    console.debug('User Joined',userId)
+
+    const messageId = crypto
+        .randomUUID()
+
+    messages.set(messageId,{
+        messageId : messageId ,
+        userId : userId ,
+        time : new Date ,
+        message : `User ${ userId } joined`
+    })
+
+    redraw()
+
     users.set(userId,user)
 
     const body = render(Page({
@@ -93,6 +108,60 @@ router.get('/',( context ) => {
         </html>
     `
 })
+
+router.get('/input',( context ) => {
+
+    const userId = new URL(context.request.url).searchParams.get('userId')
+
+    if( ! userId ){
+
+        context.response.status = 400
+        context.response.body = JSON
+            .stringify({
+                problem : `The userId field is missing`
+            })
+
+        debug(`/chat Missing UserId`)
+
+        return
+    }
+
+    const user = users.get(userId)
+
+    if( ! user ){
+
+        context.response.status = 400
+        context.response.body = JSON
+            .stringify({
+                problem : `The user with the given Id does not exist`
+            })
+
+        debug(`/chat Missing User`)
+
+        return
+    }
+
+
+    const html = render(Input({ user }))
+
+    console.log(html)
+
+    context.response.body = `
+    <!DOCTYPE html>
+        <html>
+            <head>
+                <link
+                    href = '/Assets/Input.css'
+                    rel = stylesheet
+                />
+            </head>
+            <body>
+                ${ html }
+            </body>
+        </html>
+    `
+})
+
 
 router.get('/chat',( context ) => {
 
@@ -136,6 +205,7 @@ router.get('/chat',( context ) => {
     headers.set('Transfer-Encoding','chunked')
     headers.set('Content-Encoding','chunked')
     headers.set('Connection','keep-alive')
+    headers.set('Keep-Alive',`timeout=${ 60 * 60 }`)
 
     response.body = user.response = new AsyncResponse
     user.response.write(renderMessages(user))
@@ -200,7 +270,20 @@ router.post('/post',async ( context ) => {
 
     user.messages.push(messageId)
 
-    context.response.status = 200
+    context.response.body = `
+    <!DOCTYPE html>
+        <html>
+            <head>
+                <link
+                    href = '/Assets/Input.css'
+                    rel = stylesheet
+                />
+            </head>
+            <body>
+                ${ render(Input({ user })) }
+            </body>
+        </html>
+    `
 
     redraw()
 })
