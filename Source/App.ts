@@ -1,5 +1,5 @@
 
-import { Application , Router } from 'Oak'
+import { Application , Context, Router } from 'Oak'
 import { messages , users } from './State.ts'
 import { renderMessages } from './Messages.tsx'
 import { AsyncResponse } from './AsyncResponse.ts'
@@ -9,6 +9,7 @@ import { Input } from './Input.tsx'
 import { Page } from './Page.tsx'
 
 import Favicon from './Favicon.ts'
+import { CookieNotice } from "./CookieNotice.tsx";
 
 
 const { debug } = console
@@ -289,9 +290,87 @@ router.post('/post',async ( context ) => {
 })
 
 
-const app = new Application({
+interface State {
+    sessionId : null | string
+}
+
+
+const app = new Application<State>({
     logErrors : false
 })
+
+
+app.use( async ( context , next ) => {
+
+    const path = context.request.url.pathname
+
+    const isCookieCheck = ( path === '/Cookie' )
+
+    if( isCookieCheck ){
+
+        if( await context.cookies.has('Session') ){
+            console.log('Redirecting back to home')
+            context.response.redirect(context.request.url.searchParams.get('ReturnTo') || '/')
+            return
+        }
+
+        cookieNotice(context)
+        return
+
+    } else {
+
+        if( await context.cookies.has('Session') )
+            return next()
+
+        console.log('Trying to set session cookie')
+
+        const sessionId = crypto.randomUUID()
+
+        context.cookies.set('Session',sessionId)
+
+        let url = '/Cookie'
+
+        if( path !== '/' )
+            url += `?ReturnTo=${ encodeURIComponent(path) }`
+
+        context.response.redirect(url)
+        return
+    }
+})
+
+
+function cookieNotice ( context : Context<State,State> ){
+
+    context.response.status = 403
+    context.response.body = `
+
+    <!DOCTYPE html>
+    <html>
+        <head>
+
+            <title> Missing Cookies </title>
+
+            <link
+                href = '/Assets/Style.css'
+                rel = stylesheet
+            />
+
+            <link
+                href = '${ Favicon }'
+                type = image/x-icon
+                rel = icon
+            />
+
+        <head>
+        <body>
+            ${ render(CookieNotice()) }
+        </body>
+    </html>
+`
+
+
+}
+
 
 app.use(router.routes())
 app.use(router.allowedMethods())
