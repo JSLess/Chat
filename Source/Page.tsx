@@ -20,6 +20,14 @@ function Component ( props : Props ){
         <iframe
             allowFullScreen = { false }
             loading = 'lazy'
+            src = { `/Login` }
+            id = 'Login'
+            height = { 260 }
+        />
+
+        <iframe
+            allowFullScreen = { false }
+            loading = 'lazy'
             src = { `/chat?userId=${ props.user.userId }` }
             id = 'Messages'
         />
