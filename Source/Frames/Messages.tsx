@@ -1,8 +1,8 @@
 
 export { renderMessages }
 
-import { Message , User } from './Types.ts'
-import { messages } from './State.ts'
+import { Message , User } from '../Types.ts'
+import { messages } from '../State.ts'
 import { render } from 'Render'
 
 

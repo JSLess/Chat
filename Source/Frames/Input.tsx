@@ -1,7 +1,7 @@
 
 export { Component as Input }
 
-import { User } from './Types.ts'
+import { User } from '../Types.ts'
 
 
 interface Props {

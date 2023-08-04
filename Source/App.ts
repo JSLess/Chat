@@ -1,18 +1,17 @@
 
 import { Application , Context, RouteParams, Router } from 'Oak'
 import { messages , users } from './State.ts'
-import { renderMessages } from './Messages.tsx'
+import { renderMessages } from './Frames/Messages.tsx'
 import { AsyncResponse } from './AsyncResponse.ts'
 import { crypto } from 'Deno/crypto/mod.ts'
 import { render } from 'Render'
-import { Input } from './Input.tsx'
-import { Page } from './Page.tsx'
+import { Input } from './Frames/Input.tsx'
+import { Page } from './Frames/Page.tsx'
 
-import Favicon from './Favicon.ts'
-import { CookieNotice } from "./CookieNotice.tsx";
-import { Login } from "./Login.tsx";
-import { comparePasswords , hashPassword } from "./Security/Hash.ts";
-
+import Favicon from './Components/Favicon.ts'
+import { CookieNotice } from './Frames/CookieNotice.tsx'
+import { Login } from './Frames/Login.tsx'
+import { comparePasswords , hashPassword } from './Security/Hash.ts'
 
 
 

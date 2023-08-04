@@ -1,7 +1,7 @@
 
 export { Component as Page }
 
-import { User } from './Types.ts'
+import { User } from '../Types.ts'
 
 
 interface Props {
