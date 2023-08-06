@@ -9,13 +9,26 @@ Dynamic HTML / CSS only chat page.
 [![Button Concept]][Concept]
 
 <br>
+
+*This is obviously just a prototype so far, WIP*
+
+<br>
 <br>
 
 ## Features
 
 -   Dynamic Message Refreshing
 
--   Login System  
+-   Login System
+
+<br>
+<br>
+
+<img width = 400 src = 'https://github.com/JSLess/Chat/assets/73050054/16985a84-e8d5-4442-9a49-ed074ee3b9fe' >
+
+<br>
+
+<img width = 400 src = 'https://github.com/JSLess/Chat/assets/73050054/2072d8fe-af88-4699-a9b4-be084918106a' >
 
 <br>
 <br>
