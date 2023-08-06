@@ -21,6 +21,14 @@ Dynamic HTML / CSS only chat page.
 
 -   Login System
 
+## Planned
+
+-   Account Creation
+
+-   TOTP 2FA
+
+-   Session Account Recovery
+
 <br>
 <br>
 
