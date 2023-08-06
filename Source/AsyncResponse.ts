@@ -14,7 +14,7 @@ class AsyncResponse implements Deno.Reader {
         this.promise = deferred<string>()
     }
 
-    async read ( data : Uint8Array ){
+    async read ( data : Uint8Array ){ // Max 16640 chars
 
         if( this.done )
             return null

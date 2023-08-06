@@ -31,7 +31,7 @@ function Component ( props : Props ){
             )) }
 
             <form
-                target = '_self'
+                target = '_parent'
                 action = '/Login'
                 method = 'post'
                 id = 'Login'

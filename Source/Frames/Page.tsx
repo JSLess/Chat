@@ -1,43 +1,78 @@
 
 export { Component as Page }
 
-import { User } from '../Types.ts'
+import Favicon from '../Components/Favicon.ts'
 
 
 interface Props {
-    user : User
+    loggedIn : boolean
 }
 
 
 function Component ( props : Props ){
 
+    const { loggedIn } = props
+
     return <>
 
-        <h1 style = 'text-align:center'>
-            HTML Only Chat
-        </h1>
+        <html>
+            <head>
 
-        <iframe
-            allowFullScreen = { false }
-            loading = 'lazy'
-            src = { `/Login` }
-            id = 'Login'
-            height = { 260 }
-        />
+                <title> Chat </title>
 
-        <iframe
-            allowFullScreen = { false }
-            loading = 'lazy'
-            src = { `/chat?userId=${ props.user.userId }` }
-            id = 'Messages'
-        />
+                <link
+                    href = '/Assets/Style.css'
+                    rel = 'stylesheet'
+                />
 
-        <iframe
-            allowFullScreen = { false }
-            loading = 'lazy'
-            src = { `/input?userId=${ props.user.userId }` }
-            id = 'Input'
-            height = { 60 }
-        />
+                <link
+                    href = { Favicon }
+                    type = 'image/x-icon'
+                    rel = 'icon'
+                />
+
+            </head>
+            <body>
+
+                <h1 style = 'text-align:center' >
+                    HTML Only Chat
+                </h1>
+
+
+                { ( ! loggedIn ) && <>
+
+                    <iframe
+                        allowFullScreen = { false }
+                        loading = 'lazy'
+                        height = { 260 }
+                        src = { `/Login` }
+                        id = 'Login'
+                    />
+
+                </> }
+
+
+                <iframe
+                    allowFullScreen = { false }
+                    loading = 'lazy'
+                    src = { `/Chat` }
+                    id = 'Messages'
+                />
+
+
+                { ( loggedIn ) && <>
+
+                    <iframe
+                        allowFullScreen = { false }
+                        loading = 'lazy'
+                        height = { 60 }
+                        src = { `/Chat/Input` }
+                        id = 'Input'
+                    />
+
+                </>}
+
+            </body>
+        </html>
     </>
 }

@@ -1,36 +1,25 @@
 
 export { Component as Input }
 
-import { User } from '../Types.ts'
 
-
-interface Props {
-    user : User
-}
-
-
-function Component ( props : Props ){
+function Component (){
 
     return (
 
         <form
             encType = 'multipart/form-data'
             target = '_self'
-            action = '/post'
+            action = '/Chat/Input/Post'
             method = 'post'
             id = 'Input'
         >
 
             <input
-                value = { props.user.userId }
-                type = 'hidden'
-                name = 'userId'
-            />
-
-            <input
                 placeholder = 'Message'
                 spellCheck = { true }
                 required = { true }
+                minLength = { 1 }
+                maxLength = { 500 }
                 name = 'message'
                 type = 'text'
             />

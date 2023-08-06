@@ -1,29 +1,33 @@
 
 export { renderMessages }
 
+import { messages , users } from '../State.ts'
 import { Message , User } from '../Types.ts'
-import { messages } from '../State.ts'
 import { render } from 'Render'
+
+
+function renderMessages (){
+
+    const msgs = [ ... messages.values() ]
+
+    return render((
+
+        <Messages
+            messages = { msgs }
+        />
+    ))
+}
 
 
 interface Props {
     messages : Array<Message>
-    user : User
 }
 
-
-function Component ( props : Props ){
+function Messages ( props : Props ){
 
     const { messages } = props
 
-    const elements = messages.map(( message ) => (
-
-        <div class = 'Message' >
-
-            { message.time.toLocaleTimeString(undefined,{ timeStyle : 'short' }) } : { message.message }
-
-        </div>
-    ))
+    const elements = messages.map(renderMessage)
 
     return <>
 
@@ -32,21 +36,29 @@ function Component ( props : Props ){
             rel = 'stylesheet'
         />
 
-        <div class = 'Messages' >
-            { elements }
-        </div>
+        <div
+            children = { elements }
+            class = 'Messages'
+        />
 
         <iframe name = 'void' />
     </>
 }
 
 
-function renderMessages ( user : User ){
+function renderMessage ( message : Message ){
 
-    const msgs = [ ... messages.values() ]
+    const { time } = message
 
-    const element =
-        <Component messages = { msgs } user = { user } />
+    const local = time
+        .toLocaleTimeString(undefined,{ timeStyle : 'short' })
 
-    return render(element)
+    return <>
+
+        <div class = 'Message' >
+
+            { local } : { users.get(message.accountId)?.nick ?? '???' } { message.message }
+
+        </div>
+    </>
 }

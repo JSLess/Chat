@@ -1,19 +1,39 @@
 
-export type { Message , User }
+export type { Account , Message , Session , User }
 
 import { AsyncResponse } from './AsyncResponse.ts'
 
 
-interface User {
-    messages : Array<string>
-    response : AsyncResponse
-    username : string
-    userId : string
+interface Account {
+
+    accountId : string
+    handle : string
+
+    password : Uint8Array
+    salt : Uint8Array
 }
 
+
 interface Message {
+
+    accountId : string
     messageId : string
+
     message : string
-    userId : string
     time : Date
 }
+
+
+interface Session {
+    accountId ?: string
+    messages ?: AsyncResponse
+    home ?: AsyncResponse
+}
+
+
+interface User {
+    nick : string
+}
+
+
+
