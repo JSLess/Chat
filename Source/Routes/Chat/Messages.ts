@@ -21,7 +21,6 @@ async function routeMessages (
 
     headers.set('Content-Type','text/html;charset=utf-8')
     headers.set('Transfer-Encoding','chunked')
-    headers.set('Content-Encoding','chunked')
     headers.set('Connection','keep-alive')
     headers.set('Keep-Alive',`timeout=${ 60 * 60 }`)
 

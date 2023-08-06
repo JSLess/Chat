@@ -13,3 +13,10 @@
 **/*.db
 **/*.db-shm
 **/*.db-wal
+
+
+#
+#   DrawIO Backups
+#
+
+**/*.bkp
