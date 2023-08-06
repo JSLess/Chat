@@ -14,7 +14,7 @@ Meta-Refresh-Tags & Chunked-Transfer-Encoding.
 ### Meta Refresh Tags
 
 [Meta refresh tags] can refresh a browser page after  
-a certain delay, however they are only execute after  
+a certain delay, however they are only executed after  
 a request has finished loading and don't do anything  
 when injected afterwards.
 
