@@ -41,6 +41,7 @@ function Component ( props : Props ){
 
                     <input
                         required = { true }
+                        autoComplete = 'username'
                         name = 'handle'
                         type = 'text'
                     />
@@ -55,6 +56,7 @@ function Component ( props : Props ){
 
                     <input
                         required = { true }
+                        autoComplete = 'current-password'
                         name = 'password'
                         type = 'password'
                     />

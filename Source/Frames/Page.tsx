@@ -34,6 +34,18 @@ function Component ( props : Props ){
             </head>
             <body>
 
+                { ( loggedIn ) && <>
+
+                    <iframe
+                        allowFullScreen = { false }
+                        loading = 'lazy'
+                        height = { 50 }
+                        src = { `/Logout` }
+                        id = 'Logout'
+                    />
+
+                </> }
+
                 <h1 style = 'text-align:center' >
                     HTML Only Chat
                 </h1>

@@ -13,6 +13,8 @@ import { sessions } from './State.ts'
 import { routeChatInput } from "./Routes/Chat/Input.ts";
 import { routePostMessage } from "./Routes/Chat/Post.ts";
 import { WithSession, validateSession } from "./Routes/Session.ts";
+import { logoutUser } from "./Routes/Logout/Action.ts";
+import { routeLogout } from "./Routes/Logout/Form.ts";
 
 
 const { debug } = console
@@ -54,6 +56,9 @@ router.get('/Chat',routeMessages)
 
 router.get('/Login',routeLogin)
 router.post('/Login',validateLoginCredentials,authenticateLogin)
+
+router.get('/Logout',routeLogout)
+router.post('/Logout',onlyLoggedIn,logoutUser)
 
 router.get('/Cookie',( context ) => context.response.status = 200 )
 
