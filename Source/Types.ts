@@ -6,11 +6,11 @@ import { AsyncResponse } from './AsyncResponse.ts'
 
 interface Account {
 
-    accountId : string
-    handle : string
-
     password : Uint8Array
     salt : Uint8Array
+
+    accountId : string
+    handle : string
 }
 
 

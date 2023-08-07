@@ -25,5 +25,5 @@ async function routeMessages (
     headers.set('Keep-Alive',`timeout=${ 60 * 60 }`)
 
     response.body = session.messages = new AsyncResponse
-    session.messages.write(renderMessages())
+    session.messages.write(await renderMessages())
 }

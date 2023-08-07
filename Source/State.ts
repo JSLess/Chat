@@ -1,9 +1,8 @@
 
-export { messages , sessions , users }
+export { messages , sessions }
 
-import type { Message , Session , User } from './Types.ts'
+import type { Message , Session } from './Types.ts'
 
 
 const messages = new Map<string,Message>
 const sessions = new Map<string,Session>
-const users = new Map<string,User>

@@ -4,7 +4,7 @@ export { database , router , redraw }
 import { authenticateLogin, validateLoginCredentials } from './Routes/Login/Authentication/mod.ts'
 import { Application , Context, Next, Router } from 'Oak'
 import { hashPassword } from './Security/Hash.ts'
-import { Account } from './Types.ts'
+import { Account, User } from './Types.ts'
 import { routeAsset } from './Routes/Assets.ts'
 import { routeHome } from './Routes/Page.ts'
 import { routeLogin } from "./Routes/Login/Form.ts";
@@ -79,14 +79,20 @@ const account = {
         password : userPassword ,
         salt : userSalt
     }),
+    accountId ,
     handle : 'user' ,
-    accountId : accountId ,
     salt : userSalt
 } satisfies Account
 
 
-await database.set([ 'Account_By_Id' , account.accountId ] , account )
-await database.set([ 'Account_By_Handle' , account.handle ] , account )
+await database.set([ 'Account_By_Handle' , account.handle.toLowerCase() ] , account )
+await database.set([ 'Account_By_Id' , accountId ] , account )
+
+const user = {
+    nick : 'User'
+} satisfies User
+
+await database.set([ 'User_By_Id' , accountId ] , user )
 
 
 const app = new Application({
