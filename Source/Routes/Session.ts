@@ -33,6 +33,18 @@ async function validateSession (
 
     const isCookieCheck = ( path === '/Cookie' )
 
+    if( path === '/Cookie/Notice' ){
+
+        if( await cookies.has('Session') ){
+            console.log('Redirecting back to home')
+            response.redirect(request.url.searchParams.get('ReturnTo') || '/')
+            return
+        }
+
+
+        return await next()
+    }
+
     if( isCookieCheck ){
 
         if( await cookies.has('Session') ){
@@ -41,7 +53,8 @@ async function validateSession (
             return
         }
 
-        cookieNotice(context)
+        context.response.redirect('/Cookie/Notice')
+
         return
 
     } else {
@@ -85,36 +98,3 @@ async function validateSession (
 }
 
 
-
-
-function cookieNotice ( context : Context ){
-
-    context.response.status = 403
-    context.response.body = `
-
-        <!DOCTYPE html>
-        <html>
-            <head>
-
-                <title> Missing Cookies </title>
-
-                <link
-                    href = '/Assets/Style.css'
-                    rel = stylesheet
-                />
-
-                <link
-                    href = '${ Favicon }'
-                    type = image/x-icon
-                    rel = icon
-                />
-
-            <head>
-            <body>
-                ${ render(CookieNotice()) }
-            </body>
-        </html>
-    `
-
-
-}

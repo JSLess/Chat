@@ -15,6 +15,8 @@ import { routePostMessage } from "./Routes/Chat/Post.ts";
 import { WithSession, validateSession } from "./Routes/Session.ts";
 import { logoutUser } from "./Routes/Logout/Action.ts";
 import { routeLogout } from "./Routes/Logout/Form.ts";
+import { render } from 'Render'
+import { CookieNotice } from "./Frames/CookieNotice.tsx";
 
 
 const { debug } = console
@@ -64,6 +66,7 @@ router.get('/Logout',routeLogout)
 router.post('/Logout',onlyLoggedIn,logoutUser)
 
 router.get('/Cookie',( context ) => context.response.status = 200 )
+router.get('/Cookie/Notice',( context ) => context.response.body = render(CookieNotice()))
 
 
 const database = await Deno.openKv('./Database/Storage.db');

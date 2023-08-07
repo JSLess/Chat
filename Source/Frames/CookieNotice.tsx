@@ -6,14 +6,40 @@ function Component (){
 
     return <>
 
-        <h1 style = 'text-align:center'>
-            Please Enable Cookies
-        </h1>
+        <html>
+            <head>
 
-        <p style = 'text-align:center'>
+                <title> Missing Cookies </title>
 
-            This website requires cookies to work.
+                <link
+                    href = '/Assets/Style.css'
+                    rel = 'stylesheet'
+                />
 
-        </p>
+                <link
+                    href = '${ Favicon }'
+                    type = 'image/x-icon'
+                    rel = 'icon'
+                />
+
+            </head>
+            <body>
+
+                <h1 style = 'text-align:center'>
+                    Please Enable Cookies
+                </h1>
+
+                <p style = 'text-align:center'>
+
+                    This website requires cookies to work.
+
+                </p>
+
+                <a href = '/'>
+                    Back To Home
+                </a>
+
+            </body>
+        </html>
     </>
 }
