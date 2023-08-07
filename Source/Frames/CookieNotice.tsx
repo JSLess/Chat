@@ -1,6 +1,8 @@
 
 export { Component as CookieNotice }
 
+import Favicon from '../Components/Favicon.ts'
+
 
 function Component (){
 
@@ -17,7 +19,7 @@ function Component (){
                 />
 
                 <link
-                    href = '${ Favicon }'
+                    href = { Favicon }
                     type = 'image/x-icon'
                     rel = 'icon'
                 />
