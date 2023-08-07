@@ -6,12 +6,15 @@ import { deferred } from 'Deno/async/mod.ts'
 
 class AsyncResponse implements Deno.Reader {
 
-    private promise
+    private hasData
 
     private done = false
 
+    private queue : Array<string>
+
     constructor (){
-        this.promise = deferred<string>()
+        this.hasData = deferred()
+        this.queue = []
     }
 
     async read ( data : Uint8Array ){ // Max 16640 chars
@@ -19,9 +22,14 @@ class AsyncResponse implements Deno.Reader {
         if( this.done )
             return null
 
-        const value = await this.promise
+        if( this.queue.length < 1 ){
+            this.hasData = deferred()
+            await this.hasData
+        }
 
-        this.promise = deferred<string>()
+        const value = this
+            .queue.shift()!
+
 
         const encoder = new TextEncoder
 
@@ -33,7 +41,11 @@ class AsyncResponse implements Deno.Reader {
     }
 
     write ( html : string ){
-        this.promise.resolve(html)
+
+        this.queue.push(html)
+
+        if( this.queue.length === 1 )
+            this.hasData.resolve()
     }
 
     close (){

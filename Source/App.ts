@@ -25,8 +25,11 @@ debug(`Starting HTML-Only Chat`)
 function redraw (){
 
     for ( const session of sessions.values() ){
-        session.messages?.write(`<meta http-equiv = refresh content = 0 />`)
-        session.messages?.close()
+
+        const connection = session.messages
+
+        connection?.write(`<meta http-equiv = refresh content = 0 />`)
+        connection?.close()
     }
 }
 
