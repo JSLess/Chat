@@ -1,4 +1,6 @@
 
+clear
+
 
 set -a
 source .github/.env

@@ -13,6 +13,22 @@ async function routeHome (
 
     const { loggedIn } = context.state
 
-    context.response.body =
-        render(Page({ loggedIn }))
+    let html = render(Page({ loggedIn }))
+
+    if( context.state.loggedIn )
+        html += `
+
+            <style>
+
+                #Chatting {
+
+                    grid-template-columns : 4fr 1fr ;
+                    display : grid ;
+                    gap : 2rem ;
+                }
+
+            </style>
+        `
+
+    context.response.body = html
 }

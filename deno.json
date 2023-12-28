@@ -2,8 +2,9 @@
     "lock": false,
 
     "tasks": {
-        "dev" : "bash .github/Tasks/Dev.sh" ,
-        "init" : "touch Database/Storage.db"
+        "tunnel" : "ngrok http --subdomain=JSLess --region=us 8000" ,
+        "init" : "touch Database/Storage.db" ,
+        "dev" : "bash .github/Tasks/Dev.sh"
     },
 
     "lint" : {
@@ -17,18 +18,20 @@
 
     "imports": {
 
-        "Render": "https://esm.sh/*preact-render-to-string@6.2.0" ,
-        "Deno/": "https://deno.land/std@0.196.0/" ,
+        "Render": "https://esm.sh/*preact-render-to-string@6.3.1" ,
+        "Deno/": "https://deno.land/std@0.209.0/" ,
 
-        "Preact/": "https://esm.sh/preact@10.15.1/",
-        "Preact": "https://esm.sh/preact@10.15.1" ,
+        "Preact/": "https://esm.sh/preact@10.19.3/",
+        "Preact": "https://esm.sh/preact@10.19.3" ,
 
-        "preact/": "https://esm.sh/preact@10.15.1/",
-        "preact": "https://esm.sh/preact@10.15.1" ,
+        "preact/": "https://esm.sh/preact@10.19.3/",
+        "preact": "https://esm.sh/preact@10.19.3" ,
 
-        "Oak" : "https://deno.land/x/oak@v12.6.0/mod.ts" ,
+        "Oak" : "https://deno.land/x/oak@v12.6.1/mod.ts" ,
 
-        "Argon/" : "https://esm.sh/argon2id@1.0.1/"
+        "Argon/" : "https://esm.sh/argon2id@1.0.1/" ,
+
+        "Zod" : "https://deno.land/x/zod@v3.22.4/mod.ts"
     },
 
     "compilerOptions" : {

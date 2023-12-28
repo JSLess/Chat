@@ -1,54 +1,43 @@
 
 export { AsyncResponse }
 
-import { deferred } from 'Deno/async/mod.ts'
 
+class AsyncResponse {
 
-class AsyncResponse implements Deno.Reader {
+    public readonly readable : ReadableStream
+    private controller : null | ReadableStreamController<Uint8Array> = null
 
-    private hasData
-
-    private done = false
-
-    private queue : Array<string>
 
     constructor (){
-        this.hasData = deferred()
-        this.queue = []
-    }
 
-    async read ( data : Uint8Array ){ // Max 16640 chars
+        this.readable = new ReadableStream<Uint8Array>({
 
-        if( this.done )
-            return null
+            type : 'bytes' ,
 
-        if( this.queue.length < 1 ){
-            this.hasData = deferred()
-            await this.hasData
-        }
-
-        const value = this
-            .queue.shift()!
-
-
-        const encoder = new TextEncoder
-
-        const bytes = encoder.encode(value)
-
-        data.set(bytes)
-
-        return bytes.length
-    }
-
-    write ( html : string ){
-
-        this.queue.push(html)
-
-        if( this.queue.length === 1 )
-            this.hasData.resolve()
+            start : ( controller ) => {
+                this.controller = controller
+            }
+        })
     }
 
     close (){
-        this.done = true
+
+        if( ! this.controller )
+            throw `AsyncResponse controller is not initialized`
+
+        this.controller?.close()
+    }
+
+
+    write ( html : string ){
+
+        const encoder = new TextEncoder
+
+        const bytes = encoder.encode(html)
+
+        if( ! this.controller )
+            throw `AsyncResponse controller is not initialized`
+
+        this.controller?.enqueue(bytes)
     }
 }

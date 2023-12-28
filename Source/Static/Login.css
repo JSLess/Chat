@@ -32,61 +32,61 @@ body {
     height : 46px ;
     align-items: center;
 
+}
 
-    & > div {
-        border : 1px solid var( --primary ) ;
-        inset : 0 ;
-        border-radius : 5px ;
-        inset : 0 ;
-        position : absolute ;
-        pointer-events : none ;
-    }
+.Form_Input > div {
+    border : 1px solid var( --primary ) ;
+    inset : 0 ;
+    border-radius : 5px ;
+    inset : 0 ;
+    position : absolute ;
+    pointer-events : none ;
+}
 
-    & > input {
-        position : absolute ;
-        border : none ;
-        inset : 0 ;
-        padding : 10px ;
-        background : transparent ;
-        outline : none ;
-        color : var( --text ) ;
-        font-size : 1em ;
-        transition : 0.24s ;
+.Form_Input > input {
+    position : absolute ;
+    border : none ;
+    inset : 0 ;
+    padding : 10px ;
+    background : transparent ;
+    outline : none ;
+    color : var( --text ) ;
+    font-size : 1em ;
+    transition : 0.24s ;
+}
 
-        &:is( :valid , :focus-within ){
-            translate: 0 2px;
-            font-size: 0.9em;
-        }
+.Form_Input > input:is( :valid , :focus-within ){
+    translate: 0 2px;
+    font-size: 0.9em;
+}
 
-        &:is(:valid,:focus-within) ~ div {
-            border-color : var( --accent ) ;
-        }
+.Form_Input > input:is(:valid,:focus-within) ~ div {
+    border-color : var( --accent ) ;
+}
 
-        &:is(:valid,:focus-within) ~ label {
-            inset : unset ;
-            top : 0 ;
-            left : 0 ;
-            color : var( --text ) ;
-            transform : translate( 10px , -7px ) ;
-            font-size : 0.6em ;
-            padding : 2px 10px ;
-            border-radius : 2px ;
-            letter-spacing : 0.2em ;
-            text-transform : uppercase ;
-            background : var( --accent ) ;
-            font-weight : bold ;
-        }
-    }
+.Form_Input > input:is(:valid,:focus-within) ~ label {
+    inset : unset ;
+    top : 0 ;
+    left : 0 ;
+    color : var( --text ) ;
+    transform : translate( 10px , -7px ) ;
+    font-size : 0.6em ;
+    padding : 2px 10px ;
+    border-radius : 2px ;
+    letter-spacing : 0.2em ;
+    text-transform : uppercase ;
+    background : var( --accent ) ;
+    font-weight : bold ;
+}
 
-    & > label {
-        position : absolute ;
-        left : 0 ;
-        padding : 10px 15px ;
-        pointer-events : none ;
-        font-size : 1em ;
-        color : var( --primary ) ;
-        transition: 0.24s;
-    }
+.Form_Input > label {
+    position : absolute ;
+    left : 0 ;
+    padding : 10px 15px ;
+    pointer-events : none ;
+    font-size : 1em ;
+    color : var( --primary ) ;
+    transition: 0.24s;
 }
 
 input[ type = submit ]{

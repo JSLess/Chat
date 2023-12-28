@@ -14,11 +14,11 @@
 }
 
 body {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    overflow: hidden;
     height: calc(100% - 16px);
+}
+
+form {
+    margin : 0 ;
 }
 
 
@@ -32,7 +32,42 @@ body {
     overflow-y: scroll;
 }
 
+input[ name = MessageId ]{
+    display : none ;
+}
 
+.Message {
+
+    border-radius : 4px ;
+    border : 1px solid transparent ;
+
+    padding : 0 1rem ;
+}
+
+
+.Message .Emotes {
+    display : flex ;
+    gap : 0.5rem ;
+}
+
+.Message .Emote {
+    position : relative ;
+}
+
+.Message .Emote span {
+
+    position : absolute ;
+
+    bottom : 0 ;
+    right : 0 ;
+
+    font-size : 0.6rem ;
+}
+
+.Message .Emote img {
+    height : 32px ;
+    width : 32px ;
+}
 
 
 

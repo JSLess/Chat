@@ -85,7 +85,9 @@ async function validateSession (
         sessionId = crypto.randomUUID()
 
         await cookies.set('Session',sessionId)
-        sessions.set(sessionId,{})
+        sessions.set(sessionId,{
+            sessionIds : []
+        })
 
         let url = '/Cookie'
 

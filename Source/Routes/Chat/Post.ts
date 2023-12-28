@@ -44,8 +44,10 @@ async function routePostMessage (
         return
     }
 
+    const session = sessions
+        .get(context.state.sessionId)!
 
-    const accountId = sessions.get(context.state.sessionId)?.accountId!
+    const accountId = session.accountId!
 
 
     const messageId = crypto
@@ -57,6 +59,8 @@ async function routePostMessage (
         time : new Date ,
         message : message
     })
+
+    session.selectedMessage ??= messageId
 
     context.response.body = `
         <!DOCTYPE html>

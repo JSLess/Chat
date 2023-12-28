@@ -1,7 +1,14 @@
 
-export type { Account , Message , Session , User }
+export type { PopArray }
+export type { Account , Message , Session , Reaction , User }
 
 import { AsyncResponse } from './AsyncResponse.ts'
+
+
+type PopArray<Type> =
+	| [ Type , ... Array<Type> , Type ]
+	| [ Type , ... Array<Type> ]
+	| [ ... Array<Type> , Type ]
 
 
 interface Account {
@@ -28,6 +35,8 @@ interface Session {
     accountId ?: string
     messages ?: AsyncResponse
     home ?: AsyncResponse
+    selectedMessage ?: string
+    sessionIds : Array<string>
 }
 
 
@@ -36,4 +45,9 @@ interface User {
 }
 
 
+interface Reaction {
+    emoteId : string
+    count : number
+    users : Set<string>
+}
 

@@ -47,3 +47,12 @@ iframe {
     border : none ;
 }
 
+
+.TestingA:active {
+    background-image : url(/Action/Test?wow=1) ;
+}
+
+.TestingB:active {
+    background-image : url(/Action/Test?wow=2) ;
+}
+

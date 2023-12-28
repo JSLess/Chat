@@ -17,6 +17,7 @@ function Component (){
             <input
                 placeholder = 'Message'
                 spellCheck = { true }
+                autofocus = { true }
                 required = { true }
                 minLength = { 1 }
                 maxLength = { 500 }

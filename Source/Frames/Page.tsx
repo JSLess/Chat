@@ -64,12 +64,29 @@ function Component ( props : Props ){
                 </> }
 
 
-                <iframe
-                    allowFullScreen = { false }
-                    loading = 'lazy'
-                    src = { `/Chat` }
-                    id = 'Messages'
-                />
+                <div id = 'Chatting' >
+
+                    <iframe
+                        allowFullScreen = { false }
+                        loading = 'lazy'
+                        src = { `/Chat` }
+                        id = 'Messages'
+                    />
+
+                    { ( loggedIn ) && <>
+
+                        <iframe
+                            allowFullScreen = { false }
+                            loading = 'lazy'
+                            height = '100%'
+                            width = '100%'
+                            src = { `/Chat/React` }
+                            id = 'Input'
+                        />
+
+                    </> }
+
+                </div>
 
 
                 { ( loggedIn ) && <>
@@ -77,12 +94,12 @@ function Component ( props : Props ){
                     <iframe
                         allowFullScreen = { false }
                         loading = 'lazy'
-                        height = { 60 }
+                        height = { 70 }
                         src = { `/Chat/Input` }
                         id = 'Input'
                     />
 
-                </>}
+                </> }
 
             </body>
         </html>
