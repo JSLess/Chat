@@ -203,6 +203,7 @@ router.get('/Chat/React',onlyLoggedIn,async ( context ) => {
 
     context.response.body = `
 
+    <!DOCTYPE html>
     <html><body>
 
         <form

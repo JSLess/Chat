@@ -2,8 +2,8 @@
 export { routeChatInput }
 
 import { WithSession } from '../Session.ts'
+import { renderTSX } from 'Render'
 import { Context } from 'Oak'
-import { render } from 'Render'
 import { Input } from '../../Frames/Input.tsx'
 
 
@@ -15,13 +15,17 @@ async function routeChatInput (
         <!DOCTYPE html>
         <html>
             <head>
+                <meta
+                    http-equiv = 'Content-type'
+                    content = 'text/html;charset=UTF-8'
+                >
                 <link
                     href = '/Assets/Input.css'
                     rel = stylesheet
                 />
             </head>
             <body>
-                ${ render(Input()) }
+                ${ renderTSX(Input()) }
             </body>
         </html>
     `

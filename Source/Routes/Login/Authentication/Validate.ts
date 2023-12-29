@@ -3,7 +3,7 @@ export { validateLoginCredentials }
 
 import { Context , Next } from 'Oak'
 import { Credentials } from './mod.ts'
-import { render } from 'Render'
+import { renderTSX } from 'Render'
 import { Login } from '../../../Frames/Login.tsx'
 
 
@@ -23,13 +23,17 @@ async function validateLoginCredentials (
             <!DOCTYPE html>
             <html>
                 <head>
+                    <meta
+                        http-equiv = 'Content-type'
+                        content = 'text/html;charset=UTF-8'
+                    >
                     <link
                         href = '/Assets/Login.css'
                         rel = stylesheet
                     />
                 </head>
                 <body>
-                    ${ render(Login({ notices : [{
+                    ${ renderTSX(Login({ notices : [{
                         title : 'Missing Handle' ,
                         description : `No user handle has been specified`
                     }] })) }

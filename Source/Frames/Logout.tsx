@@ -9,6 +9,11 @@ function Component (){
         <html>
             <head>
 
+                <meta
+                    http-equiv = 'Content-type'
+                    content = 'text/html;charset=UTF-8'
+                />
+
                 <link
                     href = '/Assets/Frame.css'
                     rel = 'stylesheet'

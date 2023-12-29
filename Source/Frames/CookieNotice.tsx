@@ -13,6 +13,11 @@ function Component (){
 
                 <title> Missing Cookies </title>
 
+                <meta
+                    http-equiv = 'Content-type'
+                    content = 'text/html;charset=UTF-8'
+                />
+
                 <link
                     href = '/Assets/Style.css'
                     rel = 'stylesheet'
