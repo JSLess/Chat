@@ -17,6 +17,7 @@ import { routeLogin } from './Routes/Login/Form.tsx'
 import { routeAsset } from './Routes/Assets.ts'
 import { routeHome } from './Routes/Page.ts'
 import { render } from 'Render'
+import { UserDataRoute } from "./Routes/User Data/Form.tsx";
 
 
 const { debug , clear } = console
@@ -72,6 +73,8 @@ router.post('/Logout',onlyLoggedIn,logoutUser)
 
 router.get('/Cookie',( context ) => context.response.status = 200 )
 router.get('/Cookie/Notice',( context ) => context.response.body = render(CookieNotice()))
+
+router.get('/UserData',async ( context ) => context.response.body = render( await UserDataRoute(context)))
 
 
 

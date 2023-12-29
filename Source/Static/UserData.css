@@ -1,0 +1,39 @@
+
+:root {
+    --background : #1c1817 ;
+    --secondary : #1a2c2d ;
+    --primary : #5e6d6e ;
+    --accent : #bf3831 ;
+    --text : #f5f9f9 ;
+}
+
+
+* {
+    font-family : monospace ;
+    font-size : 18px ;
+    color : var( --text ) ;
+}
+
+h1 {
+    font-size : 2rem ;
+}
+
+
+body {
+    flex-direction : column ;
+    align-items : stretch ;
+    display : flex ;
+    padding : 0 4rem ;
+    margin : 4rem auto ;
+
+    background : var( --background ) ;
+    width : fit-content ;
+}
+
+iframe {
+    border : none ;
+}
+
+section {
+    margin : 1rem 0 ;
+}
