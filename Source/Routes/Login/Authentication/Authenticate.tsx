@@ -10,6 +10,7 @@ import { Account } from '../../../Types.ts'
 import { Context } from 'Oak'
 import { render } from 'Render'
 import { Login } from '../../../Frames/Login.tsx'
+import { UTF8Meta } from 'UI/Parts'
 
 
 async function authenticateLogin (
@@ -29,10 +30,9 @@ async function authenticateLogin (
             <>
                 <html>
                     <head>
-                        <meta
-                            http-equiv = 'Content-type'
-                            content = 'text/html;charset=UTF-8'
-                        />
+
+                        <UTF8Meta />
+
                         <link
                             href = '/Assets/Login.css'
                             rel = 'stylesheet'

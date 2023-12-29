@@ -5,6 +5,7 @@ import { Context , Next } from 'Oak'
 import { Credentials } from './mod.ts'
 import { render } from 'Render'
 import { Login } from '../../../Frames/Login.tsx'
+import { UTF8Meta } from 'UI/Parts'
 
 
 async function validateLoginCredentials (
@@ -25,10 +26,9 @@ async function validateLoginCredentials (
             <>
                 <html>
                     <head>
-                        <meta
-                            http-equiv = 'Content-type'
-                            content = 'text/html;charset=UTF-8'
-                        />
+
+                        <UTF8Meta />
+
                         <link
                             href = '/Assets/Login.css'
                             rel = 'stylesheet'

@@ -7,8 +7,6 @@ import { CookieNotice } from '../Frames/CookieNotice.tsx'
 import { sessions } from '../State.ts'
 import { render } from 'Render'
 
-import Favicon from '../Components/Favicon.ts'
-
 
 interface WithSession {
     sessionId : string

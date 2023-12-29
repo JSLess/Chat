@@ -1,6 +1,8 @@
 
 export { Component as Logout }
 
+import { UTF8Meta } from 'UI/Parts'
+
 
 function Component (){
 
@@ -9,10 +11,7 @@ function Component (){
         <html>
             <head>
 
-                <meta
-                    http-equiv = 'Content-type'
-                    content = 'text/html;charset=UTF-8'
-                />
+                <UTF8Meta />
 
                 <link
                     href = '/Assets/Frame.css'

@@ -7,6 +7,7 @@ import { Context } from 'Oak'
 import { redraw } from '../../App.ts'
 import { render } from 'Render'
 import { Input } from '../../Frames/Input.tsx'
+import { UTF8Meta } from 'UI/Parts'
 
 
 const Message_Maximum_Length = 500
@@ -73,10 +74,9 @@ function Component (){
     return <>
         <html>
             <head>
-                <meta
-                    http-equiv = 'Content-type'
-                    content = 'text/html;charset=UTF-8'
-                />
+
+                <UTF8Meta />
+
                 <link
                     href = '/Assets/Input.css'
                     rel = 'stylesheet'

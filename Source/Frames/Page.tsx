@@ -1,7 +1,7 @@
 
 export { Component as Page }
 
-import Favicon from '../Components/Favicon.ts'
+import { UTF8Meta , Favicon } from 'UI/Parts'
 
 
 interface Props {
@@ -20,21 +20,14 @@ function Component ( props : Props ){
 
                 <title> Chat </title>
 
-                <meta
-                    http-equiv = 'Content-type'
-                    content = 'text/html;charset=UTF-8'
-                />
+                <UTF8Meta />
 
                 <link
                     href = '/Assets/Style.css'
                     rel = 'stylesheet'
                 />
 
-                <link
-                    href = { Favicon }
-                    type = 'image/x-icon'
-                    rel = 'icon'
-                />
+                <Favicon />
 
             </head>
             <body>

@@ -1,7 +1,7 @@
 
 export { Component as CookieNotice }
 
-import Favicon from '../Components/Favicon.ts'
+import { UTF8Meta , Favicon } from 'UI/Parts'
 
 
 function Component (){
@@ -13,21 +13,14 @@ function Component (){
 
                 <title> Missing Cookies </title>
 
-                <meta
-                    http-equiv = 'Content-type'
-                    content = 'text/html;charset=UTF-8'
-                />
+                <UTF8Meta />
 
                 <link
                     href = '/Assets/Style.css'
                     rel = 'stylesheet'
                 />
 
-                <link
-                    href = { Favicon }
-                    type = 'image/x-icon'
-                    rel = 'icon'
-                />
+                <Favicon />
 
             </head>
             <body>
