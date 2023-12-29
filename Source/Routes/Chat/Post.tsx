@@ -3,9 +3,9 @@ export { routePostMessage }
 
 import { messages , sessions } from '../../State.ts'
 import { WithSession } from '../Session.ts'
-import { renderTSX } from 'Render'
 import { Context } from 'Oak'
 import { redraw } from '../../App.ts'
+import { render } from 'Render'
 import { Input } from '../../Frames/Input.tsx'
 
 
@@ -62,24 +62,29 @@ async function routePostMessage (
 
     session.selectedMessage ??= messageId
 
-    context.response.body = `
-        <!DOCTYPE html>
+    context.response.body = render(Component())
+
+
+    redraw()
+}
+
+
+function Component (){
+    return <>
         <html>
             <head>
                 <meta
                     http-equiv = 'Content-type'
                     content = 'text/html;charset=UTF-8'
-                >
+                />
                 <link
                     href = '/Assets/Input.css'
-                    rel = stylesheet
+                    rel = 'stylesheet'
                 />
             </head>
             <body>
-                ${ renderTSX(Input()) }
+                <Input />
             </body>
         </html>
-    `
-
-    redraw()
+    </>
 }

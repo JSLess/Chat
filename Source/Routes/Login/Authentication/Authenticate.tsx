@@ -4,11 +4,11 @@ export { authenticateLogin }
 import { comparePasswords } from '../../../Security/Hash.ts'
 import { WithSession } from '../../Session.ts'
 import { Credentials } from './mod.ts'
-import { renderTSX } from 'Render'
 import { sessions } from '../../../State.ts'
 import { database } from '../../../App.ts'
 import { Account } from '../../../Types.ts'
 import { Context } from 'Oak'
+import { render } from 'Render'
 import { Login } from '../../../Frames/Login.tsx'
 
 
@@ -24,27 +24,31 @@ async function authenticateLogin (
     if( ! account ){
 
         context.response.status = 400
-        context.response.body = `
-            <!DOCTYPE html>
-            <html>
-                <head>
-                    <meta
-                        http-equiv = 'Content-type'
-                        content = 'text/html;charset=UTF-8'
-                    >
-                    <link
-                        href = '/Assets/Login.css'
-                        rel = stylesheet
-                    />
-                </head>
-                <body>
-                    ${ renderTSX(Login({ notices : [{
-                        title : 'Missing Handle' ,
-                        description : `Either the account doesn't exist or the given password is incorrect`
-                    }] })) }
-                </body>
-            </html>
-        `
+
+        context.response.body = render(
+            <>
+                <html>
+                    <head>
+                        <meta
+                            http-equiv = 'Content-type'
+                            content = 'text/html;charset=UTF-8'
+                        />
+                        <link
+                            href = '/Assets/Login.css'
+                            rel = 'stylesheet'
+                        />
+                    </head>
+                    <body>
+                        <Login
+                            notices = {[{
+                                title : 'Missing Handle' ,
+                                description : `Either the account doesn't exist or the given password is incorrect`
+                            }]}
+                        />
+                    </body>
+                </html>
+            </>
+        )
 
         return
     }

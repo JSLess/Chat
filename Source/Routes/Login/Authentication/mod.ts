@@ -1,8 +1,8 @@
 
 export type { Credentials }
 
-export * from './Authenticate.ts'
-export * from './Validate.ts'
+export * from './Authenticate.tsx'
+export * from './Validate.tsx'
 
 
 interface Credentials {
