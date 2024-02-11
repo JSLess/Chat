@@ -16,7 +16,7 @@ import { routeLogin } from './Routes/Login/Form.tsx'
 import { routeAsset } from './Routes/Assets.ts'
 import { routeHome } from './Routes/Page.ts'
 import { render } from 'Render'
-import { UserDataRoute } from "./Routes/User Data/Form.tsx";
+import { UserDataRoute } from './Routes/User Data/Form.tsx'
 
 const { debug , clear } = console
 
@@ -57,23 +57,48 @@ const router = new Router
 router.use(validateSession)
 
 router.get('/Assets/:path+',routeAsset)
-router.get('/',routeHome)
+router.get('/',onlyDocument,routeHome)
 
 router.post('/Chat/Input/Post',onlyLoggedIn,routePostMessage)
-router.get('/Chat/Input',onlyLoggedIn,routeChatInput)
-router.get('/Chat',routeMessages)
+router.get('/Chat/Input',redirectNonFrame,onlyLoggedIn,routeChatInput)
+router.get('/Chat',redirectNonFrame,routeMessages)
 
-router.get('/Login',routeLogin)
+router.get('/Login',redirectNonFrame,routeLogin)
 router.post('/Login',validateLoginCredentials,authenticateLogin)
 
-router.get('/Logout',routeLogout)
-router.post('/Logout',onlyLoggedIn,logoutUser)
+router.get('/Logout',redirectNonFrame,routeLogout)
+router.post('/Logout',logoutUser)
 
 router.get('/Cookie',( context ) => context.response.status = 200 )
 router.get('/Cookie/Notice',( context ) => context.response.body = render(CookieNotice()))
 
 router.get('/UserData',async ( context ) => context.response.body = render( await UserDataRoute(context)))
 
+
+function redirectNonFrame (
+    context : Context ,
+    next : () => Promise<any>
+){
+
+    if( context.request.headers.get('sec-fetch-dest') === 'iframe' )
+        return next()
+
+    if( context.request.url.pathname === '/' )
+        return
+
+    context.response.redirect('/')
+}
+
+function onlyDocument (
+    context : Context ,
+    next : () => Promise<any>
+){
+
+    if( context.request.headers.get('sec-fetch-dest') === 'document' )
+        return next()
+
+    context.response.status = 500
+}
 
 
 import { z } from 'Zod'

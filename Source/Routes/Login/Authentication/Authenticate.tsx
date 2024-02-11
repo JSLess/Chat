@@ -29,30 +29,32 @@ async function authenticateLogin (
 
         context.response.status = 400
 
-        context.response.body = render(
-            <>
-                <html>
-                    <head>
+        // set cookie and generate main html based on cookie
 
-                        <UTF8Meta />
+        // context.response.body = render(
+        //     <>
+        //         <html>
+        //             <head>
 
-                        <link
-                            href = '/Assets/Login.css'
-                            rel = 'stylesheet'
-                        />
+        //                 <UTF8Meta />
 
-                    </head>
-                    <body>
-                        <Login
-                            notices = {[{
-                                title : 'Missing Handle' ,
-                                description : `Either the account doesn't exist or the given password is incorrect`
-                            }]}
-                        />
-                    </body>
-                </html>
-            </>
-        )
+        //                 <link
+        //                     href = '/Assets/Login.css'
+        //                     rel = 'stylesheet'
+        //                 />
+
+        //             </head>
+        //             <body>
+        //                 <Login
+        //                     notices = {[{
+        //                         title : 'Missing Handle' ,
+        //                         description : `Either the account doesn't exist or the given password is incorrect`
+        //                     }]}
+        //                 />
+        //             </body>
+        //         </html>
+        //     </>
+        // )
 
         context.response.redirect('/')
 
