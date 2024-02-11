@@ -10,7 +10,6 @@ import { routeChatInput } from './Routes/Chat/Input.tsx'
 import { routeMessages } from './Routes/Chat/Messages.ts'
 import { Account, User } from './Types.ts'
 import { CookieNotice } from './Frames/CookieNotice.tsx'
-import { hashPassword } from './Security/Hash.ts'
 import { routeLogout } from './Routes/Logout/Form.ts'
 import { logoutUser } from './Routes/Logout/Action.ts'
 import { routeLogin } from './Routes/Login/Form.tsx'
@@ -18,7 +17,6 @@ import { routeAsset } from './Routes/Assets.ts'
 import { routeHome } from './Routes/Page.ts'
 import { render } from 'Render'
 import { UserDataRoute } from "./Routes/User Data/Form.tsx";
-
 
 const { debug , clear } = console
 
@@ -79,6 +77,7 @@ router.get('/UserData',async ( context ) => context.response.body = render( awai
 
 
 import { z } from 'Zod'
+import { createAccount } from "./Security/AccountId.ts";
 
 const SelectForm = z.object({
     messageId : z.string().uuid()
@@ -202,12 +201,33 @@ Reactions.set(crypto.randomUUID(),'4')
 Reactions.set(crypto.randomUUID(),'5')
 
 
-router.get('/Chat/React',onlyLoggedIn,async ( context ) => {
+router.get('/Chat/React',onlyLoggedIn, async ( context ) => {
 
     context.response.body = `
 
     <!DOCTYPE html>
-    <html><body>
+    <html>
+
+    <meta
+            http-equiv = 'Content-type'
+            content = 'text/html;charset=UTF-8'
+        />
+
+        <meta
+            http-equiv= 'Content-Security-Policy'
+            content = { \`
+                default-src 'none';
+                style-src 'self';
+                style-src-attr 'self' 'unsafe-inline';
+                style-src-elem 'self';
+                frame-ancestors : 'self' ;
+                frame-src 'self';
+                form-action 'self';
+                media-src 'self' data:;
+                img-src 'self' data:;
+            \` }
+        />
+    <body>
 
         <form
             action = '/Chat/React/Toggle'
@@ -275,30 +295,12 @@ router.get('/Chat/React',onlyLoggedIn,async ( context ) => {
 const database = await Deno.openKv('./Database/Storage.db');
 
 
-const accountId = '253bff2c-f757-4708-94fc-857698948678'
-const userSalt = new Uint8Array([ ... new Array(16).fill(2) ])
-const userPassword = new TextEncoder().encode('pass')
+const nick = 'Uwdmin'
+const test_account = await createAccount()
+console.debug(`Test Account`,test_account)
 
+await database.set([ 'User_By_Id' , test_account.userId ],{ nick })
 
-const account = {
-    password : hashPassword({
-        password : userPassword ,
-        salt : userSalt
-    }),
-    accountId ,
-    handle : 'user' ,
-    salt : userSalt
-} satisfies Account
-
-
-await database.set([ 'Account_By_Handle' , account.handle.toLowerCase() ] , account )
-await database.set([ 'Account_By_Id' , accountId ] , account )
-
-const user = {
-    nick : 'User'
-} satisfies User
-
-await database.set([ 'User_By_Id' , accountId ] , user )
 
 
 const app = new Application({

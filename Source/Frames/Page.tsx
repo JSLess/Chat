@@ -54,7 +54,8 @@ function Component ( props : Props ){
                     <iframe
                         allowFullScreen = { false }
                         loading = 'lazy'
-                        height = { 260 }
+                        height = { 110 }
+                        width = { 260 }
                         src = { `/Login` }
                         id = 'Login'
                     />

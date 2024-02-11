@@ -6,6 +6,5 @@ export * from './Validate.tsx'
 
 
 interface Credentials {
-    password : string
-    handle : string
+    accountId : string
 }

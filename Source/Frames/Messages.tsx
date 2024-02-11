@@ -68,7 +68,6 @@ async function renderMessage ( message : Message , session : Session ){
 
     const name =
         await nick(message.accountId) ??
-        await handle(message.accountId) ??
         '???'
 
     const emotes = reactions
@@ -137,15 +136,8 @@ async function renderMessage ( message : Message , session : Session ){
 }
 
 
-async function nick ( accountId : string ){
+async function nick ( userId : string ){
     return await database
-        .get<User>([ 'User_By_Id' , accountId ])
+        .get<User>([ 'User_By_Id' , userId ])
         .then(( user ) => user.value?.nick )
-}
-
-
-async function handle ( accountId : string ){
-    return await database
-        .get<Account>([ 'Account_By_Id' , accountId ])
-        .then(( account ) => account.value?.handle )
 }

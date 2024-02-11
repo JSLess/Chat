@@ -1,16 +1,11 @@
 
-export { isValidUsername , isValidPassword }
+export { isValidUsername }
 
 
 const Username = {
     pattern : /^[a-zA-Z0-9][a-zA-Z0-9_-]+[a-zA-Z0-9]$/ ,
     minimum : 3 ,
     maximum : 20
-}
-
-const Password = {
-    minimum : 10 ,
-    maximum : 40
 }
 
 
@@ -47,7 +42,3 @@ function isValidUsername ( username : string ){
     return { success : true }
 }
 
-
-function isValidPassword ( password : string ){
-    return { success : true }
-}

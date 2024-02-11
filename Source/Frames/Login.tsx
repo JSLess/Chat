@@ -31,6 +31,7 @@ function Component ( props : Props ){
             )) }
 
             <form
+                autocomplete = 'on'
                 target = '_parent'
                 action = '/Login'
                 method = 'post'
@@ -41,29 +42,20 @@ function Component ( props : Props ){
 
                     <input
                         required = { true }
-                        autoComplete = 'username'
-                        name = 'handle'
-                        type = 'text'
-                    />
-
-                    <div/>
-
-                    <label> Handle </label>
-
-                </div>
-
-                <div class = 'Form_Input' >
-
-                    <input
-                        required = { true }
-                        autoComplete = 'current-password'
-                        name = 'password'
+                        autocomplete = 'current-password'
+                        name = 'Account'
                         type = 'password'
+                        minlength={16}
+                        maxlength={16}
+                        size = {19}
+                        pattern = '\d{16}'
+                        inputmode = 'numeric'
+                        placeholder = '0000 0000 0000 0000'
                     />
 
                     <div/>
 
-                    <label> Password </label>
+                    <label> Account Id </label>
 
                 </div>
 

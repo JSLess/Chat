@@ -16,9 +16,9 @@ async function validateLoginCredentials (
     const form = await context.request.body({ type : 'form' }).value
 
 
-    const handle = form.get('handle')
+    const accountId = form.get('Account')
 
-    if( ! handle ){
+    if( ! accountId ){
 
         context.response.status = 400
 
@@ -52,20 +52,7 @@ async function validateLoginCredentials (
     }
 
 
-    const password = form.get('password')
-
-    if( ! password ){
-
-        context.response.status = 400
-        context.response.body = JSON.stringify({
-            problem : `No password was specified`
-        })
-
-        return
-    }
-
-
-    context.state = { ... context.state , handle : handle! , password }
+    context.state = { ... context.state , accountId }
 
 
     return await next()

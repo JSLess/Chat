@@ -1,7 +1,6 @@
 
 export { authenticateLogin }
 
-import { comparePasswords } from '../../../Security/Hash.ts'
 import { WithSession } from '../../Session.ts'
 import { Credentials } from './mod.ts'
 import { sessions } from '../../../State.ts'
@@ -11,18 +10,22 @@ import { Context } from 'Oak'
 import { render } from 'Render'
 import { Login } from '../../../Frames/Login.tsx'
 import { UTF8Meta } from 'UI/Parts'
+import { createAccount } from "../../../Security/AccountId.ts";
 
 
 async function authenticateLogin (
     context : Context<Credentials & WithSession>
 ){
 
-    const { sessionId , password , handle } = context.state
+    const { accountId , sessionId } = context.state
 
+    const id = BigInt(accountId)
 
-    const account = (await database.get<Account>([ 'Account_By_Handle' , handle ])).value
+    const account = await database.get([ 'Account_By_Id' , id ])
 
-    if( ! account ){
+    console.log('AccountId',accountId,id)
+
+    if( ! account.value ){
 
         context.response.status = 400
 
@@ -37,6 +40,7 @@ async function authenticateLogin (
                             href = '/Assets/Login.css'
                             rel = 'stylesheet'
                         />
+
                     </head>
                     <body>
                         <Login
@@ -50,35 +54,16 @@ async function authenticateLogin (
             </>
         )
 
-        return
-    }
-
-
-    const password_bytes = new TextEncoder().encode(password)
-
-
-    const isMatching = comparePasswords({
-        password : password_bytes ,
-        hashed : account.password ,
-        salt : account.salt
-    })
-
-
-    if( ! isMatching ){
-        context.response.status = 403
-        context.response.body = JSON.stringify({
-            problem : `Either the account doesn't exist or the given password is incorrect`
-        })
+        context.response.redirect('/')
 
         return
     }
-
 
 
     const session = sessions.get(sessionId)!
+    session.accountId = accountId
 
-    session.accountId = account.accountId
-    console.log('AccountId',sessionId,session,account.accountId)
+    console.log('AccountId',sessionId,session,accountId)
 
 
     context.response.headers.set('Cache-Control','no-cache="Set-Cookie"')
