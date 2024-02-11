@@ -3,20 +3,24 @@ export { database , router , redraw , Reactions }
 
 import { authenticateLogin, validateLoginCredentials } from './Routes/Login/Authentication/mod.ts'
 import { Application , Context, Next, Router } from 'Oak'
-import { messages, reactions, sessions } from './State.ts'
 import { WithSession, validateSession } from './Routes/Session.ts'
+import { routeReactToggle } from './Routes/Chat/React/Toggle.ts'
 import { routePostMessage } from './Routes/Chat/Post.tsx'
+import { routeChatSelect } from './Routes/Chat/Select/Post.ts'
+import { routeChatReact } from './Routes/Chat/React/Get.tsx'
 import { routeChatInput } from './Routes/Chat/Input.tsx'
+import { UserDataRoute } from './Routes/User Data/Form.tsx'
 import { routeMessages } from './Routes/Chat/Messages.ts'
-import { Account, User } from './Types.ts'
+import { createAccount } from './Security/AccountId.ts'
 import { CookieNotice } from './Frames/CookieNotice.tsx'
 import { routeLogout } from './Routes/Logout/Form.ts'
 import { logoutUser } from './Routes/Logout/Action.ts'
 import { routeLogin } from './Routes/Login/Form.tsx'
 import { routeAsset } from './Routes/Assets.ts'
 import { routeHome } from './Routes/Page.ts'
+import { sessions } from './State.ts'
 import { render } from 'Render'
-import { UserDataRoute } from './Routes/User Data/Form.tsx'
+
 
 const { debug , clear } = console
 
@@ -69,6 +73,9 @@ router.post('/Login',validateLoginCredentials,authenticateLogin)
 router.get('/Logout',redirectNonFrame,routeLogout)
 router.post('/Logout',logoutUser)
 
+router.post('/Chat/React/Toggle',onlyLoggedIn,routeReactToggle)
+router.post('/Chat/Select',onlyLoggedIn,routeChatSelect)
+
 router.get('/Cookie',( context ) => context.response.status = 200 )
 router.get('/Cookie/Notice',( context ) => context.response.body = render(CookieNotice()))
 
@@ -101,122 +108,6 @@ function onlyDocument (
 }
 
 
-import { z } from 'Zod'
-import { createAccount } from "./Security/AccountId.ts";
-
-const SelectForm = z.object({
-    messageId : z.string().uuid()
-})
-
-
-type SelectForm = z.infer<typeof SelectForm>
-
-
-const Template_Selected_Message = ( messageIndex : number ) =>
-    `<style> :root { --Selected_Message : ${ messageIndex } ; } </style>`
-
-
-router.post('/Chat/Select',onlyLoggedIn,async ( context ) => {
-
-    const body = await context.request.body().value
-
-    const params = ( body as URLSearchParams )
-
-    const data = {
-        messageId : params.get('MessageId')
-    }
-
-    const form = SelectForm.parse(data)
-
-    const messageId = form.messageId
-
-    if( messages.has(messageId) ){
-
-        const { sessionId } = context.state
-
-        const session = sessions.get(sessionId)!
-        const index = session.sessionIds.indexOf(messageId)
-        const html = Template_Selected_Message(index)
-
-        session.selectedMessage = messageId
-        session.messages?.write(html)
-    }
-
-    context.response.status = 200
-})
-
-
-
-const ReactToggleForm = z.object({
-    emote : z.string().uuid()
-})
-
-router.post('/Chat/React/Toggle',onlyLoggedIn,async ( context ) => {
-
-    const body = await context.request.body().value
-
-    const params = ( body as URLSearchParams )
-
-    const data = {
-        emote : params.get('Emote')
-    }
-
-    const form = ReactToggleForm.safeParse(data)
-
-    if( ! form.success ){
-        console.error(form.error)
-        context.response.status = 400
-        return
-    }
-
-    const emoteId = form.data.emote
-
-    console.log('React',emoteId)
-
-    const session = sessions.get(context.state.sessionId)!
-
-    const { selectedMessage } = session
-
-    const accountId = session.accountId!
-
-    if( selectedMessage ){
-
-        const message = messages.get(selectedMessage)
-
-        if( message ){
-
-            if( ! reactions.has(message.messageId) )
-                reactions.set(message.messageId,[])
-
-            const reacts = reactions.get(message.messageId)!
-
-            const react = reacts.find(( react ) => react.emoteId === emoteId )
-
-            if( ! react )
-                reacts.push({
-                    count : 1 ,
-                    emoteId ,
-                    users : new Set([ accountId ])
-                })
-            else {
-
-                if( react.users.has(accountId) ){
-                    react.count--
-                    react.users.delete(accountId)
-                } else {
-                    react.count++
-                    react.users.add(accountId)
-                }
-            }
-
-            redraw()
-        }
-    }
-
-    context.response.status = 200
-
-})
-
 
 const Reactions = new Map
 Reactions.set(crypto.randomUUID(),'1')
@@ -226,95 +117,7 @@ Reactions.set(crypto.randomUUID(),'4')
 Reactions.set(crypto.randomUUID(),'5')
 
 
-router.get('/Chat/React',onlyLoggedIn, async ( context ) => {
-
-    context.response.body = `
-
-    <!DOCTYPE html>
-    <html>
-
-    <meta
-            http-equiv = 'Content-type'
-            content = 'text/html;charset=UTF-8'
-        />
-
-        <meta
-            http-equiv= 'Content-Security-Policy'
-            content = { \`
-                default-src 'none';
-                style-src 'self';
-                style-src-attr 'self' 'unsafe-inline';
-                style-src-elem 'self';
-                frame-ancestors : 'self' ;
-                frame-src 'self';
-                form-action 'self';
-                media-src 'self' data:;
-                img-src 'self' data:;
-            \` }
-        />
-    <body>
-
-        <form
-            action = '/Chat/React/Toggle'
-            target = 'void'
-            method = 'post'
-            id = 'reactions'
-        >
-
-            ${ Array.from(Reactions.keys())
-                .map(( reaction ) => `<button name = 'Emote' value = '${ reaction }' ></button>`)
-                .join('') }
-
-            <style>
-
-                form {
-                    cursor : default ;
-
-                    grid-template-columns : repeat( auto-fill , 64px ) ;
-                    display : grid ;
-                    gap : 10px ;
-                }
-
-                #reactions button {
-
-                    background-color : transparent ;
-                    background-size : contain ;
-                    outline : none ;
-                    cursor : pointer ;
-                    border : none ;
-                    color : transparent ;
-
-                    height : 64px ;
-                    width : 64px ;
-
-                    border-radius : 4px ;
-
-                    transition : 0.1s ;
-
-                    background-origin : content-box ;
-                    background-repeat : no-repeat ;
-
-                    padding : 3px ;
-                }
-
-
-                #reactions button:hover {
-                    background-color : #ffffff1a ;
-                }
-
-                ${ Array.from(Reactions.entries())
-                    .map(([ id , asset ]) => `[ value = '${ id }' ] { background-image : url(/Assets/Emote/${ asset }.png) ; }`)
-                    .join('') }
-
-            </style>
-
-        </form>
-
-        </body>
-        </html>
-
-    `
-})
+router.get('/Chat/React',onlyLoggedIn,routeChatReact)
 
 
 const database = await Deno.openKv('./Database/Storage.db');
