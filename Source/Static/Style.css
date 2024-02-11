@@ -8,27 +8,110 @@
 }
 
 
+* ,
+*::before ,
+*::after {
+    box-sizing : border-box ;
+}
+
 * {
     font-family : monospace ;
     font-size : 18px ;
     color : var( --text ) ;
+    margin : 0 ;
+    padding : 0 ;
+    min-width : 0 ;
 }
+
+html {
+    color-scheme : dark light ;
+    hanging-punctuation : first last ;
+}
+
+body {
+    background : var( --background ) ;
+    min-height : 100dvh ;
+    display : flex ;
+    justify-content : center ;
+    max-height : 100dvh ;
+    overflow : clip ;
+}
+
+main {
+
+    max-width : 1000px ;
+
+    overflow : clip ;
+
+    display: grid;
+    grid-template-columns: 1fr 64px;
+    gap : 1rem ;
+
+    margin-block : 2rem ;
+}
+
+picture , video , img , svg {
+    max-width : 100% ;
+    display : block ;
+}
+
+h1 , h2 , h3 , h4 , h5 , h6 {
+    text-wrap : balance ;
+}
+
+li , p {
+    max-width : 60ch ;
+    text-wrap : pretty ;
+}
+
+
 
 h1 {
     font-size : 2rem ;
 }
 
 
-body {
+
+
+.Sidebar {
+    border: 2px solid var(--primary);
+    border-radius: 8px;
+    height : calc( 100% - 4px ) ;
+}
+
+.Sidebar > div {
+    width : 60px ;
+    height : 60px ;
+    padding : 20% ;
+    cursor : pointer ;
+}
+
+.Sidebar > div > div {
+    background : var( --primary ) ;
+    mask-clip: padding-box;
+    mask-repeat: no-repeat;
+    mask-position: center;
+    mask-size: contain;
+    width : 100% ;
+    height : 100% ;
+}
+
+.Sidebar > div:hover > div {
+    background : white ;
+}
+
+.Sidebar svg {
+    width :100% ;
+    height : 100% ;
+    fill : white ;
+}
+
+.Main {
     flex-direction : column ;
     align-items: center;
     display : flex ;
     padding : 0 4rem ;
-    margin : 4rem auto ;
     gap : 2rem ;
-
-    background : var( --background ) ;
-    width : fit-content ;
 }
 
 #Messages {

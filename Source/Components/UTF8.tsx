@@ -4,7 +4,7 @@ export { Component as UTF8Meta }
 
 const policies = `
     default-src 'none';
-    style-src 'self';
+    style-src 'self' ;
     style-src-attr 'self' 'unsafe-inline';
     style-src-elem 'self';
     frame-ancestors : 'self' ;

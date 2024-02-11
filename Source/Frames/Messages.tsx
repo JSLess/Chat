@@ -33,6 +33,10 @@ async function Messages ( props : Props ){
 
     return <>
 
+        <head>
+            <meta name="color-scheme" content="light dark" />
+        </head>
+
         <link
             href = '/Assets/Messages.css'
             rel = 'stylesheet'

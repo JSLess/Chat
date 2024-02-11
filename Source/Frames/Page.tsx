@@ -32,73 +32,94 @@ function Component ( props : Props ){
             </head>
             <body>
 
-                { ( loggedIn ) && <>
+                <main>
 
-                    <iframe
-                        allowFullScreen = { false }
-                        loading = 'lazy'
-                        height = { 50 }
-                        src = { `/Logout` }
-                        id = 'Logout'
-                    />
+                    <div class = 'Main' >
 
-                </> }
+                        { ( loggedIn ) && <>
 
-                <h1 style = 'text-align:center' >
-                    HTML Only Chat
-                </h1>
+                            <iframe
+                                allowFullScreen = { false }
+                                loading = 'lazy'
+                                height = { 50 }
+                                src = { `/Logout` }
+                                id = 'Logout'
+                            />
 
+                        </> }
 
-                { ( ! loggedIn ) && <>
-
-                    <iframe
-                        allowFullScreen = { false }
-                        loading = 'lazy'
-                        height = { 110 }
-                        width = { 260 }
-                        src = { `/Login` }
-                        id = 'Login'
-                    />
-
-                </> }
+                        <h1 style = 'text-align:center' >
+                            HTML Only Chat
+                        </h1>
 
 
-                <div id = 'Chatting' >
+                        { ( ! loggedIn ) && <>
 
-                    <iframe
-                        allowFullScreen = { false }
-                        loading = 'lazy'
-                        src = { `/Chat` }
-                        id = 'Messages'
-                    />
+                            <iframe
+                                allowFullScreen = { false }
+                                loading = 'lazy'
+                                height = { 110 }
+                                width = { 260 }
+                                src = { `/Login` }
+                                id = 'Login'
+                            />
 
-                    { ( loggedIn ) && <>
-
-                        <iframe
-                            allowFullScreen = { false }
-                            loading = 'lazy'
-                            height = '100%'
-                            width = '100%'
-                            src = { `/Chat/React` }
-                            id = 'Input'
-                        />
-
-                    </> }
-
-                </div>
+                        </> }
 
 
-                { ( loggedIn ) && <>
+                        <div id = 'Chatting' >
 
-                    <iframe
-                        allowFullScreen = { false }
-                        loading = 'lazy'
-                        height = { 70 }
-                        src = { `/Chat/Input` }
-                        id = 'Input'
-                    />
+                            <iframe
+                                allowTransparency = { true }
+                                allowFullScreen = { false }
+                                loading = 'lazy'
+                                src = { `/Chat` }
+                                id = 'Messages'
+                            />
 
-                </> }
+                            { ( loggedIn ) && <>
+
+                                <iframe
+                                    allowFullScreen = { false }
+                                    loading = 'lazy'
+                                    height = '100%'
+                                    width = '100%'
+                                    src = { `/Chat/React` }
+                                    id = 'Input'
+                                />
+
+                            </> }
+
+                        </div>
+
+
+                        { ( loggedIn ) && <>
+
+                            <iframe
+                                allowFullScreen = { false }
+                                loading = 'lazy'
+                                height = { 70 }
+                                src = { `/Chat/Input` }
+                                id = 'Input'
+                            />
+
+                        </> }
+
+                    </div>
+
+                    <div class = 'Sidebar'>
+
+                        <div>
+                            <div style = { `mask-image : url('./Assets/Icons/Login.png')` } />
+                        </div>
+
+                        <div>
+                            <div style = { `mask-image : url('./Assets/Icons/Logout.png')` } />
+                        </div>
+
+                    </div>
+
+                </main>
 
             </body>
         </html>
