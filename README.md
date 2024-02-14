@@ -9,15 +9,13 @@ Dynamic HTML / CSS only chat page.
 [![Button Concept]][Concept]
 
 <br>
-
-*This is obviously just a prototype so far, WIP*
-
-<br>
 <br>
 
 ## Features
 
 -   Dynamic Message Refreshing
+
+-   AccountId only system
 
 -   Login System
 
@@ -25,32 +23,27 @@ Dynamic HTML / CSS only chat page.
 
 -   Account Creation
 
--   TOTP 2FA
-
--   Session Account Recovery
-
 <br>
 <br>
 
-<img width = 400 src = 'https://github.com/JSLess/Chat/assets/73050054/16985a84-e8d5-4442-9a49-ed074ee3b9fe' >
+<img width = 400 src = 'https://github.com/JSLess/Chat/assets/73050054/32c7e012-f1b5-4603-8b38-6a334e77fbc8' >
 
 <br>
 
-<img width = 400 src = 'https://github.com/JSLess/Chat/assets/73050054/2072d8fe-af88-4699-a9b4-be084918106a' >
+<img width = 400 src = 'https://github.com/JSLess/Chat/assets/73050054/4c50e637-8bb4-41ca-a00c-5ee65b6253cd' >
 
 <br>
 <br>
 
 ## Built With
 
-[<kbd> <br> Deno <br> </kbd>][Deno] [<kbd> <br> Oak <br> </kbd>][Oak] [<kbd> <br> Argon2id <br> </kbd>][Argon2id] [<kbd> <br> Preact <br> </kbd>][Preact]
+[<kbd> <br> Deno <br> </kbd>][Deno] [<kbd> <br> Oak <br> </kbd>][Oak] [<kbd> <br> Preact <br> </kbd>][Preact]
 
 <br>
 
 
 <!----------------------------------------------------------------------------->
 
-[Argon2id]: https://github.com/openpgpjs/argon2id
 [Preact]: https://preactjs.com/
 [Deno]: https://deno.land/
 [Oak]: https://oakserver.github.io/oak/
