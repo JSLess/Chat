@@ -16,7 +16,11 @@
 }
 
 html {
-    overflow : hidden ;
+    color : red ;
+}
+
+html {
+    overflow : clip ;
 }
 
 body {
@@ -27,7 +31,6 @@ body {
 .Form_Input {
 
     position : relative ;
-    width : 260px ;
     display : flex ;
     justify-content: center;
     margin-top : 0.3em ;
@@ -57,14 +60,14 @@ body {
 }
 
 .Form_Input > input:is( :valid , :focus-within ){
-    letter-spacing: 0;
+    letter-spacing : 0 ;
 }
 
-.Form_Input > input:focus-within ~ :is(div,label) {
+.Form_Input > input:not(:placeholder-shown):invalid ~ :is( div , label ) {
     border-color : var( --accent ) ;
 }
 
-.Form_Input > input:valid ~ :is(div,label) {
+.Form_Input > input:valid ~ :is( div , label ) {
     border-color : var( --positive ) ;
 }
 
@@ -97,7 +100,6 @@ input[ type = submit ]{
     background: transparent;
     border : 1px solid var( --primary ) ;
     padding: 10px;
-    width: 260px;
     cursor: pointer;
     transition : 0.25s ;
     color : var( --primary ) ;
@@ -120,5 +122,9 @@ form {
     display : flex ;
     align-items : center ;
     gap : 0.5rem ;
+}
+
+form > * {
+    width : 100% ;
 }
 

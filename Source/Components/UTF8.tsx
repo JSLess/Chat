@@ -7,7 +7,7 @@ const policies = `
     style-src 'self' ;
     style-src-attr 'self' 'unsafe-inline';
     style-src-elem 'self';
-    frame-ancestors : 'self' ;
+    frame-ancestors : 'self';
     frame-src 'self';
     form-action 'self';
     media-src 'self' data:;

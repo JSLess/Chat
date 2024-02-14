@@ -1,8 +1,7 @@
 
 export { createAccount }
 
-import { database } from '../App.ts'
-import { chunk } from 'https://deno.land/std@0.215.0/collections/mod.ts'
+import { database } from 'State'
 import { delay } from 'https://deno.land/std@0.215.0/async/mod.ts'
 import { ulid } from 'https://deno.land/x/ulid@v0.3.0/mod.ts'
 
