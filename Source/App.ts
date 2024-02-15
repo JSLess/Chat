@@ -6,10 +6,6 @@ import { router } from './Routes/mod.ts'
 const { debug , clear } = console
 
 
-debug(`Starting HTML-Only Chat`)
-
-
-
 const app = new Application({
     logErrors : false
 })

@@ -12,6 +12,7 @@
     font-family : monospace ;
     font-size : 18px ;
     color : var( --text ) ;
+    box-sizing : border-box ;
 }
 
 body {
@@ -20,6 +21,8 @@ body {
 
 
 #Input {
+
+    height : 100vh ;
 
     background : var( --secondary ) ;
 
@@ -42,6 +45,7 @@ body {
     padding : 0.25rem 0.25rem ;
     outline : none ;
     resize : none ;
+    height : 100% ;
 }
 
 #Input [ name = message ]::placeholder {

@@ -32,7 +32,7 @@ interface Message {
 
 
 interface Session {
-    accountId ?: string
+    accountId ?: bigint
     messages ?: AsyncResponse
     home ?: AsyncResponse
     selectedMessage ?: string

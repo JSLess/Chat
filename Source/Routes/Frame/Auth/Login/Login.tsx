@@ -38,26 +38,20 @@ function Component ( props : Props ){
                 id = 'Login'
             >
 
-                <div class = 'Form_Input' >
+                <input
+                    required = { true }
+                    autocomplete = 'current-password'
+                    name = 'Account'
+                    type = 'password'
+                    minlength={16}
+                    maxlength={16}
+                    size = {19}
+                    pattern = '\d{16}'
+                    inputmode = 'numeric'
+                    placeholder = '0000 0000 0000 0000'
+                />
 
-                    <input
-                        required = { true }
-                        autocomplete = 'current-password'
-                        name = 'Account'
-                        type = 'password'
-                        minlength={16}
-                        maxlength={16}
-                        size = {19}
-                        pattern = '\d{16}'
-                        inputmode = 'numeric'
-                        placeholder = '0000 0000 0000 0000'
-                    />
-
-                    <div/>
-
-                    <label> Account Id </label>
-
-                </div>
+                <label> Account Id </label>
 
                 <input
                     value = 'Login'

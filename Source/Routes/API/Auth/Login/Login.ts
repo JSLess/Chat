@@ -5,7 +5,6 @@ export { middleware as routeLogin }
 import { deleteCookie , setCookie } from 'HTTP'
 import { sessions , database } from 'State'
 import { Context } from 'Oak'
-import { WithSession } from "../../../State.ts";
 import { Session } from "../../../../Misc/Types.ts";
 
 
@@ -27,9 +26,6 @@ async function middleware (
     console.log('AccountId',accountId,id)
 
     if( ! account.value ){
-
-        context.response.status = 400
-
 
         context.response.headers.set('Cache-Control','no-cache="Set-Cookie"')
 

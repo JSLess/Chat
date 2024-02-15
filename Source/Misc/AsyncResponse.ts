@@ -25,7 +25,9 @@ class AsyncResponse {
         if( ! this.controller )
             throw `AsyncResponse controller is not initialized`
 
-        this.controller?.close()
+        try {
+            this.controller?.close()
+        } catch {}
     }
 
 
@@ -41,7 +43,7 @@ class AsyncResponse {
         try {
             this.controller.enqueue(bytes)
         } catch {
-            console.log('Steam closed')
+            console.log('Stream was already closed')
         }
     }
 }

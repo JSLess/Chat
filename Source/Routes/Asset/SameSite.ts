@@ -17,9 +17,6 @@ function middleware (
 
     const referer = context.request.headers.get('referer')
 
-    console.log('check external',referer)
-
-
     if( ! referer ){
         context.response.status = 421
         context.response.body = notice

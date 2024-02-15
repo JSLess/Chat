@@ -48,15 +48,34 @@ function Component ( props : Props ){
 
                             </> : <>
 
-                                <iframe
-                                    src = { `/Frame/Auth/Login` }
-                                    id = 'Login'
-                                />
+                                <div id = 'Auth' >
+
+                                    <iframe
+                                        src = { `/Frame/Auth/Register` }
+                                        id = 'Register'
+                                    />
+
+                                    <iframe
+                                        src = { `/Frame/Auth/Login` }
+                                        id = 'Login'
+                                    />
+
+                                </div>
 
                             </> }
 
                         </> }
 
+
+                        { ( hasSession ) && <>
+
+                            <iframe
+                                loading = 'lazy'
+                                src = { `/Frame/Chat/Message/Input` }
+                                id = 'Input'
+                            />
+
+                        </> }
 
                         <div id = 'Chatting' >
 
@@ -73,24 +92,12 @@ function Component ( props : Props ){
                                     height = '100%'
                                     width = '100%'
                                     src = { `/Frame/Chat/React/Selection` }
-                                    id = 'Input'
+                                    id = 'Reactions'
                                 />
 
                             </> }
 
                         </div>
-
-                        { ( hasSession ) && <>
-
-                            <iframe
-                                loading = 'lazy'
-                                height = { 70 }
-                                src = { `/Frame/Chat/Message/Input` }
-                                id = 'Input'
-                            />
-
-                        </> }
-
                     </div>
 
                     <div class = 'Sidebar' >

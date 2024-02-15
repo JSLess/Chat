@@ -1,11 +1,9 @@
 
 export { middleware as validateCredentials }
 
+import { deleteCookie , setCookie } from 'HTTP'
 import { Context , Next } from 'Oak'
 import { Credentials } from './Login.ts'
-import { UTF8Meta } from 'UI/Parts'
-import { render } from 'Render'
-import { Login } from '../../../Frame/Auth/Login/Login.tsx'
 
 
 async function middleware (
@@ -20,33 +18,37 @@ async function middleware (
 
     if( ! accountId ){
 
-        context.response.status = 400
+        context.response.headers.set('Cache-Control','no-cache="Set-Cookie"')
 
-        context.response.body = render(
-            <>
-                <html>
-                    <head>
+        deleteCookie(context.response.headers,'Session',{
+            path : '/'
+        })
 
-                        <UTF8Meta />
+        interface Error {
+            type : string
+        }
 
-                        <link
-                            href = '/Asset/Login.css'
-                            rel = 'stylesheet'
-                        />
-                    </head>
-                    <body>
+        let errors : Array<Error>
 
-                        <Login
-                            notices = {[{
-                                title : 'Missing Handle' ,
-                                description : `No user handle has been specified`
-                            }]}
-                        />
+        try {
+            errors = JSON.parse(atob(context.request.headers.get('Errors') ?? '') ?? '[]')
+        } catch {
+            errors = []
+        }
 
-                    </body>
-                </html>
-            </>
-        )
+        errors.push({
+            type : 'Missing AccountId'
+        })
+
+        setCookie(context.response.headers,{
+            name : 'Errors' ,
+            value : btoa(JSON.stringify(errors)) ,
+            path : '/' ,
+            httpOnly : true ,
+            secure : false ,
+            sameSite : 'Lax' ,
+            expires : new Date(Date.now() + 1000 * 60 * 20)
+        })
 
         return
     }

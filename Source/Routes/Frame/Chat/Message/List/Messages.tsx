@@ -72,7 +72,7 @@ async function renderMessage ( message : Message , session : Session ){
 
     const name =
         await nick(message.accountId) ??
-        '???'
+        'Anon'
 
     const emotes = reactions
         .get(message.messageId)
@@ -98,7 +98,19 @@ async function renderMessage ( message : Message , session : Session ){
         >
 
             <div class = 'Message' data-message = { message.messageId }
-                style = { `border-color:rgba(255,255,255,calc(1 - max(var(--Selected_Message) - ${ number },-1 * ( var(--Selected_Message) - ${ number } ) )))` }
+                style = { `
+                    ----Delta : var( --Selected_Message ) - ${ number } ;
+                    ----Abs : max( var( ----Delta ) , -1 * var( ----Delta ) ) ;
+                    ----Norm : var( ----Abs ) / var( ----Abs ) ;
+
+                    border-color :
+                        color-mix( in srgb ,
+                            var( ---Selected )
+                            calc( 100% * ( 1 - var( ----Norm ) ) ) ,
+                            var( ---Unselected )
+                            calc( 100% * var( ----Norm ) )
+                        ) ;
+                ` }
             >
 
                 <p> { local } : { name } : { message.message } </p>

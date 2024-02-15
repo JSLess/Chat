@@ -76,8 +76,6 @@ async function determineSession (
 
     const sessionId = await context.cookies.get('Session')
 
-    console.log('Session Id',sessionId)
-
     if( ! sessionId )
         return await next()
 
@@ -164,8 +162,6 @@ function onlyWithCookies (
     context : Context<BaseState> ,
     next : () => Promise<any>
 ){
-
-    console.log('Only Cookies',context.state)
 
     if( context.state.hasCookies === 'Enabled' )
         return next()

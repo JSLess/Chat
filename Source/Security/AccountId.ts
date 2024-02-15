@@ -88,8 +88,6 @@ async function createAccount (){
 
     await delay(remaining)
 
-    console.log(`Remaining`,remaining)
-
     if( ok )
         return Promise.resolve({
             accountId , userId
