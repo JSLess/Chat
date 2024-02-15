@@ -9,28 +9,31 @@ Dynamic HTML / CSS only chat page.
 [![Button Concept]][Concept]
 
 <br>
-<br>
 
 ## Features
 
 -   Dynamic Message Refreshing
 
--   AccountId only system
+-   Password Only Accounts
 
--   Login System
+-   Message Reactions
+
+<br>
 
 ## Planned
 
--   Account Creation
+-   GDPR Cookie Banner thingy
 
 <br>
 <br>
 
-<img width = 400 src = 'https://github.com/JSLess/Chat/assets/73050054/32c7e012-f1b5-4603-8b38-6a334e77fbc8' >
+<div align = left >
 
-<br>
+<img width = 40% src = 'https://github.com/JSLess/Chat/assets/73050054/cc50f027-c8fd-48a1-b4e1-92773984e287' >
 
-<img width = 400 src = 'https://github.com/JSLess/Chat/assets/73050054/4c50e637-8bb4-41ca-a00c-5ee65b6253cd' >
+<img width = 40% src = 'https://github.com/JSLess/Chat/assets/73050054/4def45d7-3409-4742-9e39-d078d4c1fa3d' >
+
+</div>
 
 <br>
 <br>
