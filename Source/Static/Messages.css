@@ -30,7 +30,7 @@ form {
     flex-grow : 1 ;
     display: flex;
     flex-direction: column;
-    gap: 0.335rem;
+    gap: 0.75rem;
     color: var(--text);
     padding: 0.5rem;
     overflow-y: scroll;
@@ -46,13 +46,17 @@ input[ name = MessageId ]{
     border : 1px solid transparent ;
     border-width : 0 0 0 2px ;
 
-    padding : 0 1rem ;
+    padding-inline : 1rem 0.25rem ;
+    padding-block : 0.25rem ;
 
     cursor : pointer ;
 
     transition :
         border-color 200ms ease-in-out ,
         background 100ms ease-in-out ;
+
+    display: grid;
+    grid-template-columns: 1fr auto;
 }
 
 .Message:hover {
@@ -60,13 +64,18 @@ input[ name = MessageId ]{
 }
 
 .Message p {
-    margin-bottom : 0.5rem ;
+    margin-block : 0 ;
 }
 
+.Message span {
+    user-select : none ;
+}
 
 .Message .Emotes {
+    margin-top : 0.5rem ;
     display : flex ;
     gap : 0.5rem ;
+    user-select : none ;
 }
 
 .Message .Emote {

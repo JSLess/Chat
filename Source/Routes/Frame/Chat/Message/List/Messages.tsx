@@ -6,12 +6,13 @@ import { Message , Session } from '../../../../../Misc/Types.ts'
 import { Reactions } from 'Dummy'
 import { userById } from 'Database'
 import { render } from 'Render'
+import moment from 'npm:moment@2.30.1'
 
 
 
 async function renderMessages ( session : Session ){
 
-    const msgs = [ ... messages.values() ]
+    const msgs = [ ... messages.values() ].reverse()
 
     let html = render( await Messages({ messages : msgs , session }) )
 
@@ -61,14 +62,42 @@ async function Messages ( props : Props ){
 }
 
 
+function formatDelta (
+    time : Date
+){
+
+    const duration = moment.duration(moment().diff(time))
+
+    const years = duration.years();
+    const months = duration.months();
+    const days = duration.days();
+    const hours = duration.hours();
+    const minutes = duration.minutes();
+
+    if( years > 0 )
+        return `${ years }y`
+
+    if( months > 0 )
+        return `${ months }M`
+
+    if( days > 0 )
+        return `${ days }d`
+
+    if( hours > 0 )
+        return `${ hours }h`
+
+    if( minutes > 0 )
+        return `${minutes}m`
+
+    return `Now`
+}
 
 
 async function renderMessage ( message : Message , session : Session ){
 
     const { time } = message
 
-    const local = time
-        .toLocaleTimeString(undefined,{ timeStyle : 'short' })
+    const local = formatDelta(time)
 
 
     const name =
@@ -88,67 +117,73 @@ async function renderMessage ( message : Message , session : Session ){
 
     return <>
 
-        <input type = 'submit'  id = { `Submit-${ message.messageId }` } name = 'MessageId' value = { message.messageId }  />
+        <input
+            type = 'submit'
+            id = { `Submit-${ message.messageId }` }
+            name = 'MessageId'
+            value = { message.messageId }
+        />
 
-        <label for = { `Submit-${ message.messageId }` } >
-
-        <form
-             action = '/Chat/React'
-             target = 'void'
-             method = 'post'
+        <label
+            for = { `Submit-${ message.messageId }` }
         >
 
-            <div class = 'Message' data-message = { message.messageId }
-                style = { `
-                    ----Delta : var( --Selected_Message ) - ${ number } ;
-                    ----Abs : max( var( ----Delta ) , -1 * var( ----Delta ) ) ;
-                    ----Norm : var( ----Abs ) / var( ----Abs ) ;
-
-                    border-color :
-                        color-mix( in srgb ,
-                            var( ---Selected )
-                            calc( 100% * ( 1 - var( ----Norm ) ) ) ,
-                            var( ---Unselected )
-                            calc( 100% * var( ----Norm ) )
-                        ) ;
-                ` }
+            <form
+                action = '/Chat/React'
+                target = 'void'
+                method = 'post'
             >
 
-                <p> { local } : { name } : { message.message } </p>
+                <div
+                    data-message = { message.messageId }
+                    class = 'Message'
+                    style = { `
+                        ----Delta : var( --Selected_Message ) - ${ number } ;
+                        ----Abs : max( var( ----Delta ) , -1 * var( ----Delta ) ) ;
+                        ----Norm : var( ----Abs ) / var( ----Abs ) ;
 
-                { ( emotes ) && <>
+                        border-color :
+                            color-mix( in srgb ,
+                                var( ---Selected )
+                                calc( 100% * ( 1 - var( ----Norm ) ) ) ,
+                                var( ---Unselected )
+                                calc( 100% * var( ----Norm ) )
+                            ) ;
+                    ` }
+                >
 
-                    <div class = 'Emotes' >
+                    <p> { name } : { message.message } </p>
 
-                        { emotes
-                            .filter(( reaction ) => reaction.count )
-                            .map(( reaction ) => [ Reactions.get(reaction.emoteId) , reaction.count])
-                            .map(([ asset , count ]) => {
+                    <span children = { local } />
 
-                                return <>
+                    { ( emotes ) && <>
 
-                                    <div class = 'Emote'>
+                        <div class = 'Emotes' >
 
-                                        <img src = { `/Asset/Emote/${ asset }.png` } />
+                            { emotes
+                                .filter(( reaction ) => reaction.count )
+                                .map(( reaction ) => [ Reactions.get(reaction.emoteId) , reaction.count])
+                                .map(([ asset , count ]) => {
 
-                                        <span children = { count } />
+                                    return <>
 
-                                    </div>
-                                </>
-                            })}
+                                        <div class = 'Emote'>
 
-                    </div>
+                                            <img src = { `/Asset/Emote/${ asset }.png` } />
 
-                </> }
+                                            <span children = { count } />
 
+                                        </div>
+                                    </>
+                                })}
 
-            </div>
+                        </div>
 
+                    </> }
 
-        </form>
-
+                </div>
+            </form>
         </label>
-
     </>
 }
 
