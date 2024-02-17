@@ -40,7 +40,7 @@ async function middleware (
 
     const { selectedMessage } = session
 
-    const accountId = session.accountId!
+    const userId = session.userId!
 
     if( selectedMessage ){
 
@@ -59,16 +59,16 @@ async function middleware (
                 reacts.push({
                     count : 1 ,
                     emoteId ,
-                    users : new Set([ accountId ])
+                    users : new Set([ userId ])
                 })
             else {
 
-                if( react.users.has(accountId) ){
+                if( react.users.has(userId) ){
                     react.count--
-                    react.users.delete(accountId)
+                    react.users.delete(userId)
                 } else {
                     react.count++
-                    react.users.add(accountId)
+                    react.users.add(userId)
                 }
             }
 

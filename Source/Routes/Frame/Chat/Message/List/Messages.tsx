@@ -1,9 +1,10 @@
 
 export { renderMessages }
 
-import { messages , reactions , database } from 'State'
-import { Message , Session, User } from '../../../../../Misc/Types.ts'
+import { messages , reactions } from 'State'
+import { Message , Session } from '../../../../../Misc/Types.ts'
 import { Reactions } from 'Dummy'
+import { userById } from 'Database'
 import { render } from 'Render'
 
 
@@ -71,7 +72,7 @@ async function renderMessage ( message : Message , session : Session ){
 
 
     const name =
-        await nick(message.accountId) ??
+        await nick(message.userId) ??
         'Anon'
 
     const emotes = reactions
@@ -153,7 +154,6 @@ async function renderMessage ( message : Message , session : Session ){
 
 
 async function nick ( userId : string ){
-    return await database
-        .get<User>([ 'User_By_Id' , userId ])
+    return await userById(userId)
         .then(( user ) => user.value?.nick )
 }

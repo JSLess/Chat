@@ -1,10 +1,10 @@
 
 export { createAccount }
 
+import { UserIdByAccount , userToId } from 'Database'
 import { database } from 'State'
-import { delay } from 'https://deno.land/std@0.215.0/async/mod.ts'
+import { delay } from 'Async'
 import { ulid } from 'https://deno.land/x/ulid@v0.3.0/mod.ts'
-
 
 
 function bufferToBigInt ( buffer : Uint8Array ){
@@ -39,9 +39,6 @@ async function createAccount (){
 
     const userId = ulid()
 
-    const account = { userId }
-
-
     let accountId : bigint ,
         attempts = 0 ,
         ok = false
@@ -52,13 +49,13 @@ async function createAccount (){
 
         accountId = randomDigits()
 
-        const key = [ 'Account_By_Id' , accountId ] as const
+        const key = [ UserIdByAccount , accountId ] as const
 
 
         const result = await database
             .atomic()
             .check({ key , versionstamp : null })
-            .set(key,account)
+            .set(key,userId)
             .commit()
 
         ok = result.ok
@@ -74,11 +71,7 @@ async function createAccount (){
 
     if( ok ){
 
-        const user = {
-            nick : null
-        }
-
-        await database.set([ 'User_By_Id' , userId ] , user )
+        await userToId(userId,{ accountId , userId })
     }
 
 

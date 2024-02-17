@@ -1,6 +1,6 @@
 
 export type { PopArray }
-export type { Account , Message , Session , Reaction , User }
+export type { Message , Session , Reaction }
 
 import { AsyncResponse } from 'Misc/Async'
 
@@ -11,20 +11,11 @@ type PopArray<Type> =
 	| [ ... Array<Type> , Type ]
 
 
-interface Account {
-
-    password : Uint8Array
-    salt : Uint8Array
-
-    accountId : string
-    handle : string
-}
-
 
 interface Message {
 
-    accountId : string
     messageId : string
+    userId : string
 
     message : string
     time : Date
@@ -32,16 +23,11 @@ interface Message {
 
 
 interface Session {
-    accountId ?: bigint
+    userId ?: string
     messages ?: AsyncResponse
     home ?: AsyncResponse
     selectedMessage ?: string
     sessionIds : Array<string>
-}
-
-
-interface User {
-    nick : string
 }
 
 

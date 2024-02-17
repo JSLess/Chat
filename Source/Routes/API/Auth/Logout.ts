@@ -1,10 +1,10 @@
 
 export { middleware as routeLogout }
 
+import { BaseState } from "../../State.ts";
 import { sessions } from 'State'
 import { Context } from 'Oak'
 import { delay } from 'Async'
-import { BaseState } from "../../State.ts";
 
 
 async function middleware (

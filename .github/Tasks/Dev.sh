@@ -7,8 +7,8 @@ source .github/.env
 set +a
 
 
-deno run \
-    --unstable \
-    --watch \
-    -A \
+deno run            \
+    --unstable-kv   \
+    --watch         \
+    -A              \
     Source/App.ts

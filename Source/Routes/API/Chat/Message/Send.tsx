@@ -47,7 +47,7 @@ async function middleware (
     const session = sessions
         .get(context.state.sessionId)!
 
-    const accountId = session.accountId!
+    const userId = session.userId!
 
 
     const messageId = crypto
@@ -55,7 +55,7 @@ async function middleware (
 
     messages.set(messageId,{
         messageId : messageId ,
-        accountId : accountId ,
+        userId : userId ,
         time : new Date ,
         message : message
     })

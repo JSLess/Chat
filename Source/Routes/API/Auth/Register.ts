@@ -1,11 +1,11 @@
 
 export { middleware as routeRegister }
 
-import { database , sessions } from 'State'
+import { createAccount } from "../../../Security/AccountId.ts"
+import { BaseState } from "../../State.ts"
+import { sessions } from 'State'
+import { Session } from "../../../Misc/Types.ts"
 import { Context } from 'Oak'
-import { BaseState } from "../../State.ts";
-import { Session } from "../../../Misc/Types.ts";
-import { createAccount } from "../../../Security/AccountId.ts";
 
 
 async function middleware (
@@ -13,10 +13,6 @@ async function middleware (
 ){
 
     const account = await createAccount()
-
-    const key = [ 'User_By_Id' , account.userId ]
-
-    await database.set(key,{ nick : null })
 
     const sessionId = crypto.randomUUID()
 
@@ -27,7 +23,7 @@ async function middleware (
 
     sessions.set(sessionId,session)
 
-    session.accountId = account.accountId
+    session.userId = account.userId
 
 
     context.response.headers.set('Cache-Control','no-cache="Set-Cookie"')

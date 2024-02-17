@@ -1,11 +1,11 @@
 
 export { middleware as routeMessageInput }
 
+import { WithSession } from "../../../../State.ts";
 import { UTF8Meta } from 'UI/Parts'
 import { Context } from 'Oak'
 import { render } from 'Render'
 import { Input } from './Input.tsx'
-import { WithSession } from "../../../../State.ts";
 
 
 async function middleware (

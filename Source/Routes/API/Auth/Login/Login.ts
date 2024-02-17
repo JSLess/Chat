@@ -3,7 +3,8 @@ export type { Credentials }
 export { middleware as routeLogin }
 
 import { deleteCookie , setCookie } from 'HTTP'
-import { sessions , database } from 'State'
+import { userIdByAccount } from 'Database'
+import { sessions } from 'State'
 import { Context } from 'Oak'
 import { Session } from "../../../../Misc/Types.ts";
 
@@ -21,11 +22,11 @@ async function middleware (
 
     const id = BigInt(accountId)
 
-    const account = await database.get([ 'Account_By_Id' , id ])
+    const userId = await userIdByAccount(id)
 
     console.log('AccountId',accountId,id)
 
-    if( ! account.value ){
+    if( ! userId.value ){
 
         context.response.headers.set('Cache-Control','no-cache="Set-Cookie"')
 
@@ -75,7 +76,7 @@ async function middleware (
 
     sessions.set(sessionId,session)
 
-    session.accountId = accountId
+    session.userId = userId.value
 
     console.log('AccountId',sessionId,session,accountId)
 

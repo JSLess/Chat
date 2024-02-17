@@ -1,14 +1,14 @@
 
 export { Component as Page }
 
-import { UTF8Meta } from 'UI/Parts'
-import { BaseState } from "../../State.ts";
+import { AccountId , UTF8Meta } from 'UI/Parts'
+import { BaseState } from "../../State.ts"
 
 
 type Props = BaseState
 
 
-function Component ( props : Props ){
+async function Component ( props : Props ){
 
     const { hasSession , hasCookies } = props
 
@@ -41,10 +41,16 @@ function Component ( props : Props ){
 
                             { ( hasSession ) ? <>
 
-                                <iframe
-                                    src = { `/Frame/Auth/Logout` }
-                                    id = 'Logout'
-                                />
+                                <div id = 'LoggedIn'>
+
+                                    <iframe
+                                        src = { `/Frame/Auth/Logout` }
+                                        id = 'Logout'
+                                    />
+
+                                    { await AccountId({ userId : props.session.userId! }) }
+
+                                </div>
 
                             </> : <>
 

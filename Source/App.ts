@@ -3,9 +3,6 @@ import { Application } from 'Oak'
 import { router } from './Routes/mod.ts'
 
 
-const { debug , clear } = console
-
-
 const app = new Application({
     logErrors : false
 })
@@ -32,5 +29,5 @@ app.addEventListener('error',( event ) => {
     console.error(event)
 })
 
-await app.listen({ port : 8000 })
+await app.listen({ port : 9000 })
 
