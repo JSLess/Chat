@@ -17,7 +17,9 @@ async function middleware (
     const sessionId = crypto.randomUUID()
 
     const session = {
-        sessionIds : []
+        sessionIds : [] ,
+        contexts : {} ,
+        frames : {}
     } as Session
 
 

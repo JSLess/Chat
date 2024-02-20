@@ -28,6 +28,14 @@ interface Session {
     home ?: AsyncResponse
     selectedMessage ?: string
     sessionIds : Array<string>
+
+    frames : {
+        reactions ?: AsyncResponse
+    },
+
+    contexts : {
+        reactions ?: Map<string,string>
+    }
 }
 
 

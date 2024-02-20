@@ -23,9 +23,9 @@ function Component (){
             content = 'text/html;charset=UTF-8'
         />
 
-        <meta
+        {/* <meta
             http-equiv= 'Content-Security-Policy'
             content = { policies }
-        />
+        /> */}
     </>
 }

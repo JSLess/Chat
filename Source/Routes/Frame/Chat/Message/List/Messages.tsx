@@ -16,7 +16,10 @@ async function renderMessages ( session : Session ){
 
     let html = render( await Messages({ messages : msgs , session }) )
 
-    html += `<style> :root { --Selected_Message : ${ ( session.selectedMessage ) ? session.sessionIds.indexOf(session.selectedMessage) : 0 } ; } </style>`
+    const selected = ( session.selectedMessage )
+        ? session.sessionIds.indexOf(session.selectedMessage) : 0
+
+    html += `<style> :root { --Selected_Message : ${ selected } ; } </style>`
 
     return html
 }
@@ -36,7 +39,10 @@ async function Messages ( props : Props ){
     return <>
 
         <head>
-            <meta name="color-scheme" content="light dark" />
+            <meta
+                content = 'light dark'
+                name = 'color-scheme'
+            />
         </head>
 
         <link
