@@ -1,11 +1,10 @@
 
 export { middleware as routeReactSelection }
 
+import { AsyncResponse } from 'Misc/Async'
 import { Reactions } from 'Dummy'
 import { Context } from 'Oak'
 import { render } from 'Render'
-import { sessions } from "State";
-import { AsyncResponse } from "Misc/Async";
 
 
 // Idea : Inject autofocused inputs when typing any character into field
@@ -39,27 +38,12 @@ async function middleware (
     const hoverStyles = Array
         .from(Reactions.entries())
 
-            .map(([ reactionId , asset ]) => `
+            .map(([ reactionId ]) => `
                 [ value = '${ reactionId }' ]:active::before {
-                    list-style-image : url('/API/Chat/Message/React/Drag?reaction=${ reactionId }&a=${ Date.now() }') ;
-                }` )
+                    list-style-image : url('/API/Spark?Scope=Reactions:Editing&Action=Drag&Reaction=${ reactionId }&Time=${ Date.now() }') ;
+                }
+            ` )
         .join('')
-
-
-    // let gridStyle = ''
-
-    // for ( let x = 0 ; x < 10 ; x++ ){
-
-    //     gridStyle += `
-    //         .cell:nth-child(10n + ${ x + 1}):hover ~ button {
-    //             ---x: ${x};
-    //         }
-    //         .cell:nth-child(n + ${10 * x + 1}):nth-child(-n + ${10 * (x + 1)}):hover ~ button {
-    //             ---y: ${x};
-    //         }
-    //     `
-    // }
-
 
 
     const rendered = render(
@@ -81,8 +65,6 @@ async function middleware (
                     id = 'reactions'
                 >
 
-                    {/* { Array(100).fill(null).map(() => <div class = 'cell' /> ) } */}
-
                     { buttons }
 
                     <style dangerouslySetInnerHTML = {{ __html : style }} />
@@ -92,7 +74,7 @@ async function middleware (
                     <style dangerouslySetInnerHTML = {{ __html : `
 
                         .Category:hover::before {
-                            list-style-image : url('/API/Chat/Message/React/Hover?a=${ Date.now() }')
+                            list-style-image : url('/API/Spark?Scope=Reactions:Editing&Action=Hover&Time=${ Date.now() }') ;
                         }
 
                     ` }} />
@@ -102,8 +84,7 @@ async function middleware (
                 </body>
             </html>
 
-    ) + `<style>${ hoverStyles }</style>` //+ `<style>${ gridStyle }</style>`
-
+    ) + `<style>${ hoverStyles }</style>`
 
 
     const { response , state } = context

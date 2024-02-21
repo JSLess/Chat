@@ -33,8 +33,6 @@ async function checkCookies (
     next : () => Promise<any>
 ){
 
-    console.log('Check Cookie',context.request.url.pathname.toString(),{ ... context.cookies.entries() })
-
     if( context.request.url.searchParams.has('CheckCookie') ){
 
         if( await context.cookies.size ){

@@ -13,8 +13,6 @@ function middleware (
 
     const destination = request.headers.get('sec-fetch-dest')
 
-    console.log('Only Frames',request.url.toString(),destination)
-
     const inIFrame = ( destination === 'iframe' )
 
     if( inIFrame )
