@@ -33,7 +33,6 @@ form {
     position : relative ;
     display : flex ;
     justify-content: center;
-    margin-top : 0.3em ;
 }
 
 
@@ -81,5 +80,5 @@ form {
 
 input {
     width : 100% ;
-    height : 100px ;
+    height : 100% ;
 }

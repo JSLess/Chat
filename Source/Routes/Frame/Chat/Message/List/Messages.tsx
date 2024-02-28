@@ -3,10 +3,11 @@ export { renderMessages }
 
 import { messages , reactions } from 'State'
 import { Message , Session } from '../../../../../Misc/Types.ts'
-import { Reactions } from 'Dummy'
 import { userById } from 'Database'
 import { render } from 'Render'
 import moment from 'npm:moment@2.30.1'
+import { Icon, Reactions } from "../../../../../Reactions/Groups.ts";
+import { UTF8Meta } from "../../../../../Components/UTF8.tsx";
 
 
 
@@ -39,11 +40,13 @@ async function Messages ( props : Props ){
     return <>
 
         <head>
-            <meta
-                content = 'light dark'
-                name = 'color-scheme'
-            />
+            <UTF8Meta />
         </head>
+
+        <link
+            href = '/Asset/Styles/Reset.css'
+            rel = 'stylesheet'
+        />
 
         <link
             href = '/Asset/Messages.css'
@@ -121,6 +124,7 @@ async function renderMessage ( message : Message , session : Session ){
 
     const number = session.sessionIds.indexOf(message.messageId)
 
+
     return <>
 
         <input
@@ -142,20 +146,8 @@ async function renderMessage ( message : Message , session : Session ){
 
                 <div
                     data-message = { message.messageId }
+                    style = { `----Message_Index : ${ number }` }
                     class = 'Message'
-                    style = { `
-                        ----Delta : var( --Selected_Message ) - ${ number } ;
-                        ----Abs : max( var( ----Delta ) , -1 * var( ----Delta ) ) ;
-                        ----Norm : var( ----Abs ) / var( ----Abs ) ;
-
-                        border-color :
-                            color-mix( in srgb ,
-                                var( ---Selected )
-                                calc( 100% * ( 1 - var( ----Norm ) ) ) ,
-                                var( ---Unselected )
-                                calc( 100% * var( ----Norm ) )
-                            ) ;
-                    ` }
                 >
 
                     <p> { name } : { message.message } </p>
@@ -168,14 +160,15 @@ async function renderMessage ( message : Message , session : Session ){
 
                             { emotes
                                 .filter(( reaction ) => reaction.count )
-                                .map(( reaction ) => [ Reactions.get(reaction.emoteId) , reaction.count])
-                                .map(([ asset , count ]) => {
+                                .map(( reaction ) => [ Reactions.get(reaction.emoteId) , reaction.count ] as const )
+                                .filter(( value ) : value is [ Icon , number ] => !! value[0] )
+                                .map(([ reaction , count ]) => {
 
                                     return <>
 
                                         <div class = 'Emote'>
 
-                                            <img src = { `/Asset/Emote/${ asset }.png` } />
+                                            <img src = { `/${ reaction.file }` } />
 
                                             <span children = { count } />
 
@@ -186,6 +179,23 @@ async function renderMessage ( message : Message , session : Session ){
                         </div>
 
                     </> }
+
+                    <div class = 'Options' >
+
+                        <div
+                            data-option = 'React'
+                            children = { 'R' }
+                        />
+
+                    </div>
+
+                    <style dangerouslySetInnerHTML = {{ __html : `
+
+                        [ data-option = React ]:active {
+                            list-style-image : url('/API/Spark?Scope=Message:Option&Action=Click&Option=React&Message=${ message.messageId }&Time=${ Date.now() }') ;
+                        }
+
+                    ` }} />
 
                 </div>
             </form>

@@ -31,6 +31,9 @@ interface Session {
 
     frames : {
         reactions ?: AsyncResponse
+        reactions_window ?: AsyncResponse
+        reactions_emoticons ?: AsyncResponse
+        reactions_groups ?: AsyncResponse
     },
 
     contexts : {

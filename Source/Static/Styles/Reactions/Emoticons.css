@@ -1,0 +1,47 @@
+
+html {
+    background : #c0c0c0 ;
+}
+
+body {
+    margin: 0;
+    box-sizing: border-box;
+    position: absolute;
+    inset: 0;
+
+    padding : 2px 3px ;
+
+    box-shadow :
+        inset -1px -1px #dfdfdf ,
+        inset 1px 1px grey ;
+}
+
+.List {
+
+    grid-template-columns : repeat( auto-fit , 32px ) ;
+    justify-content : center ;
+    grid-auto-rows : 32px ;
+    grid-gap : 1rem ;
+    display : grid ;
+
+    padding : 0.75rem ;
+
+    height : 100% ;
+    width : 100% ;
+
+    overflow-x : clip ;
+    overflow-y : auto ;
+}
+
+.List div {
+    cursor : pointer ;
+}
+
+.List img {
+
+    pointer-events : none ;
+    user-select : none ;
+
+    height : 100% ;
+    width : 100% ;
+}

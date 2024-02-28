@@ -1,0 +1,94 @@
+
+html {
+    background : #c0c0c0 ;
+    color : white ;
+    font-family : monospace ;
+}
+
+body {
+
+    margin: 0;
+    box-sizing: border-box;
+    position: absolute;
+    inset: 0;
+
+    grid-template-rows : 2rem 1fr 2fr ;
+    justify-items : stretch ;
+    align-items : stretch ;
+    grid-gap : 3px ;
+    display : grid ;
+
+    padding : 3px ;
+    box-shadow :
+        inset -1px -1px #0a0a0a ,
+        inset 1px 1px #dfdfdf ,
+        inset -2px -2px grey ,
+        inset 2px 2px #fff ;
+}
+
+.Header {
+
+    background : linear-gradient( 90deg ,
+        rgba(163,45,71,1) 0% ,
+        rgba(224,77,110,1) 100%
+    ) ;
+
+    padding : 3px ;
+
+    justify-content : space-between ;
+    align-items : center ;
+    display : flex ;
+}
+
+.Header p {
+
+    padding-inline : 0.5rem ;
+
+    letter-spacing : -1px ;
+    font-family : monospace ;
+    flex-grow : 1 ;
+
+    user-select : none ;
+}
+
+form > button {
+
+    ---Ratio : 100% ;
+
+    ---Background : color-mix( in srgb , silver var( ---Ratio ) , black ) ;
+    ---Box-Bottom : color-mix( in srgb , grey var( ---Ratio ) , black ) ;
+    ---Box-Right : color-mix( in srgb , #dfdfdf var( ---Ratio ) , black ) ;
+    ---Box-Left : color-mix( in srgb , white var( ---Ratio ) , black ) ;
+    ---Box-Top : color-mix( in srgb , #0a0a0a var( ---Ratio ) , black ) ;
+
+
+    cursor : pointer ;
+
+    background : var( ---Background ) ;
+
+    box-shadow :
+        inset -1px -1px var( ---Box-Top ) ,
+        inset 1px 1px var( ---Box-Right ) ,
+        inset -2px -2px var( ---Box-Bottom ) ,
+        inset 2px 2px var( ---Box-Left ) ;
+
+
+    background-blend-mode : difference ;
+    background-position : center ;
+    background-repeat : no-repeat ;
+    background-image : none ;
+    background-size : 80% ;
+}
+
+form > button:hover {
+    ---Ratio : 90% ;
+}
+
+[ name = Edit-Favorites ] {
+    background-image : url('/Asset/Icons/Star.png') ;
+}
+
+[ name = Close ] {
+    background-image : url('/Asset/Icons/X.png') ;
+}
+

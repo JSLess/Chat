@@ -1,5 +1,8 @@
 
-export { middleware as routeMessageInput }
+export {
+    middleware as routeMessageInput ,
+    Component as MessageInput
+}
 
 import { WithSession } from "../../../../State.ts";
 import { UTF8Meta } from 'UI/Parts'
@@ -21,6 +24,11 @@ function Component (){
             <head>
 
                 <UTF8Meta />
+
+                <link
+                    href = '/Asset/Styles/Reset.css'
+                    rel = 'stylesheet'
+                />
 
                 <link
                     href = '/Asset/Input.css'

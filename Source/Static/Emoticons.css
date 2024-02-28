@@ -10,12 +10,12 @@ button::before {
 
 
 form {
+
     cursor : default ;
 
     grid-template-columns : repeat( auto-fill , 64px ) ;
     display : grid ;
     gap : 10px ;
-
 }
 
 #reactions button {
@@ -45,12 +45,6 @@ form {
     background-color : #ffffff1a ;
 }
 
-/* .cell {
-    z-index: 2;
-    width : 100% ;
-    height : 100% ;
-} */
-
 
 .Hoverer {
     pointer-events: none;
@@ -73,3 +67,4 @@ form {
 .Category::before {
     content : '' ;
 }
+

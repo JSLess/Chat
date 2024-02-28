@@ -23,6 +23,11 @@ function Component (){
             content = 'text/html;charset=UTF-8'
         />
 
+        <meta
+            content = 'dark light'
+            name = 'color-scheme'
+        />
+
         {/* <meta
             http-equiv= 'Content-Security-Policy'
             content = { policies }

@@ -1,0 +1,15 @@
+
+name = '葬送のフリーレン'
+
+handles = [ 'frieren' ]
+tint = '#b3c2d8'
+
+[[Icon]]
+
+handles = [ 'frieren' , 'ancient' ]
+file = 'Frieren.png'
+
+[[Icon]]
+
+handles = [ 'himmel' , 'hero' ]
+file = 'Himmel.png'

@@ -7,6 +7,7 @@ import { WithSession } from "../../../State.ts";
 import { UTF8Meta } from 'UI/Parts'
 import { Context } from 'Oak'
 import { Input } from "../../../Frame/Chat/Message/Input/Input.tsx";
+import { MessageInput } from "../../../Frame/Chat/Message/Input/mod.tsx";
 
 
 const Message_Maximum_Length = 500
@@ -62,28 +63,8 @@ async function middleware (
 
     session.selectedMessage ??= messageId
 
-    context.response.body = render(Component())
+    context.response.body = render(MessageInput())
 
 
     redraw()
-}
-
-
-function Component (){
-    return <>
-        <html>
-            <head>
-
-                <UTF8Meta />
-
-                <link
-                    href = '/Asset/Input.css'
-                    rel = 'stylesheet'
-                />
-            </head>
-            <body>
-                <Input />
-            </body>
-        </html>
-    </>
 }

@@ -112,7 +112,7 @@ h1 {
     align-items: center;
     display : flex ;
     padding : 0 4rem ;
-    gap : 1rem ;
+    gap : 2rem ;
 }
 
 #Messages {
@@ -144,13 +144,10 @@ iframe {
 
 
 #Auth {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-gap: 1rem;
-}
-
-#Auth > * {
-    height : 110px ;
+    flex-direction : column ;
+    align-items : center ;
+    display : flex ;
+    gap : 2rem ;
 }
 
 
@@ -162,10 +159,23 @@ iframe {
 
 #Chatting {
     width : 100% ;
+    position: relative;
 }
 
 #Logout {
     height : 50px ;
+}
+
+#Register {
+    height : 50px ;
+}
+
+#Overlay {
+    background : #ffffff1a ;
+    position : fixed ;
+    inset : 0 ;
+    display : none ;
+    z-index : 1000 ;
 }
 
 
@@ -264,4 +274,15 @@ backface-visibility: hidden;
     color: white !important;
     text-align: center;
     letter-spacing: 0.1rem;
+}
+
+
+#Reactions_Window {
+    position: absolute;
+    top: -1rem;
+    right: 4rem;
+    width: 20rem;
+    height: 25rem;
+    z-index : 1100 ;
+    display : none ;
 }

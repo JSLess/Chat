@@ -33,7 +33,7 @@ form {
     gap: 0.75rem;
     color: var(--text);
     padding: 0.5rem;
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 
 input[ name = MessageId ]{
@@ -42,8 +42,37 @@ input[ name = MessageId ]{
 
 .Message {
 
+    /* -Inf -> +Inf | 0 = Message is selected */
+
+    ----Delta : ( var( --Selected_Message ) - var( ----Message_Index ) ) ;
+
+    /* 0 - Inf | Absolute */
+
+    ----Abs : max( var( ----Delta ) , -1 * var( ----Delta ) ) ;
+
+    /* 0 or 1 | Normalizing */
+
+    ----Norm : clamp( 0 , var( ----Abs ) , 1 ) ;
+
+    /* Percentage */
+
+    ----Percent : calc( 100 * var( ----Norm ) ) ;
+    ----Invert-Percent : calc( 100 - var( ----Percent ) ) ;
+
+    ----Unselect-Percent : calc( 1% * var( ----Percent ) ) ;
+    ----Select-Percent : calc( 1% * var( ----Invert-Percent ) ) ;
+
+
+    /* Switch between 2 colors */
+
+    ----Border : color-mix( in srgb
+        , var( ---Unselected ) var( ----Unselect-Percent )
+        , var( ---Selected ) var( ----Select-Percent )
+    ) ;
+
+
     border-radius : 4px ;
-    border : 1px solid transparent ;
+    border : 1px solid var( ----Border ) ;
     border-width : 0 0 0 2px ;
 
     padding-inline : 1rem 0.25rem ;
@@ -57,6 +86,8 @@ input[ name = MessageId ]{
 
     display: grid;
     grid-template-columns: 1fr auto;
+
+    position : relative ;
 }
 
 .Message:hover {
@@ -78,11 +109,15 @@ input[ name = MessageId ]{
     user-select : none ;
 }
 
+.Message .Emotes:empty {
+    display : none ;
+}
+
 .Message .Emote {
 
     position : relative ;
 
-    padding : 0.1rem 0.3rem ;
+    padding : 0.15rem 0.3rem ;
 
     background : #ffffff14 ;
     border-radius : 5px ;
@@ -91,6 +126,8 @@ input[ name = MessageId ]{
     font-family : sans-serif ;
     font-weight : 600 ;
     line-height : 1 ;
+
+    display : flex ;
 }
 
 .Message .Emote span {
@@ -109,7 +146,46 @@ input[ name = MessageId ]{
     width : 16px ;
 }
 
+.Message:not(:hover) .Options {
+    opacity : 0 ;
+    transition : all 50ms ease-in-out ;
+}
 
+
+.Options {
+
+    border-radius : 3px ;
+    background : #1a2c2d ;
+    padding : 2px ;
+
+    position : absolute ;
+    inset-block : 0 ;
+    right : 0 ;
+
+    margin-block : auto ;
+
+    max-height : 1.5rem ;
+    width : fit-content ;
+
+    justify-content : flex-end ;
+    align-items : stretch ;
+    display : flex ;
+    gap : 0.5rem ;
+
+    transition : all 100ms ease-in-out ;
+}
+
+
+.Options > * {
+
+    aspect-ratio : 1 / 1 ;
+
+    text-align : center ;
+
+    justify-content : center ;
+    align-items : center ;
+    display : flex ;
+}
 
 
 

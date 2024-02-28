@@ -1,0 +1,115 @@
+
+html {
+    background : #c0c0c0 ;
+}
+
+body {
+
+    box-sizing : border-box ;
+    position : absolute ;
+    margin : 0 ;
+    inset : 0 ;
+
+    padding : 2px 3px ;
+
+    box-shadow :
+        inset -1px -1px #dfdfdf ,
+        inset 1px 1px grey ;
+}
+
+
+form {
+
+    grid-template-columns : 1fr 1fr ;
+    grid-gap : 5px ;
+    display : grid ;
+
+    padding : 5px ;
+}
+
+
+.Group {
+
+    ---Ratio : 100% ;
+    ---Tint : gray ;
+
+    ---Background-Lighter : color-mix( in srgb , color-mix( in srgb , var( ---Tint ) 95% , white ) var( ---Ratio ) , black ) ;
+    ---Background-Darker : color-mix( in srgb , color-mix( in srgb , var( ---Tint ) 95% , black ) var( ---Ratio ) , black ) ;
+
+    ---Lightest : color-mix( in srgb , color-mix( in srgb , var( ---Tint ) 50% , white ) var( ---Ratio ) , black ) ;
+    ---Lighter : color-mix( in srgb , color-mix( in srgb , var( ---Tint ) 90% , white ) var( ---Ratio ) , black ) ;
+    ---Darkest : color-mix( in srgb , color-mix( in srgb , var( ---Tint ) 50% , black ) var( ---Ratio ) , black ) ;
+    ---Darker : color-mix( in srgb , color-mix( in srgb , var( ---Tint ) 90% , black ) var( ---Ratio ) , black ) ;
+
+    ---Rottom-Outer : var( ---Darkest ) ;
+    ---Rottom-Inner : var( ---Darker ) ;
+
+    ---Lop-Outer : var( ---Lightest ) ;
+    ---Lop-Inner : var( ---Lighter ) ;
+
+    position : relative ;
+
+    justify-content : center ;
+    align-items : center ;
+    display : flex ;
+
+    text-transform : uppercase ;
+    letter-spacing : 1px ;
+    font-weight : bold ;
+    color : white ;
+
+    background: linear-gradient( 137deg ,
+        var( ---Background-Darker ) 0% ,
+        var( ---Background-Lighter ) 100%
+    ) ;
+
+    box-shadow :
+        inset -1px -1px var( ---Rottom-Outer ) ,
+        inset +1px +1px var( ---Lop-Outer ) ,
+        inset -2px -2px var( ---Rottom-Inner ) ,
+        inset +2px +2px var( ---Lop-Inner ) ;
+
+    user-select : none ;
+    cursor : pointer ;
+
+    aspect-ratio : 320 / 100 ;
+}
+
+.Group:hover {
+    ---Ratio : 90% ;
+}
+
+.Group:active {
+
+    ---Ratio : 80% ;
+
+    ---Rottom-Outer : var( ---Lightest ) ;
+    ---Rottom-Inner : var( ---Lighter ) ;
+
+    ---Lop-Outer : var( ---Darkest ) ;
+    ---Lop-Inner : var( ---Darker ) ;
+
+    background: linear-gradient( 137deg ,
+        var( ---Background-Lighter ) 0% ,
+        var( ---Background-Darker ) 100%
+    ) ;
+}
+
+.Group span:first-child {
+
+    background-repeat : no-repeat ;
+
+    position : absolute ;
+    inset : 10% 2px ;
+
+    opacity : 0.5 ;
+    filter : blur(1px) ;
+}
+
+.Group span:last-child {
+    z-index : 2 ;
+}
+
+.Group[ data-group = Favorites ]{
+    ---Tint : #e1be4d ;
+}

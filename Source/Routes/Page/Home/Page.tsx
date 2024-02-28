@@ -61,6 +61,8 @@ async function Component ( props : Props ){
                                         id = 'Register'
                                     />
 
+                                    <b> or </b>
+
                                     <iframe
                                         src = { `/Frame/Auth/Login` }
                                         id = 'Login'
@@ -81,44 +83,41 @@ async function Component ( props : Props ){
                                 id = 'Input'
                             />
 
-                        </> }
-
-                        <div id = 'Chatting' >
-
-                            <iframe
-                                loading = 'lazy'
-                                src = { `/Frame/Chat/Message/List` }
-                                id = 'Messages'
-                            />
-
-                            { ( hasSession ) && <>
+                            <div id = 'Chatting' >
 
                                 <iframe
                                     loading = 'lazy'
-                                    height = '100%'
-                                    width = '100%'
-                                    src = { `/Frame/Chat/React/Selection` }
-                                    id = 'Reactions'
+                                    src = { `/Frame/Chat/Message/List` }
+                                    id = 'Messages'
                                 />
 
-                            </> }
+                                <iframe
+                                    loading = 'lazy'
+                                    src = { `/Frame/Chat/Reactions` }
+                                    id = 'Reactions_Window'
+                                />
 
-                        </div>
-                    </div>
+                            </div>
 
-                    <div class = 'Sidebar' >
-
-                        <div>
-                            <div style = { `mask-image : url('/Asset/Icons/Login.png')` } />
-                        </div>
-
-                        <div>
-                            <div style = { `mask-image : url('/Asset/Icons/Logout.png')` } />
-                        </div>
+                        </> }
 
                     </div>
 
                 </main>
+
+                { ( hasSession ) && <>
+
+                    <div id = 'Overlay' />
+
+                    <style dangerouslySetInnerHTML = {{ __html : `
+
+                        #Overlay:active {
+                            list-style-image : url('/API/Spark?Scope=General:Overlay&Action=Click&Time=${ Date.now() }') ;
+                        }
+
+                    `}} />
+
+                </> }
 
             </body>
         </html>

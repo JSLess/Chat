@@ -1,0 +1,45 @@
+
+name = 'Steins;Gate'
+
+handles = [ 'sg' , 'steins-gate' ]
+tint = '#6e8a6a'
+
+[[Icon]]
+
+handles = [ 'rintaro' , 'okabe' , 'hououin' , 'kyoma' , 'okarin' ]
+file = 'Rintaro.png'
+
+[[Icon]]
+
+handles = [ 'kurisu' , 'makise' , 'assistant' , 'christina' , 'zombie' , 'channeler' , 'celeb' ]
+file = 'Kurisu.png'
+
+[[Icon]]
+
+handles = [ 'mayuri' ]
+file = 'Mayuri.png'
+
+[[Icon]]
+
+handles = [ 'suzuha' , 'titor' ]
+file = 'Suzuha.png'
+
+[[Icon]]
+
+handles = [ 'ruka' , 'titor' ]
+file = 'Ruka.png'
+
+[[Icon]]
+
+handles = [ 'daru' , 'hashida' , 'itaru' , 'barrel' ]
+file = 'Daru.png'
+
+[[Icon]]
+
+handles = [ 'moeka' , 'kiryu' , 'finger' ]
+file = 'Moeka.png'
+
+[[Icon]]
+
+handles = [ 'feris' , 'nyan' , 'akiha' , 'rumi' ]
+file = 'Feris.png'

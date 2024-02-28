@@ -23,6 +23,7 @@
         "Async" : "https://deno.land/std@0.215.0/async/mod.ts" ,
         "HTTP" : "https://deno.land/std@0.215.0/http/mod.ts" ,
         "Deno/": "https://deno.land/std@0.215.0/" ,
+        "TOML" : "https://deno.land/std@0.217.0/toml/mod.ts" ,
 
         "Preact/": "https://esm.sh/preact@10.19.3/",
         "Preact": "https://esm.sh/preact@10.19.3" ,
@@ -41,6 +42,7 @@
 
         "UI/Parts" : "./Source/Components/mod.ts" ,
         "Misc/Async" : "./Source/Misc/AsyncResponse.ts" ,
+        "Misc/Frame" : "./Source/Misc/Frame/mod.tsx" ,
         "Database" : "./Source/Database/mod.ts" ,
         "Render" : "./Source/Misc/Render/mod.ts" ,
         "State" : "./Source/Misc/State.ts" ,
