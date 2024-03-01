@@ -117,7 +117,7 @@ input[ name = MessageId ]{
 
     position : relative ;
 
-    padding : 0.15rem 0.3rem ;
+    padding : 0.15rem 0.4rem ;
 
     background : #ffffff14 ;
     border-radius : 5px ;
@@ -136,14 +136,16 @@ input[ name = MessageId ]{
     font-size : 100% ;
 
     margin-left : 0.3rem ;
+
+    translate : 0 2px ;
 }
 
 .Message .Emote img {
 
     vertical-align : middle ;
 
-    height : 16px ;
-    width : 16px ;
+    aspect-ratio : 1 ;
+    width : 20px ;
 }
 
 .Message:not(:hover) .Options {

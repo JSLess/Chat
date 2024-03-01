@@ -20,10 +20,10 @@
 
         "Preact/Render": "https://esm.sh/*preact-render-to-string@6.3.1" ,
 
-        "Async" : "https://deno.land/std@0.215.0/async/mod.ts" ,
-        "HTTP" : "https://deno.land/std@0.215.0/http/mod.ts" ,
-        "Deno/": "https://deno.land/std@0.215.0/" ,
-        "TOML" : "https://deno.land/std@0.217.0/toml/mod.ts" ,
+        "Async" : "https://deno.land/std@0.218.0/async/mod.ts" ,
+        "HTTP" : "https://deno.land/std@0.218.0/http/mod.ts" ,
+        "Deno/": "https://deno.land/std@0.218.0/" ,
+        "TOML" : "https://deno.land/std@0.218.0/toml/mod.ts" ,
 
         "Preact/": "https://esm.sh/preact@10.19.3/",
         "Preact": "https://esm.sh/preact@10.19.3" ,

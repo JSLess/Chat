@@ -43,3 +43,18 @@ file = 'Moeka.png'
 
 handles = [ 'feris' , 'nyan' , 'akiha' , 'rumi' ]
 file = 'Feris.png'
+
+[[Icon]]
+
+handles = [ 'eisuke' ]
+file = 'Eisuke.png'
+
+[[Icon]]
+
+handles = [ 'maho' ]
+file = 'Maho.png'
+
+[[Icon]]
+
+handles = [ 'alexis' ]
+file = 'Alexis.png'
