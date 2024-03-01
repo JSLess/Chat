@@ -29,9 +29,9 @@ Dynamic HTML / CSS only chat page.
 
 <div align = left >
 
-<img width = 40% src = 'https://github.com/JSLess/Chat/assets/73050054/cc50f027-c8fd-48a1-b4e1-92773984e287' >
+<img width = 40% src = 'https://github.com/JSLess/Chat/assets/73050054/e58b9175-6b91-4678-bd86-58398c94af36' >
 
-<img width = 40% src = 'https://github.com/JSLess/Chat/assets/73050054/4def45d7-3409-4742-9e39-d078d4c1fa3d' >
+<img width = 40% src = 'https://github.com/JSLess/Chat/assets/73050054/168c9a92-3e32-40a5-9d7c-3f8068df7200' >
 
 </div>
 
