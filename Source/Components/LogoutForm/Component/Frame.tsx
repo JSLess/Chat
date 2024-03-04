@@ -14,12 +14,12 @@ function Component (){
                 <UTF8Meta />
 
                 <link
-                    href = '/Asset/Frame.css'
+                    href = '/Asset/Styles/Frame.css'
                     rel = 'stylesheet'
                 />
 
                 <link
-                    href = '/Asset/Logout.css'
+                    href = '/Asset/Styles/Logout.css'
                     rel = 'stylesheet'
                 />
 
@@ -30,7 +30,7 @@ function Component (){
 
                     <form
                         target = '_parent'
-                        action = '/API/Auth/Logout'
+                        action = '/API/LogoutForm'
                         method = 'post'
                         id = 'Logout'
                     >

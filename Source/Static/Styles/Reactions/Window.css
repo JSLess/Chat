@@ -87,8 +87,3 @@ form > button:hover {
 [ name = Edit-Favorites ] {
     background-image : url('/Asset/Icons/Star.png') ;
 }
-
-[ name = Close ] {
-    background-image : url('/Asset/Icons/X.png') ;
-}
-

@@ -44,6 +44,7 @@
         "UI/Parts" : "./Source/Components/mod.ts" ,
         "Misc/Async" : "./Source/Misc/AsyncResponse.ts" ,
         "Misc/Frame" : "./Source/Misc/Frame/mod.tsx" ,
+        "Misc/Time" : "./Source/Misc/Time.ts" ,
         "Database" : "./Source/Database/mod.ts" ,
         "Render" : "./Source/Misc/Render/mod.ts" ,
         "State" : "./Source/Misc/State.ts" ,

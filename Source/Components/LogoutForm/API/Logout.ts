@@ -1,10 +1,16 @@
 
-export { middleware as routeLogout }
+export type { Credentials }
+export { middleware as routeAPI }
 
-import { BaseState } from "../../State.ts";
+import { BaseState } from '../../../Routes/State.ts'
 import { sessions } from 'State'
 import { Context } from 'Oak'
 import { delay } from 'Async'
+
+
+interface Credentials {
+    accountId : string
+}
 
 
 async function middleware (

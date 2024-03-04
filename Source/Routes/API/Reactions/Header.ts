@@ -11,12 +11,7 @@ async function middleware (
 ){
     console.debug(`Header Action`)
 
-    context.state.session.frames.reactions_window?.write(`
-        <meta
-            http-equiv = refresh
-            content = 0
-        />
-    `)
+    context.state.session.frames.reactions_window?.refresh()
 
     context.response.status = 200
 }

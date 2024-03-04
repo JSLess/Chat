@@ -31,7 +31,7 @@ function Component (){
                 />
 
                 <link
-                    href = '/Asset/Input.css'
+                    href = '/Asset/Styles/Input.css'
                     rel = 'stylesheet'
                 />
 

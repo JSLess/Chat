@@ -1,10 +1,10 @@
 
-export { middleware as routeRegister }
+export { middleware as routeAPI }
 
-import { createAccount } from "../../../Security/AccountId.ts"
-import { BaseState } from "../../State.ts"
+import { createAccount } from '../../../Security/AccountId.ts'
+import { BaseState } from '../../../Routes/State.ts'
 import { sessions } from 'State'
-import { Session } from "../../../Misc/Types.ts"
+import { Session } from '../../../Misc/Types.ts'
 import { Context } from 'Oak'
 
 
@@ -19,7 +19,8 @@ async function middleware (
     const session = {
         sessionIds : [] ,
         contexts : {} ,
-        frames : {}
+        frames : {} ,
+        errors : []
     } as Session
 
 

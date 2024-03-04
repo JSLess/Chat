@@ -1,6 +1,9 @@
 
 export { AsyncResponse }
 
+import { render } from 'Preact/Render'
+import { VNode } from 'Preact'
+
 
 class AsyncResponse {
 
@@ -31,11 +34,17 @@ class AsyncResponse {
     }
 
 
-    write ( html : string ){
+    write ( element : VNode ) : void
+    write ( html : string ) : void
+
+    write ( data : string | VNode ){
+
+        if( typeof data !== 'string' )
+            data = render(data)
 
         const encoder = new TextEncoder
 
-        const bytes = encoder.encode(html)
+        const bytes = encoder.encode(data)
 
         if( ! this.controller )
             throw `AsyncResponse controller is not initialized`
@@ -45,5 +54,24 @@ class AsyncResponse {
         } catch {
             console.log('Stream was already closed')
         }
+    }
+
+
+    refresh (){
+        this.write(`
+            <meta
+                http-equiv = refresh
+                content = 0
+            />
+        `)
+    }
+
+    redirect ( url : string ){
+        this.write(`
+            <meta
+                http-equiv = refresh
+                content = '0;url=${ url }'
+            />
+        `)
     }
 }

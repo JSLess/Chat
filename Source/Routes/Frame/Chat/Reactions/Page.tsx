@@ -41,11 +41,6 @@ function Component (){
 
                 <p> Reactions </p>
 
-                {/* <button
-                    class = 'Square'
-                    name = 'Close'
-                /> */}
-
             </form>
 
             <iframe

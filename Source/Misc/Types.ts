@@ -22,18 +22,27 @@ interface Message {
 }
 
 
+interface ErrorInfo {
+    type : string
+}
+
+
 interface Session {
-    userId ?: string
+
+    errors : Array<ErrorInfo>
+
     selectedMessage ?: string
+    userId ?: string
+
     sessionIds : Array<string>
 
     frames : {
-        reactions ?: AsyncResponse
-        reactions_window ?: AsyncResponse
         reactions_emoticons ?: AsyncResponse
+        reactions_window ?: AsyncResponse
         reactions_groups ?: AsyncResponse
-        home ?: AsyncResponse
+        reactions ?: AsyncResponse
         messages ?: AsyncResponse
+        home ?: AsyncResponse
     },
 
     contexts : {

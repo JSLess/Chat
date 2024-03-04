@@ -1,9 +1,9 @@
 
 export { Component as Page }
 
+import { RegisterForm , LogoutForm , LoginForm } from 'UI/Parts'
 import { AccountId , UTF8Meta } from 'UI/Parts'
 import { BaseState } from "../../State.ts"
-import { LoginForm } from "UI/Parts";
 
 
 type Props = BaseState
@@ -23,7 +23,7 @@ async function Component ( props : Props ){
                 <UTF8Meta />
 
                 <link
-                    href = '/Asset/Style.css'
+                    href = '/Asset/Styles/Style.css'
                     rel = 'stylesheet'
                 />
 
@@ -44,8 +44,7 @@ async function Component ( props : Props ){
 
                                 <div id = 'LoggedIn'>
 
-                                    <iframe
-                                        src = { `/Frame/Auth/Logout` }
+                                    <LogoutForm
                                         id = 'Logout'
                                     />
 
@@ -57,8 +56,7 @@ async function Component ( props : Props ){
 
                                 <div id = 'Auth' >
 
-                                    <iframe
-                                        src = { `/Frame/Auth/Register` }
+                                    <RegisterForm
                                         id = 'Register'
                                     />
 

@@ -1,5 +1,5 @@
 
-export { middleware as routeLogout }
+export { middleware as routeFrame }
 
 import { Context } from 'Oak'
 import { render } from 'Render'

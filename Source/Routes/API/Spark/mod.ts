@@ -35,8 +35,6 @@ async function middleware (
 
                 case 'Click' : {
 
-
-
                     frame?.write(`
                         <style>
                             #Overlay {

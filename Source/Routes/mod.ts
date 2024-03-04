@@ -18,9 +18,17 @@ import { asset } from './Asset/mod.ts'
 import { page } from './Page/mod.ts'
 import { api } from './API/mod.ts'
 import { login_form_router } from "../Components/LoginForm/mod.ts";
+import { logout_form_router, register_form_router } from "UI/Parts";
 
 
 const router = new Router
+
+router.use(register_form_router.routes())
+router.use(register_form_router.allowedMethods())
+
+router.use(logout_form_router.routes())
+router.use(logout_form_router.allowedMethods())
+
 router.use(login_form_router.routes())
 router.use(login_form_router.allowedMethods())
 

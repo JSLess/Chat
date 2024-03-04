@@ -11,7 +11,6 @@ function Component ( context : Context ){
 
     const groupId = search.get('Group')
 
-
     return <>
         <head>
 

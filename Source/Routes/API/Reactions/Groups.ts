@@ -21,12 +21,7 @@ async function middleware (
 
     const frame = context.state.session.frames.reactions_emoticons
 
-    frame?.write(`
-        <meta
-            http-equiv = refresh
-            content = '0;url=${ url }'
-        />
-    `)
+    frame?.redirect(url)
 
     frame?.close()
 

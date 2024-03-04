@@ -1,19 +1,19 @@
 
-export { Component as Form }
+export { Component as Frame }
 
+import { BaseDocument } from 'Framework'
 
 
 function Component (){
 
     return (
-
-        <div>
-
-            {/* <iframe name="dummyframe" id="dummyframe" style="display: none"></iframe> */}
+        <BaseDocument
+            name = 'RegisterForm'
+        >
 
             <form
                 target = '_parent'
-                action = '/API/Auth/Register'
+                action = '/API/RegisterForm'
                 method = 'post'
                 id = 'Register'
             >
@@ -25,6 +25,6 @@ function Component (){
 
             </form>
 
-        </div>
+        </BaseDocument>
     )
 }
