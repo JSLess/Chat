@@ -33,22 +33,22 @@ function Component ( props : Props ){
             <form
                 autocomplete = 'on'
                 target = '_parent'
-                action = '/API/Auth/Login'
+                action = '/API/LoginForm'
                 method = 'post'
                 id = 'Login'
             >
 
                 <input
-                    required = { true }
                     autocomplete = 'current-password'
-                    name = 'Account'
-                    type = 'password'
-                    minlength={16}
-                    maxlength={16}
-                    size = {19}
-                    pattern = '\d{16}'
-                    inputmode = 'numeric'
                     placeholder = '0000 0000 0000 0000'
+                    inputmode = 'numeric'
+                    minlength = { 16 }
+                    maxlength = { 16 }
+                    required = { true }
+                    pattern = '\d{16}'
+                    type = 'password'
+                    name = 'Account'
+                    size = { 19 }
                 />
 
                 <label> Account Id </label>

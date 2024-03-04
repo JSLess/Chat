@@ -1,13 +1,23 @@
 
 export { middleware as serveGroups }
 
-import { Frame } from 'Misc/Frame'
+import { DynamicFrame } from 'Framework'
 import { Page } from './Page.tsx'
+import { Context } from 'Oak'
+import { WithSession } from "../../../../State.ts";
 
 
-const middleware = Frame({
 
-    frameId : 'reactions_groups' ,
+async function middleware (
+    context : Context<WithSession>
+){
 
-    page : Page
-})
+    DynamicFrame({
+
+        context ,
+
+        frameId : 'reactions_groups' ,
+
+        children : Page()
+    })
+}

@@ -1,12 +1,12 @@
 
 export type { Credentials }
-export { middleware as routeLogin }
+export { middleware as routeAPI }
 
 import { deleteCookie , setCookie } from 'HTTP'
 import { userIdByAccount } from 'Database'
 import { sessions } from 'State'
-import { Context } from 'Oak'
-import { Session } from "../../../../Misc/Types.ts";
+import { Context, Middleware, RouterMiddleware } from 'Oak'
+import { Session } from "../../../Misc/Types.ts";
 
 
 interface Credentials {

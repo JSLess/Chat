@@ -44,7 +44,7 @@ async function middleware (
         const html = Template_Selected_Message(index)
 
         session.selectedMessage = messageId
-        session.messages?.write(html)
+        session.frames.messages?.write(html)
     }
 
     context.response.status = 200

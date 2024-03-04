@@ -1,13 +1,22 @@
 
 export { middleware as serveEmoticons }
 
-import { Frame } from 'Misc/Frame'
+import { DynamicFrame } from 'Framework'
 import { Page } from './Page.tsx'
+import { Context } from 'Oak'
+import { WithSession } from "../../../../State.ts";
 
 
-const middleware = Frame({
 
-    frameId : 'reactions_emoticons' ,
+async function middleware (
+    context : Context<WithSession>
+){
+    DynamicFrame({
 
-    page : Page
-})
+        context ,
+
+        frameId : 'reactions_emoticons' ,
+
+        children : Page(context)
+    })
+}

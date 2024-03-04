@@ -39,6 +39,7 @@
         "Argon/" : "https://esm.sh/argon2id@1.0.1/" ,
 
         "Zod" : "https://deno.land/x/zod@v3.22.4/mod.ts" ,
+        "Moment" : "npm:moment@2.30.1" ,
 
         "UI/Parts" : "./Source/Components/mod.ts" ,
         "Misc/Async" : "./Source/Misc/AsyncResponse.ts" ,
@@ -46,7 +47,8 @@
         "Database" : "./Source/Database/mod.ts" ,
         "Render" : "./Source/Misc/Render/mod.ts" ,
         "State" : "./Source/Misc/State.ts" ,
-        "Dummy" : "./Source/Misc/Dummy/mod.ts"
+        "Dummy" : "./Source/Misc/Dummy/mod.ts" ,
+        "Framework" : "./Source/Framework/mod.ts"
     },
 
     "compilerOptions" : {

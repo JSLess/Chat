@@ -3,6 +3,7 @@ export { Component as Page }
 
 import { AccountId , UTF8Meta } from 'UI/Parts'
 import { BaseState } from "../../State.ts"
+import { LoginForm } from "UI/Parts";
 
 
 type Props = BaseState
@@ -63,8 +64,7 @@ async function Component ( props : Props ){
 
                                     <b> or </b>
 
-                                    <iframe
-                                        src = { `/Frame/Auth/Login` }
+                                    <LoginForm
                                         id = 'Login'
                                     />
 

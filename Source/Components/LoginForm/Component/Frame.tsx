@@ -1,18 +1,16 @@
 
-export { middleware as routeLogin }
+export { middleware as routeFrame }
 
 import { deleteCookie , setCookie } from 'HTTP'
-import { UTF8Meta } from 'UI/Parts'
+import { BaseDocument } from 'Framework'
 import { Context } from 'Oak'
 import { render } from 'Render'
-import { Login } from './Login.tsx'
+import { Login } from './mod.tsx'
 
 
 async function middleware (
     context : Context
 ){
-
-    console.log('Login frame')
 
     context.response.headers.set('Cache-Control','no-cache="Set-Cookie"')
 
@@ -61,21 +59,8 @@ async function middleware (
     })
 
 
-    context.response.body = render(
-        <html>
-            <head>
-
-                <UTF8Meta />
-
-                <link
-                    href = '/Asset/Login.css'
-                    rel = 'stylesheet'
-                />
-
-            </head>
-            <body>
-                <Login notices = { notices } />
-            </body>
-        </html>
-    )
+    context.response.body = render(BaseDocument({
+        children : Login({ notices }) ,
+        name : 'LoginForm'
+    }))
 }

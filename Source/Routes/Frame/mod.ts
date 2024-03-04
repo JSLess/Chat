@@ -1,7 +1,7 @@
 
 export { router as frame }
 
-import { onlySessions } from "../mod.ts";
+import { onlySessions } from '../mod.ts'
 import { Router } from 'Oak'
 import { auth } from './Auth/mod.ts'
 import { chat } from './Chat/mod.ts'

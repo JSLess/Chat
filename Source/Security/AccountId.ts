@@ -71,7 +71,7 @@ async function createAccount (){
 
     if( ok ){
 
-        await userToId(userId,{ accountId , userId })
+        await userToId(userId,{ accountId , userId , favorites : new Set })
     }
 
 

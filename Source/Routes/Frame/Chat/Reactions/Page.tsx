@@ -34,10 +34,10 @@ function Component (){
                 class = 'Header'
             >
 
-                {/* <button
+                <button
                     class = 'Square'
                     name = 'Edit-Favorites'
-                /> */}
+                />
 
                 <p> Reactions </p>
 

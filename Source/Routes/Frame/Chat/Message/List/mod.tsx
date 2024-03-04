@@ -1,31 +1,29 @@
 
 export { middleware as routeMessages }
 
-import { renderMessages } from './Messages.tsx'
-import { AsyncResponse } from 'Misc/Async'
+import { DynamicFrame } from 'Framework'
+import { WithSession } from '../../../../State.ts'
+import { Messages } from './Messages.tsx'
 import { sessions } from 'State'
+import { messages } from 'State'
 import { Context } from 'Oak'
-import { WithSession } from "../../../../State.ts";
 
 
 async function middleware (
     context : Context<WithSession>
 ){
 
-    const { response , state } = context
-
     const session = sessions
-        .get(state.sessionId)!
+        .get(context.state.sessionId)!
 
-    const { headers } = response
+    const msgs = [ ... messages.values() ].reverse()
 
-    headers.set('Content-Type','text/html;charset=utf-8')
-    headers.set('Transfer-Encoding','chunked')
-    headers.set('Connection','keep-alive')
-    headers.set('Keep-Alive',`timeout=${ 60 * 60 }`)
+    const children = await Messages({
+        messages : msgs , session
+    })
 
-    session.messages = new AsyncResponse
-
-    response.body = session.messages.readable
-    session.messages.write(await renderMessages(session))
+    DynamicFrame({
+        children , context ,
+        frameId : 'messages'
+    })
 }

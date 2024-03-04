@@ -8,8 +8,8 @@ function Component (){
 
         <form
             encType = 'multipart/form-data'
-            target = '_self'
             action = '/API/Chat/Message/Send'
+            target = '_self'
             method = 'post'
             id = 'Input'
         >

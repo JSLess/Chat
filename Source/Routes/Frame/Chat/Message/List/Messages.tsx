@@ -1,29 +1,13 @@
 
-export { renderMessages }
+export { Messages }
 
-import { messages , reactions } from 'State'
 import { Message , Session } from '../../../../../Misc/Types.ts'
+import { Icon, Reactions } from '../../../../../Reactions/Groups.ts'
+import { reactions } from 'State'
 import { userById } from 'Database'
-import { render } from 'Render'
-import moment from 'npm:moment@2.30.1'
-import { Icon, Reactions } from "../../../../../Reactions/Groups.ts";
-import { UTF8Meta } from "../../../../../Components/UTF8.tsx";
-
-
-
-async function renderMessages ( session : Session ){
-
-    const msgs = [ ... messages.values() ].reverse()
-
-    let html = render( await Messages({ messages : msgs , session }) )
-
-    const selected = ( session.selectedMessage )
-        ? session.sessionIds.indexOf(session.selectedMessage) : 0
-
-    html += `<style> :root { --Selected_Message : ${ selected } ; } </style>`
-
-    return html
-}
+import { UTF8Meta } from 'UI/Parts'
+import moment from 'Moment'
+import { BaseDocument } from "Framework";
 
 
 interface Props {
@@ -31,43 +15,43 @@ interface Props {
     session : Session
 }
 
+
 async function Messages ( props : Props ){
 
     const { messages , session } = props
 
     const elements = await Promise.all(messages.map(( message ) => renderMessage(message,session)))
 
-    return <>
+    const selected = ( session.selectedMessage )
+        ? session.sessionIds.indexOf(session.selectedMessage) : 0
 
-        <head>
-            <UTF8Meta />
-        </head>
+    return (
 
-        <link
-            href = '/Asset/Styles/Reset.css'
-            rel = 'stylesheet'
-        />
-
-        <link
-            href = '/Asset/Messages.css'
-            rel = 'stylesheet'
-        />
-
-        <form
-             action = '/API/Chat/Message/Select'
-             target = 'void'
-             method = 'post'
+        <BaseDocument
+            name = 'Messages'
         >
 
-        <div
-            children = { elements }
-            class = 'Messages'
-        />
+            <form
+                action = '/API/Chat/Message/Select'
+                target = 'void'
+                method = 'post'
+            >
 
-        </form>
+                <div
+                    children = { elements }
+                    class = 'Messages'
+                />
 
-        <iframe name = 'void' />
-    </>
+            </form>
+
+            <iframe name = 'void' />
+
+            <style dangerouslySetInnerHTML = {{ __html : `
+                :root { --Selected_Message : ${ selected } ; }
+            ` }} />
+
+        </BaseDocument>
+    )
 }
 
 

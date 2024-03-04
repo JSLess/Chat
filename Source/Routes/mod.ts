@@ -2,6 +2,10 @@
 export { router }
 export { onlySessions }
 
+
+export { initState , checkCookies , determineCookies , determineSession , recheckCookies , onlyWithCookies }
+
+
 import { BaseState, WithSession } from './State.ts'
 import { Context, Router } from 'Oak'
 import { onlyDocument } from './Misc/OnlyDocument.ts'
@@ -13,9 +17,12 @@ import { frame } from './Frame/mod.ts'
 import { asset } from './Asset/mod.ts'
 import { page } from './Page/mod.ts'
 import { api } from './API/mod.ts'
+import { login_form_router } from "../Components/LoginForm/mod.ts";
 
 
 const router = new Router
+router.use(login_form_router.routes())
+router.use(login_form_router.allowedMethods())
 
 router.get('/',onlyDocument,checkCookies,initState,determineSession,determineCookies,recheckCookies,routeHome)
 

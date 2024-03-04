@@ -29,7 +29,7 @@ async function middleware (
 
         case 'General:Overlay' : {
 
-            const frame = session.home
+            const frame = session.frames.home
 
             switch ( action ){
 
@@ -138,7 +138,7 @@ async function middleware (
 
         case 'Message:Option' : {
 
-            const frame = session.messages
+            const frame = session.frames.messages
 
             const messageId = search.get('Message')!
             const option = search.get('Option')!
@@ -158,7 +158,7 @@ async function middleware (
                 }
                 case 'Unclick' : {
 
-                    session.home?.write(`
+                    session.frames.home?.write(`
                         <style>
                             #Overlay {
                                 display : block ;

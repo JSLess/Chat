@@ -24,8 +24,6 @@ interface Message {
 
 interface Session {
     userId ?: string
-    messages ?: AsyncResponse
-    home ?: AsyncResponse
     selectedMessage ?: string
     sessionIds : Array<string>
 
@@ -34,6 +32,8 @@ interface Session {
         reactions_window ?: AsyncResponse
         reactions_emoticons ?: AsyncResponse
         reactions_groups ?: AsyncResponse
+        home ?: AsyncResponse
+        messages ?: AsyncResponse
     },
 
     contexts : {
