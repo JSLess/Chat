@@ -1,12 +1,32 @@
 
-export type { WithoutSession , WithSession , SessionState , BaseState }
+export type { WithoutSession , WithSession , SessionState , BaseState , CookieState ,
+    DisabledCookies ,
+    EnabledCookies ,
+    UnknownCookies
+}
 
 import { Session } from '../Misc/Types.ts'
 
 
-type BaseState = {
-    hasCookies : 'Unknown' | 'Disabled' | 'Enabled'
-} & SessionState
+type UnknownCookies = {
+    hasCookies : 'Unknown'
+}
+
+type EnabledCookies = {
+    hasCookies : 'Enabled'
+}
+
+type DisabledCookies = {
+    hasCookies : 'Disabled'
+}
+
+type CookieState =
+    | UnknownCookies
+    | EnabledCookies
+    | DisabledCookies
+
+
+type BaseState = CookieState & SessionState
 
 interface WithSession {
     hasSession : true

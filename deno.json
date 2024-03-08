@@ -49,7 +49,9 @@
         "Render" : "./Source/Misc/Render/mod.ts" ,
         "State" : "./Source/Misc/State.ts" ,
         "Dummy" : "./Source/Misc/Dummy/mod.ts" ,
-        "Framework" : "./Source/Framework/mod.ts"
+        "Framework" : "./Source/Framework/mod.ts" ,
+
+        "Misc/Routes" : "./Source/Routes/Misc/mod.ts"
     },
 
     "compilerOptions" : {

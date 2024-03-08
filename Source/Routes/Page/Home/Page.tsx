@@ -3,7 +3,8 @@ export { Component as Page }
 
 import { RegisterForm , LogoutForm , LoginForm } from 'UI/Parts'
 import { AccountId , UTF8Meta } from 'UI/Parts'
-import { BaseState } from "../../State.ts"
+import { BaseState } from '../../State.ts'
+import { MessageInputForm } from "../../../Components/MessageInputForm/mod.ts";
 
 
 type Props = BaseState
@@ -42,7 +43,7 @@ async function Component ( props : Props ){
 
                             { ( hasSession ) ? <>
 
-                                <div id = 'LoggedIn'>
+                                <div id = 'LoggedIn' >
 
                                     <LogoutForm
                                         id = 'Logout'
@@ -75,9 +76,7 @@ async function Component ( props : Props ){
 
                         { ( hasSession ) && <>
 
-                            <iframe
-                                loading = 'lazy'
-                                src = { `/Frame/Chat/Message/Input` }
+                            <MessageInputForm
                                 id = 'Input'
                             />
 

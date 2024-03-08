@@ -1,25 +1,20 @@
 
 export { middleware as routeHome }
 
+import { BaseState, WithSession } from '../../State.ts'
+import { DynamicFrame } from '../../../Framework/DynamicFrame.tsx'
 import { Context } from 'Oak'
 import { render } from 'Render'
 import { Page } from './Page.tsx'
-import { BaseState, WithSession } from "../../State.ts";
-import { sessions } from "State";
-import { AsyncResponse } from "Misc/Async";
-import { DynamicFrame } from "../../../Framework/DynamicFrame.tsx";
 
 
 async function middleware (
     context : Context<BaseState>
 ){
 
-
-    const { response , state } = context
+    const { state } = context
 
     const children = await Page(context.state)
-
-
 
     if( state.hasSession ){
 

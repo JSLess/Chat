@@ -5,8 +5,8 @@ import { BaseState } from '../State.ts'
 import { Context } from 'Oak'
 
 
-async function middleware (
-    context : Context<BaseState> ,
+async function middleware < State extends BaseState > (
+    context : Context<State> ,
     next : () => Promise<any>
 ){
 

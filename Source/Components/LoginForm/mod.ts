@@ -4,9 +4,10 @@ export {
     router as login_form_router
 }
 
-import { initState , determineCookies , determineSession , onlyWithCookies } from '../../Routes/mod.ts'
-import { validateCredentials } from './API/Validate.tsx'
+import { initState , determineCookies , determineSession } from '../../Routes/mod.ts'
 import { IFrameReference , routeStyle } from 'Framework'
+import { validateCredentials } from './API/Validate.tsx'
+import { onlyWithCookies } from 'Misc/Routes'
 import { onlyFrames } from '../../Routes/Misc/OnlyFrames.ts'
 import { routeFrame } from './Component/Frame.tsx'
 import { routeAPI } from './API/Login.ts'

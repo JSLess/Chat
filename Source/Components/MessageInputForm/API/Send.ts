@@ -1,21 +1,21 @@
 
-export { middleware as routeSendMessage }
+export { middleware as routeSend }
 
 import { messages , sessions } from 'State'
 import { render , redraw } from 'Render'
-import { WithSession } from "../../../State.ts";
-import { UTF8Meta } from 'UI/Parts'
 import { Context } from 'Oak'
-import { Input } from "../../../Frame/Chat/Message/Input/Input.tsx";
-import { MessageInput } from "../../../Frame/Chat/Message/Input/mod.tsx";
+import { BaseState, WithSession } from "../../../Routes/State.ts";
+import { Input } from "../Component/Input.tsx";
 
 
 const Message_Maximum_Length = 500
 
 
-async function middleware (
-    context : Context<WithSession>
+async function middleware < State extends BaseState > (
+    context : Context<State>
 ){
+
+    const state = context.state as WithSession
 
     const form = await context.request.body({ type : 'form-data' }).value.read()
 
@@ -46,7 +46,7 @@ async function middleware (
     }
 
     const session = sessions
-        .get(context.state.sessionId)!
+        .get(state.sessionId)!
 
     const userId = session.userId!
 
@@ -63,7 +63,7 @@ async function middleware (
 
     session.selectedMessage ??= messageId
 
-    context.response.body = render(MessageInput())
+    context.response.body = render(Input())
 
 
     redraw()

@@ -2,7 +2,7 @@
 export { router as api }
 
 import { handleSparks } from './Spark/mod.ts'
-import { onlySessions } from '../mod.ts'
+import { onlySessions } from 'Misc/Routes'
 import { reactions } from './Reactions/mod.ts'
 import { Router } from 'Oak'
 import { chat } from './Chat/mod.ts'

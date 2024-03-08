@@ -4,8 +4,9 @@ export {
     router as logout_form_router
 }
 
-import { initState , determineCookies , determineSession , onlyWithCookies } from '../../Routes/mod.ts'
+import { initState , determineCookies , determineSession } from '../../Routes/mod.ts'
 import { IFrameReference , routeStyle } from 'Framework'
+import { onlyWithCookies } from 'Misc/Routes'
 import { onlyFrames } from '../../Routes/Misc/OnlyFrames.ts'
 import { routeFrame } from './Component/mod.ts'
 import { routeAPI } from './API/Logout.ts'

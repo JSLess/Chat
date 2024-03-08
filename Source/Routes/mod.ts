@@ -1,24 +1,23 @@
 
 export { router }
-export { onlySessions }
 
 
-export { initState , checkCookies , determineCookies , determineSession , recheckCookies , onlyWithCookies }
+export { initState , checkCookies , determineCookies , determineSession , recheckCookies }
 
 
-import { BaseState, WithSession } from './State.ts'
+import { message_input_form_router , register_form_router , logout_form_router , login_form_router, error_log_router } from 'UI/Parts'
+import { onlyWithCookies } from 'Misc/Routes'
 import { Context, Router } from 'Oak'
 import { onlyDocument } from './Misc/OnlyDocument.ts'
-import { onlyFrames } from "./Misc/OnlyFrames.ts";
+import { onlyFrames } from './Misc/OnlyFrames.ts'
 import { routeHome } from './Page/Home/Home.ts'
+import { BaseState } from './State.ts'
 import { setCookie } from 'HTTP'
 import { sessions } from 'State'
 import { frame } from './Frame/mod.ts'
 import { asset } from './Asset/mod.ts'
 import { page } from './Page/mod.ts'
 import { api } from './API/mod.ts'
-import { login_form_router } from "../Components/LoginForm/mod.ts";
-import { logout_form_router, register_form_router } from "UI/Parts";
 
 
 const router = new Router
@@ -32,6 +31,12 @@ router.use(logout_form_router.allowedMethods())
 router.use(login_form_router.routes())
 router.use(login_form_router.allowedMethods())
 
+router.use(error_log_router.routes())
+router.use(error_log_router.allowedMethods())
+
+router.use(message_input_form_router.routes())
+router.use(message_input_form_router.allowedMethods())
+
 router.get('/',onlyDocument,checkCookies,initState,determineSession,determineCookies,recheckCookies,routeHome)
 
 router.get('/Asset',asset.routes())
@@ -39,8 +44,6 @@ router.get('/Asset',asset.routes())
 router.use('/Frame',onlyFrames,initState,determineSession,determineCookies,onlyWithCookies,frame.routes())
 router.use('/Page',onlyDocument,checkCookies,initState,determineSession,determineCookies,recheckCookies,page.routes())
 router.use('/API',initState,determineSession,determineCookies,onlyWithCookies,api.routes())
-
-
 
 
 async function checkCookies (
@@ -159,26 +162,4 @@ function recheckCookies (
     return next()
 }
 
-
-function onlySessions (
-    context : Context<WithSession> ,
-    next : () => Promise<any>
-){
-
-    if( context.state.hasSession )
-        return next()
-
-    context.response.status = 403
-}
-
-function onlyWithCookies (
-    context : Context<BaseState> ,
-    next : () => Promise<any>
-){
-
-    if( context.state.hasCookies === 'Enabled' )
-        return next()
-
-    context.response.status = 403
-}
 
