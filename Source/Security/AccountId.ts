@@ -4,10 +4,12 @@ export { createAccount }
 import { UserIdByAccount , userToId } from 'Database'
 import { database } from 'State'
 import { delay } from 'Async'
-import { ulid } from 'https://deno.land/x/ulid@v0.3.0/mod.ts'
+import { ulid } from 'ULID'
 
 
-function bufferToBigInt ( buffer : Uint8Array ){
+function bufferToBigInt (
+    buffer : Uint8Array
+){
 
     let number = 0n
 
@@ -18,8 +20,14 @@ function bufferToBigInt ( buffer : Uint8Array ){
 }
 
 
-function clampLength ( number : bigint ){
-    return BigInt(number.toString().slice(0,16))
+function clampLength (
+    number : bigint
+){
+    const clamped = number
+        .toString()
+        .slice(0,16)
+
+    return BigInt(clamped)
 }
 
 
@@ -69,10 +77,8 @@ async function createAccount (){
     }
 
 
-    if( ok ){
-
+    if( ok )
         await userToId(userId,{ accountId , userId , favorites : new Set })
-    }
 
 
     const after = Date.now()

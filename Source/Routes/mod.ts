@@ -4,6 +4,18 @@ export { router }
 
 export { initState , checkCookies , determineCookies , determineSession , recheckCookies }
 
+import {
+    setupMessageInputForm ,
+    setupRegisterForm ,
+    setupLogoutForm ,
+    setupLoginForm ,
+    setupErrorLog
+} from 'UI/Parts'
+
+import {
+    determineSession , determineCookies , onlyWithCookies , initState ,
+    recheckCookies , onlyDocument , checkCookies , onlyFrames
+} from 'Misc/Routes'
 
 import { message_input_form_router , register_form_router , logout_form_router , login_form_router, error_log_router } from 'UI/Parts'
 import { onlyWithCookies } from 'Misc/Routes'
@@ -70,96 +82,3 @@ async function checkCookies (
 
     return await next()
 }
-
-
-function initState (
-    context : Context<BaseState> ,
-    next : () => Promise<any>
-){
-
-    context.state = {
-        hasCookies : 'Unknown' ,
-        hasSession : false
-    }
-
-    return next()
-}
-
-async function determineSession (
-    context : Context<BaseState> ,
-    next : () => Promise<any>
-){
-
-    const sessionId = await context.cookies.get('Session')
-
-    if( ! sessionId )
-        return await next()
-
-    /*
-     * No need to check if it's a proper UUID
-     * only if it contains valid chars.
-     */
-
-    if( ! /^[-0-9A-F]{36}$/i.test(sessionId) )
-        return await next()
-
-    const session = sessions.get(sessionId)
-
-    if( ! session )
-        return await next()
-
-    context.state = {
-        ... context.state ,
-        hasSession : true ,
-        sessionId : sessionId ,
-        session : session
-    }
-
-    return await next()
-}
-
-async function determineCookies (
-    context : Context<BaseState> ,
-    next : () => Promise<any>
-){
-
-    if( context.state.hasSession )
-        context.state.hasCookies = 'Enabled'
-
-    if( context.request.url.searchParams.has('NoCookies') )
-        context.state.hasCookies = 'Disabled'
-
-    if( await context.cookies.size )
-        context.state.hasCookies = 'Enabled'
-
-    return await next()
-}
-
-function recheckCookies (
-    context : Context<BaseState> ,
-    next : () => Promise<any>
-){
-
-    if( context.state.hasCookies === 'Unknown' ){
-
-        setCookie(context.response.headers,{
-            name : 'CheckCookie' ,
-            value : 'Dummy' ,
-            path : '/' ,
-            httpOnly : true ,
-            secure : false ,
-            sameSite : 'Lax' ,
-            expires : new Date(Date.now() + 1000 * 10)
-        })
-
-        const url = context.request.url
-        url.searchParams.set('CheckCookie','')
-        context.response.redirect(url)
-
-        return
-    }
-
-    return next()
-}
-
-

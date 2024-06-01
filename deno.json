@@ -24,6 +24,7 @@
         "HTTP" : "https://deno.land/std@0.218.0/http/mod.ts" ,
         "Deno/": "https://deno.land/std@0.218.0/" ,
         "TOML" : "https://deno.land/std@0.218.0/toml/mod.ts" ,
+        "ULID" : "https://deno.land/x/ulid@v0.3.0/mod.ts" ,
 
         "Preact/": "https://esm.sh/preact@10.19.3/",
         "Preact": "https://esm.sh/preact@10.19.3" ,
@@ -41,17 +42,19 @@
         "Zod" : "https://deno.land/x/zod@v3.22.4/mod.ts" ,
         "Moment" : "npm:moment@2.30.1" ,
 
-        "UI/Parts" : "./Source/Components/mod.ts" ,
+        "Misc/Routes" : "./Source/Routes/Misc/mod.ts" ,
         "Misc/Async" : "./Source/Misc/AsyncResponse.ts" ,
         "Misc/Frame" : "./Source/Misc/Frame/mod.tsx" ,
         "Misc/Time" : "./Source/Misc/Time.ts" ,
+
+        "UI/Parts" : "./Source/Components/mod.ts" ,
+
+        "Framework" : "./Source/Framework/mod.ts" ,
         "Database" : "./Source/Database/mod.ts" ,
         "Render" : "./Source/Misc/Render/mod.ts" ,
-        "State" : "./Source/Misc/State.ts" ,
+        "Routes" : "./Source/Routes/mod.ts" ,
         "Dummy" : "./Source/Misc/Dummy/mod.ts" ,
-        "Framework" : "./Source/Framework/mod.ts" ,
-
-        "Misc/Routes" : "./Source/Routes/Misc/mod.ts"
+        "State" : "./Source/Misc/State.ts"
     },
 
     "compilerOptions" : {
@@ -62,8 +65,8 @@
         "lib": [
             "deno.unstable" ,
             "deno.window" ,
-            "dom" ,
-            "es2023"
+            "es2023" ,
+            "dom"
         ]
     }
 }

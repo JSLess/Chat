@@ -4,5 +4,14 @@
     "editor.defaultFormatter": null ,
     "editor.formatOnPaste": false ,
     "editor.formatOnSave": false ,
-    "editor.formatOnType": false
+    "editor.formatOnType": false,
+    "files.exclude": {
+        ".gitignore": true,
+        "deno.json": true,
+        "LICENSE": true,
+        "README.md": true,
+        ".editorconfig": true,
+        ".github": true,
+        ".vscode": true
+    }
 }
