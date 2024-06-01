@@ -12,6 +12,7 @@
         "README.md": true,
         ".editorconfig": true,
         ".github": true,
-        ".vscode": true
+        ".vscode": true,
+        "Database": true
     }
 }

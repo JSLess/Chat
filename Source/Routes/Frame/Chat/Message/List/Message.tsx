@@ -89,10 +89,11 @@ async function Component (
 
                     <div class = 'Options' >
 
-                        <div
-                            data-option = 'React'
-                            children = { 'R' }
-                        />
+                        <div data-option = 'React' >
+
+                            <img src = '/Asset/Icons/Reaction.webp' />
+
+                        </div>
 
                     </div>
 

@@ -140,6 +140,10 @@ input[ name = MessageId ]{
     translate : 0 2px ;
 }
 
+.Message:hover > span {
+    display : none ;
+}
+
 .Message .Emote img {
 
     vertical-align : middle ;
@@ -157,7 +161,6 @@ input[ name = MessageId ]{
 .Options {
 
     border-radius : 3px ;
-    background : #1a2c2d ;
     padding : 2px ;
 
     position : absolute ;
@@ -180,7 +183,8 @@ input[ name = MessageId ]{
 
 .Options > * {
 
-    aspect-ratio : 1 / 1 ;
+    height : 1.2rem ;
+    width : 1.2rem ;
 
     text-align : center ;
 
