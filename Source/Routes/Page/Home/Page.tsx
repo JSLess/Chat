@@ -3,8 +3,9 @@ export { Component as Page }
 
 import { RegisterForm , LogoutForm , LoginForm } from 'UI/Parts'
 import { AccountId , UTF8Meta } from 'UI/Parts'
+import { MessageInputForm } from '../../../Components/MessageInputForm/mod.ts'
 import { BaseState } from '../../State.ts'
-import { MessageInputForm } from "../../../Components/MessageInputForm/mod.ts";
+import { Button } from "../../../Frames/Button/mod.tsx";
 
 
 type Props = BaseState
@@ -34,6 +35,11 @@ async function Component ( props : Props ){
                 <main>
 
                     <div class = 'Main' >
+
+                        <Button
+                            icon = 'Reaction'
+                            onClick = { () => console.warn(`Button`) }
+                        />
 
                         <h1 style = 'text-align:center' >
                             HTML Only Chat

@@ -141,7 +141,7 @@ input[ name = MessageId ]{
 }
 
 .Message:hover > span {
-    display : none ;
+    visibility : hidden ;
 }
 
 .Message .Emote img {
