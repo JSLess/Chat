@@ -21,11 +21,13 @@ const internal = {
     style : /* CSS */ `
 
         a {
-            background : red ;
+            border-radius : 4px ;
+            display : block ;
+            padding : 1px ;
         }
 
-        img {
-
+        a:hover {
+            background : #ffffff1f ;
         }
     `
 }
