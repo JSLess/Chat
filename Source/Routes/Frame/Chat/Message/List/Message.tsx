@@ -89,15 +89,21 @@ async function Component (
 
                     <div class = 'Options' >
 
+                        <div data-option = 'Context' >
+                            <img src = '/Asset/Icons/Context.webp' />
+                        </div>
+
                         <div data-option = 'React' >
-
                             <img src = '/Asset/Icons/Reaction.webp' />
-
                         </div>
 
                     </div>
 
                     <style dangerouslySetInnerHTML = {{ __html : `
+
+                        [ data-option = Context ]:active {
+                            list-style-image : url('/API/Spark?Scope=Message:Option&Action=Click&Option=Context&Message=${ messageId }&Time=${ Date.now() }') ;
+                        }
 
                         [ data-option = React ]:active {
                             list-style-image : url('/API/Spark?Scope=Message:Option&Action=Click&Option=React&Message=${ messageId }&Time=${ Date.now() }') ;

@@ -144,6 +144,24 @@ async function middleware (
             switch ( action ){
                 case 'Click' : {
 
+                    switch ( option ){
+                    case 'React' :
+
+                        session.frames.home?.write(`
+                            <style>
+                                #Overlay {
+                                    display : block ;
+                                }
+                                #Reactions_Window {
+                                    display : block ;
+                                }
+                            </style>
+                        `)
+
+                        break
+                    }
+
+
                     frame?.write(`
                         <style>
                             [ data-option = ${ option } ] {
@@ -155,17 +173,6 @@ async function middleware (
                     break
                 }
                 case 'Unclick' : {
-
-                    session.frames.home?.write(`
-                        <style>
-                            #Overlay {
-                                display : block ;
-                            }
-                            #Reactions_Window {
-                                display : block ;
-                            }
-                        </style>
-                    `)
 
                     frame?.write(`
                         <style>
