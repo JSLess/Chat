@@ -1,17 +1,18 @@
 
 export { middleware as routeSend }
 
+import { BaseState, WithSession } from '../../../Routes/State.ts'
 import { messages , sessions } from 'State'
 import { render , redraw } from 'Render'
 import { Context } from 'Oak'
-import { BaseState, WithSession } from "../../../Routes/State.ts";
-import { Input } from "../Component/Input.tsx";
+import { Input } from '../Component/Input.tsx'
 
 
 const Message_Maximum_Length = 500
 
 
-async function middleware < State extends BaseState > (
+async function middleware
+< State extends BaseState > (
     context : Context<State>
 ){
 

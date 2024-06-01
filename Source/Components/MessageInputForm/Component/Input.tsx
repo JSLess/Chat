@@ -14,7 +14,7 @@ function Component (){
 
             <form
                 encType = 'multipart/form-data'
-                action = '/API/Chat/Message/Send'
+                action = '/API/MessageInputForm'
                 target = '_self'
                 method = 'post'
                 id = 'Input'
