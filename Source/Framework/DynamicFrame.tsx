@@ -2,12 +2,12 @@
 export type { Props as FrameProps }
 export { Component as DynamicFrame }
 
-import { ComponentChildren } from 'preact'
+import { ComponentChildren, Fragment } from 'preact'
 import { AsyncResponse } from 'Misc/Async'
+import { WithSession } from '../Routes/State.ts'
 import { Session } from '../Misc/Types.ts'
 import { Context } from 'Oak'
 import { render } from 'Render'
-import { WithSession } from "../Routes/State.ts";
 
 
 interface Props {
@@ -17,16 +17,17 @@ interface Props {
 }
 
 
-function Component ( props : Props ){
+function Component (
+    props : Props
+){
 
     const { context , frameId , children } = props
 
     const { response , state } = context
 
+    const wrapper = Fragment({ children })!
 
-    const html = render(
-        <html children = { children } />
-    )
+    const html = render(wrapper)
 
 
     const { headers } = response
