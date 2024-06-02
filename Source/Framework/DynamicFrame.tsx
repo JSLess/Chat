@@ -2,7 +2,7 @@
 export type { Props as FrameProps }
 export { Component as DynamicFrame }
 
-import { ComponentChildren } from 'Preact'
+import { ComponentChildren } from 'preact'
 import { AsyncResponse } from 'Misc/Async'
 import { Session } from '../Misc/Types.ts'
 import { Context } from 'Oak'

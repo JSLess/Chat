@@ -7,7 +7,7 @@
     "editor.formatOnType": false,
     "files.exclude": {
         ".gitignore": true,
-        "deno.json": true,
+        "deno.json": false,
         "LICENSE": true,
         "README.md": true,
         ".editorconfig": true,

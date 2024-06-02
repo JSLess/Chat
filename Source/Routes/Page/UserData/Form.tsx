@@ -3,7 +3,7 @@ export { Route as UserDataRoute }
 
 import { UTF8Meta } from 'UI/Parts'
 import { Context } from 'Oak'
-import { JSX } from 'preact/jsx-runtime'
+import { JSX } from 'preact'
 
 
 async function toArray < Type > ( iterable : AsyncIterable<Type> ){

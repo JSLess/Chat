@@ -53,6 +53,9 @@ function Frame (
 }
 
 
+import { UTF8Meta } from 'UI/Parts'
+
+
 frames.set('Button',{
 
     ... internal ,
@@ -84,5 +87,3 @@ frames.set('Button',{
 })
 
 
-import { VNode } from "https://esm.sh/v128/preact@10.19.3/src/index.js";
-import { UTF8Meta } from "UI/Parts";

@@ -2,7 +2,7 @@
 export { AsyncResponse }
 
 import { render } from 'Preact/Render'
-import { VNode } from 'Preact'
+import { VNode } from 'preact'
 
 
 class AsyncResponse {

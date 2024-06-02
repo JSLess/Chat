@@ -3,7 +3,7 @@ export type { Group , Icon }
 export { Reactions , Groups }
 
 import { parse } from 'TOML'
-import { join } from 'Deno/path/join.ts'
+import { join } from 'Path'
 import { z } from 'Zod'
 
 

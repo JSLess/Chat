@@ -3,10 +3,10 @@ export { router as frame }
 export { frames }
 
 import { onlySessions } from 'Misc/Routes'
+import { render } from 'Render'
 import { Router } from 'Oak'
+import { VNode } from 'preact'
 import { chat } from './Chat/mod.ts'
-import { VNode } from "https://esm.sh/v128/preact@10.19.3/src/index.js";
-import { render } from "Render";
 
 
 const frames = new Map<string,{

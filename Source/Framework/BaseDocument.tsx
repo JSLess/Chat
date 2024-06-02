@@ -2,7 +2,7 @@
 export type { Props as BaseDocumentProps }
 export { Component as BaseDocument }
 
-import { ComponentChild } from 'Preact'
+import { ComponentChild } from 'preact'
 import { UTF8Meta } from 'UI/Parts'
 
 

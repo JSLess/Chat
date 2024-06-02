@@ -2,7 +2,7 @@
 export type { Props as IFrameReferenceProps }
 export { Component as IFrameReference }
 
-import { JSX } from 'Preact'
+import { JSX } from 'preact'
 
 
 interface Options {
