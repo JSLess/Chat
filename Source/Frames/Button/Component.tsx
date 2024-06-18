@@ -9,13 +9,19 @@ interface Args {
 
 
 function Component (
-    { frame , uuid } : {
-        frame : string
+    { frameId , uuid } : {
+        frameId : string
         uuid : string
     }
 ){
 
-    const href = `/Frame?Type=${ frame }&Action=Click&Ref=${ uuid }`
+    const search = new URLSearchParams({
+        Action : 'Click' ,
+        Type : frameId ,
+        Ref : uuid
+    })
+
+    const href = `/Frame?${ search.toString() }`
 
     return (
         <a

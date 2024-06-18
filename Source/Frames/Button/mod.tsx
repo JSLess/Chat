@@ -16,7 +16,7 @@ const internal = {
 
     component : Button ,
 
-    frame : 'Button' ,
+    frameId : 'Button' ,
 
     style : /* CSS */ `
 
@@ -50,6 +50,13 @@ function Frame (
 
     const icon = `/Asset/Icons/${ args.icon }.webp`
 
+    const search = new URLSearchParams({
+        Type : internal.frameId ,
+        Ref : uuid
+    })
+
+    const src = `/Frame?${ search.toString() }`
+
     return (
         <div class = 'Button' >
 
@@ -58,7 +65,7 @@ function Frame (
             <iframe
                 height = { 32 }
                 width = { 32 }
-                src = { `/Frame?Type=${ internal.frame }&Ref=${ uuid }` }
+                src = { src }
             />
 
         </div>
@@ -74,10 +81,10 @@ frames.set('Button',{
 
     component : ( args : { uuid : string } ) => {
 
-        const { component , frame , style } = internal
+        const { component , frameId , style } = internal
 
         const children = component({
-            frame , ... args
+            frameId , ... args
         })
 
         return (
