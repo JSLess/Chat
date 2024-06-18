@@ -62,11 +62,7 @@ function Frame (
 
             <img src = { icon } />
 
-            <iframe
-                height = { 32 }
-                width = { 32 }
-                src = { src }
-            />
+            <iframe src = { src } />
 
         </div>
     )
@@ -87,25 +83,17 @@ frames.set('Button',{
             frameId , ... args
         })
 
-        return (
+        return <>
 
-            <html>
+            <link
+                href = '/Asset/Styles/MinimalReset.css'
+                rel = 'stylesheet'
+            />
 
-                <head>
+            <style children = { style } />
 
-                    <link
-                        href = '/Asset/Styles/MinimalReset.css'
-                        rel = 'stylesheet'
-                    />
-
-                    <style children = { style } />
-
-                </head>
-
-                <body children = { children } />
-
-            </html>
-        )
+            { children }
+        </>
     }
 })
 
