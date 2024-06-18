@@ -38,11 +38,12 @@ const internal = {
 }
 
 
-frames.set('Button',{
+frames.set(internal.frameId,{
 
     ... internal ,
 
-    ref : ( uuid : string ) => references.get(uuid) ,
+    ref : ( uuid : string ) =>
+        references.get(uuid) ,
 
     component : ( args : { uuid : string } ) => {
 
@@ -53,11 +54,6 @@ frames.set('Button',{
         })
 
         return <>
-
-            <link
-                href = '/Asset/Styles/MinimalReset.css'
-                rel = 'stylesheet'
-            />
 
             <style children = { style } />
 

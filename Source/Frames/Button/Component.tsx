@@ -1,3 +1,4 @@
+import { Parameters } from '../../Framework/Frame/Parameters.ts';
 
 export type { Args as ComponentArgs }
 export { Component }
@@ -16,17 +17,23 @@ function Component (
 ){
 
     const search = new URLSearchParams({
-        Action : 'Click' ,
-        Type : frameId ,
-        Ref : uuid
+        [ Parameters.Reference] : uuid ,
+        [ Parameters.FrameId ] : frameId ,
+        [ Parameters.Event ] : 'Click'
     })
 
     const href = `/Frame?${ search.toString() }`
 
-    return (
+    return <>
+
+        <link
+            href = '/Asset/Styles/MinimalReset.css'
+            rel = 'stylesheet'
+        />
+
         <a
             draggable = { false }
             href = { href }
         />
-    )
+    </>
 }

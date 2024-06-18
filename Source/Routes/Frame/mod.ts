@@ -3,6 +3,7 @@ export { router as frame }
 export { frames }
 
 import { onlySessions } from 'Misc/Routes'
+import { Parameters } from '../../Framework/Frame/Parameters.ts'
 import { render } from 'Render'
 import { Router } from 'Oak'
 import { VNode } from 'preact'
@@ -20,7 +21,7 @@ const router = new Router
 router.use('/Chat',onlySessions,chat.routes())
 router.get('/',( context ) => {
 
-    const type = context.request.url.searchParams.get('Type')
+    const type = context.request.url.searchParams.get(Parameters.FrameId)
 
     if( ! type ){
         console.warn(`No Type`)
@@ -38,27 +39,27 @@ router.get('/',( context ) => {
         return
     }
 
-    const ref_ = context.request.url.searchParams.get('Ref')
+    const reference = context.request.url.searchParams.get(Parameters.Reference)
 
-    if( ! ref_ ){
+    if( ! reference ){
         console.warn(`No Ref_`)
         context.response.status = 400
         return
     }
 
-    const ref = frame.ref(ref_)
+    const referenced = frame.ref(reference)
 
-    if( ! ref ){
+    if( ! referenced ){
         console.warn(`No Ref`)
         context.response.status = 400
         return
     }
 
-    const { args , uuid } = ref
+    const { args , uuid } = referenced
 
     context.response.body = render(frame.component({ ... args , uuid }))
 
-    const action = context.request.url.searchParams.get('Action')
+    const action = context.request.url.searchParams.get(Parameters.Event)
 
     if( action === 'Click' )
         args.onClick()
