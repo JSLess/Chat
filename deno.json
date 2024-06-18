@@ -16,6 +16,10 @@
         }
     },
 
+    "fmt" : {
+        "singleQuote" : true
+    },
+
     "imports" : {
 
         "Async" : "jsr:@std/async@0.224.1" ,

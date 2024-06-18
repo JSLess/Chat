@@ -1,6 +1,6 @@
 
-export type { Args as ButtonArgs }
-export { Component as Button }
+export type { Args as ComponentArgs }
+export { Component }
 
 
 interface Args {

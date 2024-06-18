@@ -1,20 +1,20 @@
 
-export type { ButtonArgs } from './Component.tsx'
-export { Frame as Button }
+export { references , internal }
 
-import { Button, ButtonArgs } from './Component.tsx'
-import { frames } from "../../Routes/Frame/mod.ts"
+import { Component } from './Component.tsx'
+import { FrameArgs } from './Frame.tsx'
+import { frames } from '../../Routes/Frame/mod.ts'
 
 
 const references = new Map<string,{
-    args : ButtonArgs
+    args : FrameArgs
     uuid : string
 }>
 
 
 const internal = {
 
-    component : Button ,
+    component : Component ,
 
     frameId : 'Button' ,
 
@@ -35,37 +35,6 @@ const internal = {
             background : #ffffff2f ;
         }
     `
-}
-
-
-function Frame (
-    args : ButtonArgs & {
-        onClick : () => void
-    }
-){
-
-    const uuid = crypto.randomUUID()
-
-    references.set(uuid,{ args , uuid })
-
-    const icon = `/Asset/Icons/${ args.icon }.webp`
-
-    const search = new URLSearchParams({
-        Type : internal.frameId ,
-        Ref : uuid
-    })
-
-    const src = `/Frame?${ search.toString() }`
-
-    return (
-        <div class = 'Button' >
-
-            <img src = { icon } />
-
-            <iframe src = { src } />
-
-        </div>
-    )
 }
 
 

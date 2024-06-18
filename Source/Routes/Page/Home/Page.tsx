@@ -5,7 +5,7 @@ import { RegisterForm , LogoutForm , LoginForm } from 'UI/Parts'
 import { AccountId , UTF8Meta } from 'UI/Parts'
 import { MessageInputForm } from '../../../Components/MessageInputForm/mod.ts'
 import { BaseState } from '../../State.ts'
-import { Button } from "../../../Frames/Button/mod.tsx";
+import { Button } from '../../../Frames/Button/mod.ts'
 
 
 type Props = BaseState
@@ -37,8 +37,8 @@ async function Component ( props : Props ){
                     <div class = 'Main' >
 
                         <Button
-                            icon = 'Reaction'
                             onClick = { () => console.warn(`Button`) }
+                            icon = 'Reaction'
                         />
 
                         <h1 style = 'text-align:center' >
