@@ -2,6 +2,8 @@
 export type { Args as FrameArgs }
 export { Frame }
 
+import { FrameContext } from 'Framework'
+
 
 interface Args {
     onClick : () => void
@@ -10,15 +12,16 @@ interface Args {
 
 
 const Frame =
-    ( { references , slug } : { slug : string , references : Map<string,{
-        uuid : string
-        args : Args
-    }> } ) =>
+    ( context : FrameContext ) =>
     ( args : Args ) => {
+
+    const { references , slug } = context
 
     const uuid = crypto.randomUUID()
 
     references.set(uuid,{ args , uuid })
+
+    console.debug('References',references)
 
     const icon = `/Asset/Icons/${ args.icon }.webp`
 

@@ -1,6 +1,6 @@
 
+export type { ContentContext , FrameContext }
 export type { Args as FrameComponentArgs }
-export type { ContentContext }
 export { FrameComponent }
 
 import { frames } from '../../Routes/Frame/mod.ts'
@@ -21,7 +21,7 @@ interface Args <ComponentArgs> {
 }
 
 
-interface FrameContext <ComponentArgs> {
+interface FrameContext < ComponentArgs = unknown > {
     references : ReferenceMap<ComponentArgs>
     slug : string
 }
