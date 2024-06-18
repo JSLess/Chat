@@ -22,12 +22,17 @@ const internal = {
 
         a {
             border-radius : 4px ;
+            aspect-ratio : 1 ;
             display : block ;
-            padding : 1px ;
+            width : 100% ;
         }
 
         a:hover {
             background : #ffffff1f ;
+        }
+
+        a:active {
+            background : #ffffff2f ;
         }
     `
 }
@@ -43,17 +48,22 @@ function Frame (
 
     references.set(uuid,{ args , uuid })
 
+    const icon = `/Asset/Icons/${ args.icon }.webp`
+
     return (
-        <iframe
-            height = { 32 }
-            width = { 32 }
-            src = { `/Frame?Type=${ internal.frame }&Ref=${ uuid }` }
-        />
+        <div class = 'Button' >
+
+            <img src = { icon } />
+
+            <iframe
+                height = { 32 }
+                width = { 32 }
+                src = { `/Frame?Type=${ internal.frame }&Ref=${ uuid }` }
+            />
+
+        </div>
     )
 }
-
-
-import { UTF8Meta } from 'UI/Parts'
 
 
 frames.set('Button',{
@@ -62,28 +72,34 @@ frames.set('Button',{
 
     ref : ( uuid : string ) => references.get(uuid) ,
 
-    component : ( args : ButtonArgs & { uuid : string } ) => (
+    component : ( args : { uuid : string } ) => {
 
-        <html>
-            <head>
+        const { component , frame , style } = internal
 
-                <UTF8Meta />
+        const children = component({
+            frame , ... args
+        })
 
-                <link
-                    href = '/Asset/Styles/Reset.css'
-                    rel = 'stylesheet'
-                />
+        return (
 
-                <style>
-                    { internal.style }
-                </style>
+            <html>
 
-            </head>
-            <body children = { internal.component({
-                frame : internal.frame , ... args}
-                ) } />
-        </html>
-    )
+                <head>
+
+                    <link
+                        href = '/Asset/Styles/MinimalReset.css'
+                        rel = 'stylesheet'
+                    />
+
+                    <style children = { style } />
+
+                </head>
+
+                <body children = { children } />
+
+            </html>
+        )
+    }
 })
 
 

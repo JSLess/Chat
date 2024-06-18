@@ -16,8 +16,7 @@
         }
     },
 
-    "imports": {
-
+    "imports" : {
 
         "Async" : "jsr:@std/async@0.224.1" ,
         "HTTP" : "jsr:@std/http@0.224.2" ,

@@ -9,7 +9,7 @@ interface Args {
 
 
 function Component (
-    { frame , icon , uuid } : Args & {
+    { frame , uuid } : {
         frame : string
         uuid : string
     }
@@ -17,11 +17,10 @@ function Component (
 
     const href = `/Frame?Type=${ frame }&Action=Click&Ref=${ uuid }`
 
-    icon = `/Asset/Icons/${ icon }.webp`
-
     return (
-        <a href = { href } >
-            <img src = { icon } />
-        </a>
+        <a
+            draggable = { false }
+            href = { href }
+        />
     )
 }
