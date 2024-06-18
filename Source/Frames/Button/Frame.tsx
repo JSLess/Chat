@@ -3,10 +3,14 @@ export type { Args as FrameArgs }
 export { Frame }
 
 import { FrameContext } from 'Framework'
+import { Session } from '../../Misc/Types.ts'
 
 
 interface Args {
-    onClick : () => void
+
+    onClick :
+        ( args : { session : Session } ) => void
+
     icon : string
 }
 

@@ -3,9 +3,10 @@ export { router as frame }
 export { frames }
 
 import { onlySessions } from 'Misc/Routes'
+import { WithSession } from 'Routes'
 import { Parameters } from '../../Framework/Frame/Parameters.ts'
 import { render } from 'Render'
-import { Router } from 'Oak'
+import { Context, Router } from 'Oak'
 import { VNode } from 'preact'
 import { chat } from './Chat/mod.ts'
 
@@ -15,13 +16,17 @@ const frames = new Map<string,{
     ref : ( uuid : string ) => undefined | { uuid : string , args : any }
 }>
 
+const sessions = new Map<string,Set<string>>
+
 
 const router = new Router
 
 router.use('/Chat',onlySessions,chat.routes())
-router.get('/',( context ) => {
+router.get('/',onlySessions,( context : Context<WithSession> ) => {
 
-    const type = context.request.url.searchParams.get(Parameters.Frame)
+    const search = context.request.url.searchParams
+
+    const type = search.get(Parameters.Frame)
 
     if( ! type ){
         console.warn(`No Type`)
@@ -34,15 +39,15 @@ router.get('/',( context ) => {
     const frame = frames.get(type)
 
     if( ! frame ){
-        console.warn(`No Frame`)
+        console.warn(`No frame slug`)
         context.response.status = 404
         return
     }
 
-    const reference = context.request.url.searchParams.get(Parameters.Reference)
+    const reference = search.get(Parameters.Reference)
 
     if( ! reference ){
-        console.warn(`No Ref_`)
+        console.warn(`No frame reference`)
         context.response.status = 400
         return
     }
@@ -50,7 +55,7 @@ router.get('/',( context ) => {
     const referenced = frame.ref(reference)
 
     if( ! referenced ){
-        console.warn(`No Ref`)
+        console.warn(`No frame under this reference`)
         context.response.status = 400
         return
     }
@@ -59,8 +64,10 @@ router.get('/',( context ) => {
 
     context.response.body = render(frame.component({ ... args , uuid }))
 
-    const action = context.request.url.searchParams.get(Parameters.Event)
+    const action = search.get(Parameters.Event)
+
+    const { session } = context.state
 
     if( action === 'Click' )
-        args.onClick()
+        args.onClick({ session })
 })

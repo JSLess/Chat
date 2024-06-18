@@ -14,7 +14,7 @@ interface Args <ComponentArgs> {
 
     frame :
         ( args : FrameContext<ComponentArgs> ) =>
-        ( args : ComponentArgs ) => JSX.Element
+        ( args : { session : string } & ComponentArgs ) => JSX.Element
 
     style ?: string
     slug : string
@@ -74,12 +74,6 @@ function FrameComponent <
             </>
         }
     })
-
-
-    interface Args {
-        onClick : () => void
-        icon : string
-    }
 
 
     return frame({ references , slug })

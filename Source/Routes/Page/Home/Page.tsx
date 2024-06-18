@@ -11,7 +11,9 @@ import { Button } from '../../../Frames/Button/mod.ts'
 type Props = BaseState
 
 
-async function Component ( props : Props ){
+async function Component (
+    props : Props
+){
 
     const { hasSession , hasCookies } = props
 
@@ -36,10 +38,15 @@ async function Component ( props : Props ){
 
                     <div class = 'Main' >
 
-                        <Button
-                            onClick = { () => console.warn(`Button`) }
-                            icon = 'Reaction'
-                        />
+                        { ( hasSession ) && <>
+
+                            <Button
+                                onClick = { ( args ) => console.warn(`Button`,args) }
+                                session = { props.sessionId }
+                                icon = 'Reaction'
+                            />
+
+                        </> }
 
                         <h1 style = 'text-align:center' >
                             HTML Only Chat

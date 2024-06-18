@@ -2,15 +2,13 @@
 export type { Args as ButtonArgs }
 export { Component as Button }
 
+import { FrameArgs as Args } from './Frame.tsx'
 import { FrameComponent } from 'Framework'
 import { Content } from './Content.tsx'
 import { Frame } from './Frame.tsx'
 
 
-type Args = Parameters<typeof Component>[ 0 ]
-
-
-const Component = FrameComponent({
+const Component = FrameComponent<Args>({
 
     content : Content ,
     frame : Frame ,
