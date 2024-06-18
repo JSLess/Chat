@@ -1,16 +1,14 @@
 
 export { Content }
 
-import { Parameters } from '../../Framework/Frame/Parameters.ts'
-
+import { ContentContext , Parameters } from 'Framework'
 
 
 function Content (
-    { slug , uuid } : {
-        slug : string
-        uuid : string
-    }
+    args : ContentContext
 ){
+
+    const { slug , uuid } = args
 
     const search = new URLSearchParams({
         [ Parameters.Reference] : uuid ,

@@ -1,5 +1,6 @@
 
 export type { Args as FrameComponentArgs }
+export type { ContentContext }
 export { FrameComponent }
 
 import { frames } from '../../Routes/Frame/mod.ts'
@@ -9,7 +10,7 @@ import { JSX } from 'preact'
 interface Args <ComponentArgs> {
 
     content :
-        ( args : ComponentContext ) => JSX.Element
+        ( args : ContentContext ) => JSX.Element
 
     frame :
         ( args : FrameContext<ComponentArgs> ) =>
@@ -25,7 +26,7 @@ interface FrameContext <ComponentArgs> {
     slug : string
 }
 
-interface ComponentContext {
+interface ContentContext {
     slug : string
     uuid : string
 }
