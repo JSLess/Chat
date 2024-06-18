@@ -21,7 +21,7 @@ const router = new Router
 router.use('/Chat',onlySessions,chat.routes())
 router.get('/',( context ) => {
 
-    const type = context.request.url.searchParams.get(Parameters.FrameId)
+    const type = context.request.url.searchParams.get(Parameters.Frame)
 
     if( ! type ){
         console.warn(`No Type`)

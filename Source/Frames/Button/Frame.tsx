@@ -2,8 +2,6 @@
 export type { Args as FrameArgs }
 export { Frame }
 
-import { references , internal } from './Internal.tsx'
-
 
 interface Args {
     onClick : () => void
@@ -11,9 +9,12 @@ interface Args {
 }
 
 
-function Frame (
-    args : Args
-){
+const Frame =
+    ( { references , slug } : { slug : string , references : Map<string,{
+        uuid : string
+        args : Args
+    }> } ) =>
+    ( args : Args ) => {
 
     const uuid = crypto.randomUUID()
 
@@ -22,7 +23,7 @@ function Frame (
     const icon = `/Asset/Icons/${ args.icon }.webp`
 
     const search = new URLSearchParams({
-        Type : internal.frameId ,
+        Type : slug ,
         Ref : uuid
     })
 

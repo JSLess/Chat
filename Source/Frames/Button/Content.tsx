@@ -1,25 +1,21 @@
-import { Parameters } from '../../Framework/Frame/Parameters.ts';
 
-export type { Args as ComponentArgs }
-export { Component }
+export { Content }
 
-
-interface Args {
-    icon : string
-}
+import { Parameters } from '../../Framework/Frame/Parameters.ts'
 
 
-function Component (
-    { frameId , uuid } : {
-        frameId : string
+
+function Content (
+    { slug , uuid } : {
+        slug : string
         uuid : string
     }
 ){
 
     const search = new URLSearchParams({
         [ Parameters.Reference] : uuid ,
-        [ Parameters.FrameId ] : frameId ,
-        [ Parameters.Event ] : 'Click'
+        [ Parameters.Event ] : 'Click' ,
+        [ Parameters.Frame ] : slug
     })
 
     const href = `/Frame?${ search.toString() }`
