@@ -10,7 +10,7 @@ async function middleware (
     context : Context<WithSession>
 ){
 
-    const form = await context.request.body({ type : 'form' }).value
+    const form = await context.request.body.formData()
 
     const groupId = form.get('Group')!
 

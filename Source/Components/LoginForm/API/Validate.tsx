@@ -12,10 +12,9 @@ async function middleware (
     next : Next
 ){
 
-    const form = await context.request.body({ type : 'form' }).value
+    const form = await context.request.body.formData()
 
-
-    const accountId = form.get('Account')
+    const accountId = form.get('Account')?.toString()
 
     if( ! accountId ){
 

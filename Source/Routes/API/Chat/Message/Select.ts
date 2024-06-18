@@ -23,9 +23,7 @@ async function middleware (
     context : Context
 ){
 
-    const body = await context.request.body().value
-
-    const params = ( body as URLSearchParams )
+    const params = await context.request.body.form()
 
     const data = {
         messageId : params.get('MessageId')

@@ -8,7 +8,9 @@ export { initState , checkCookies , determineCookies , determineSession , rechec
 
 import {
     determineSession , determineCookies , onlyWithCookies , initState ,
-    recheckCookies , onlyDocument , checkCookies , onlyFrames
+    recheckCookies , onlyDocument , checkCookies , onlyFrames,
+    onlySessions,
+    onlyAuthenticated
 } from 'Misc/Routes'
 
 import {
@@ -25,6 +27,7 @@ import { frame } from './Frame/mod.ts'
 import { asset } from './Asset/mod.ts'
 import { page } from './Page/mod.ts'
 import { api } from './API/mod.ts'
+import { handlePing } from '../Misc/Ping.ts';
 
 
 const router = new Router
@@ -51,3 +54,5 @@ router.get('/Asset',asset.routes())
 router.use('/Frame',onlyFrames,initState,determineSession,determineCookies,onlyWithCookies,frame.routes())
 router.use('/Page',onlyDocument,checkCookies,initState,determineSession,determineCookies,recheckCookies,page.routes())
 router.use('/API',initState,determineSession,determineCookies,onlyWithCookies,api.routes())
+
+router.get('/Ping',initState,determineSession,determineCookies,onlyWithCookies,onlySessions,onlyAuthenticated,handlePing)

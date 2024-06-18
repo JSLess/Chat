@@ -18,11 +18,9 @@ async function middleware
 
     const state = context.state as WithSession
 
-    const form = await context.request.body({ type : 'form-data' }).value.read()
+    const form = await context.request.body.formData()
 
-    const { fields } = form
-
-    const message = fields.message
+    const message = form.get('message')?.toString()
 
     if( ! message ){
 

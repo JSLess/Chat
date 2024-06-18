@@ -40,6 +40,11 @@ async function Component (
 
                         { ( hasSession ) && <>
 
+                            <iframe
+                                style = 'display:none'
+                                src = '/Ping'
+                            />
+
                             <Button
                                 onClick = { ( args ) => console.warn(`Button`,args) }
                                 session = { props.sessionId }
