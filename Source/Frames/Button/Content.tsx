@@ -20,6 +20,11 @@ function Content (
 
     return <>
 
+        <meta
+            content = 'dark light'
+            name = 'color-scheme'
+        />
+
         <link
             href = '/Asset/Styles/MinimalReset.css'
             rel = 'stylesheet'

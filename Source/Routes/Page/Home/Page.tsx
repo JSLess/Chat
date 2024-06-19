@@ -27,6 +27,11 @@ async function Component (
                 <UTF8Meta />
 
                 <link
+                    href = '/Asset/Styles/Reset.css'
+                    rel = 'stylesheet'
+                />
+
+                <link
                     href = '/Asset/Styles/Style.css'
                     rel = 'stylesheet'
                 />
