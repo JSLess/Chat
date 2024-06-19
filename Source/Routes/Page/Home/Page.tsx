@@ -5,13 +5,15 @@ import { RegisterForm , LogoutForm , LoginForm } from 'UI/Parts'
 import { AccountId , UTF8Meta } from 'UI/Parts'
 import { MessageInputForm } from '../../../Components/MessageInputForm/mod.ts'
 import { BaseState } from '../../State.ts'
-import { Button } from "../../../Frames/Button/mod.tsx";
+import { Button } from '../../../Frames/Button/mod.ts'
 
 
 type Props = BaseState
 
 
-async function Component ( props : Props ){
+async function Component (
+    props : Props
+){
 
     const { hasSession , hasCookies } = props
 
@@ -36,14 +38,20 @@ async function Component ( props : Props ){
 
                     <div class = 'Main' >
 
-                        <Button
-                            icon = 'Reaction'
-                            onClick = { () => console.warn(`Button`) }
-                        />
+                        { ( hasSession ) && <>
 
-                        <h1 style = 'text-align:center' >
-                            HTML Only Chat
-                        </h1>
+                            {/* <iframe
+                                style = 'display:none'
+                                src = '/Ping'
+                            /> */}
+
+                            <Button
+                                onClick = { ( args ) => console.warn(`Button`,args) }
+                                icon = 'Reaction'
+                                uuid = 'Reaction-Button'
+                            />
+
+                        </> }
 
                         { ( hasCookies === 'Enabled' ) && <>
 

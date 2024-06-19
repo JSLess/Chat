@@ -16,8 +16,11 @@
         }
     },
 
-    "imports": {
+    "fmt" : {
+        "singleQuote" : true
+    },
 
+    "imports" : {
 
         "Async" : "jsr:@std/async@0.224.1" ,
         "HTTP" : "jsr:@std/http@0.224.2" ,
@@ -30,7 +33,7 @@
         "preact/jsx-runtime" : "npm:preact@10.22.0/jsx-runtime" ,
         "preact" : "npm:preact@10.22.0" ,
 
-        "Oak" : "jsr:@oak/oak@16.0.0" ,
+        "Oak" : "jsr:@oak/oak@16.1.0" ,
 
         "Moment" : "npm:moment@2.30.1" ,
         "Zod" : "npm:zod@3.23.8" ,

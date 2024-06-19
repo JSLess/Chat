@@ -3,24 +3,28 @@ export { router as frame }
 export { frames }
 
 import { onlySessions } from 'Misc/Routes'
+import { WithSession } from 'Routes'
+import { Parameters } from '../../Framework/Frame/Parameters.ts'
 import { render } from 'Render'
-import { Router } from 'Oak'
+import { Context, Router } from 'Oak'
 import { VNode } from 'preact'
 import { chat } from './Chat/mod.ts'
 
 
 const frames = new Map<string,{
     component : ( args : any ) => VNode<any> ,
-    ref : ( uuid : string ) => undefined | { uuid : string , args : any }
+    ref : ( uuid : string ) => undefined | { args : any , uuid : string }
 }>
 
 
 const router = new Router
 
 router.use('/Chat',onlySessions,chat.routes())
-router.get('/',( context ) => {
+router.get('/',onlySessions,( context : Context<WithSession> ) => {
 
-    const type = context.request.url.searchParams.get('Type')
+    const search = context.request.url.searchParams
+
+    const type = search.get(Parameters.Frame)
 
     if( ! type ){
         console.warn(`No Type`)
@@ -33,33 +37,35 @@ router.get('/',( context ) => {
     const frame = frames.get(type)
 
     if( ! frame ){
-        console.warn(`No Frame`)
+        console.warn(`No frame slug`)
         context.response.status = 404
         return
     }
 
-    const ref_ = context.request.url.searchParams.get('Ref')
+    const reference = search.get(Parameters.Reference)
 
-    if( ! ref_ ){
-        console.warn(`No Ref_`)
+    if( ! reference ){
+        console.warn(`No frame reference`)
         context.response.status = 400
         return
     }
 
-    const ref = frame.ref(ref_)
+    const referenced = frame.ref(reference)
 
-    if( ! ref ){
-        console.warn(`No Ref`)
+    if( ! referenced ){
+        console.warn(`No frame under this reference`)
         context.response.status = 400
         return
     }
 
-    const { args , uuid } = ref
+    const { args , uuid } = referenced
 
     context.response.body = render(frame.component({ ... args , uuid }))
 
-    const action = context.request.url.searchParams.get('Action')
+    const action = search.get(Parameters.Event)
+
+    const { session } = context.state
 
     if( action === 'Click' )
-        args.onClick()
+        args.onClick({ session })
 })
