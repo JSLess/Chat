@@ -13,10 +13,8 @@ import { chat } from './Chat/mod.ts'
 
 const frames = new Map<string,{
     component : ( args : any ) => VNode<any> ,
-    ref : ( uuid : string ) => undefined | { uuid : string , args : any }
+    ref : ( uuid : string ) => undefined | { args : any , uuid : string }
 }>
-
-const sessions = new Map<string,Set<string>>
 
 
 const router = new Router

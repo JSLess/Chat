@@ -13,17 +13,17 @@ interface Args <ComponentArgs> {
         ( args : ContentContext ) => JSX.Element
 
     frame :
-        ( args : FrameContext<ComponentArgs> ) =>
-        ( args : { session : string } & ComponentArgs ) => JSX.Element
+        ( args : FrameContext ) =>
+        ( args : { uuid : string } & ComponentArgs ) => JSX.Element
 
     style ?: string
     slug : string
 }
 
 
-interface FrameContext < ComponentArgs = unknown > {
-    references : ReferenceMap<ComponentArgs>
+interface FrameContext {
     slug : string
+    uuid : string
 }
 
 interface ContentContext {
@@ -32,19 +32,12 @@ interface ContentContext {
 }
 
 
-type ReferenceMap <ComponentArgs> =
-    Map<string,{
-        args : ComponentArgs ,
-        uuid : string
-    }>
-
-
 /**
  *  @typeParam ComponentArgs Attributes the user of the component can supply.
  */
 
 function FrameComponent <
-    ComponentArgs extends object
+    ComponentArgs extends { uuid : string }
 >(
     { content , frame , style , slug } : Args<ComponentArgs>
 ){
@@ -76,5 +69,14 @@ function FrameComponent <
     })
 
 
-    return frame({ references , slug })
+    return ( args : ComponentArgs ) => {
+
+        console.log('Args',args)
+
+        const { uuid } = args
+
+        references.set(uuid,{ args , uuid })
+
+        return frame({ slug , uuid })(args)
+    }
 }

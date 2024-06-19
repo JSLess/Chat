@@ -2,7 +2,7 @@
 export type { Args as FrameArgs }
 export { Frame }
 
-import { FrameContext } from 'Framework'
+import { FrameContext, Parameters } from 'Framework'
 import { Session } from '../../Misc/Types.ts'
 
 
@@ -12,6 +12,7 @@ interface Args {
         ( args : { session : Session } ) => void
 
     icon : string
+    uuid : string
 }
 
 
@@ -19,19 +20,13 @@ const Frame =
     ( context : FrameContext ) =>
     ( args : Args ) => {
 
-    const { references , slug } = context
-
-    const uuid = crypto.randomUUID()
-
-    references.set(uuid,{ args , uuid })
-
-    console.debug('References',references)
-
     const icon = `/Asset/Icons/${ args.icon }.webp`
 
+    const { slug , uuid } = context
+
     const search = new URLSearchParams({
-        Type : slug ,
-        Ref : uuid
+        [ Parameters.Reference ] : uuid ,
+        [ Parameters.Frame ] : slug
     })
 
     const src = `/Frame?${ search.toString() }`

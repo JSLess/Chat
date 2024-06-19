@@ -40,22 +40,18 @@ async function Component (
 
                         { ( hasSession ) && <>
 
-                            <iframe
+                            {/* <iframe
                                 style = 'display:none'
                                 src = '/Ping'
-                            />
+                            /> */}
 
                             <Button
                                 onClick = { ( args ) => console.warn(`Button`,args) }
-                                session = { props.sessionId }
                                 icon = 'Reaction'
+                                uuid = 'Reaction-Button'
                             />
 
                         </> }
-
-                        <h1 style = 'text-align:center' >
-                            HTML Only Chat
-                        </h1>
 
                         { ( hasCookies === 'Enabled' ) && <>
 
