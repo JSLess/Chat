@@ -22,11 +22,18 @@ interface Args <ComponentArgs> {
 
 
 interface FrameContext {
+
+    style ?: string
+
+    content :
+        ( args : ContentContext ) => JSX.Element
+
     slug : string
     uuid : string
 }
 
 interface ContentContext {
+    style ?: string
     slug : string
     uuid : string
 }
@@ -61,7 +68,11 @@ function FrameComponent <
 
             return <>
 
-                <style children = { style } />
+                <style
+                    dangerouslySetInnerHTML = {{
+                        __html : style ?? ''
+                    }}
+                />
 
                 { children }
             </>
@@ -75,6 +86,6 @@ function FrameComponent <
 
         references.set(uuid,{ args , uuid })
 
-        return frame({ slug , uuid })(args)
+        return frame({ content , style , slug , uuid })(args)
     }
 }

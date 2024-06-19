@@ -4,6 +4,7 @@ export { Frame }
 
 import { FrameContext, Parameters } from 'Framework'
 import { Session } from '../../Misc/Types.ts'
+import { render } from 'Render';
 
 
 interface Args {
@@ -22,21 +23,15 @@ const Frame =
 
     const icon = `/Asset/Icons/${ args.icon }.webp`
 
-    const { slug , uuid } = context
+    const { content , style , slug } = context
 
-    const search = new URLSearchParams({
-        [ Parameters.Reference ] : uuid ,
-        [ Parameters.Frame ] : slug
-    })
-
-    const src = `/Frame?${ search.toString() }`
 
     return (
         <div class = 'Button' >
 
             <img src = { icon } />
 
-            <iframe src = { src } />
+            <iframe srcDoc = { render(content({ ... args , style , slug })) } />
 
         </div>
     )
