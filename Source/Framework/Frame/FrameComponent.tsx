@@ -71,8 +71,6 @@ function FrameComponent <
 
     return ( args : ComponentArgs ) => {
 
-        console.log('Args',args)
-
         const { uuid } = args
 
         references.set(uuid,{ args , uuid })
