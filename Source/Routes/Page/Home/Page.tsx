@@ -56,6 +56,12 @@ async function Component (
                                 uuid = 'Reaction-Button'
                             />
 
+                            <Button
+                                onClick = { ( args ) => console.warn(`Button`,args) }
+                                icon = 'Context'
+                                uuid = 'Reaction-Button'
+                            />
+
                         </> }
 
                         { ( hasCookies === 'Enabled' ) && <>

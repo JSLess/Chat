@@ -9,11 +9,6 @@ import { Session } from '../../Misc/Types.ts'
 import { Content } from './Content.tsx';
 
 
-const buffer = await Deno.readFile(`./Source/Static/Icons/Reaction.webp`)
-
-const uri = `data:image/webp;base64,${ encodeBase64(buffer) }`
-
-
 interface Args {
 
     onClick :
@@ -29,6 +24,12 @@ const Frame =
     ( args : Args ) => {
 
     const { style , slug } = context
+
+    const path = `./Source/Static/Icons/${ args.icon }.webp`
+
+    const buffer = Deno.readFileSync(path)
+
+    const uri = `data:image/webp;base64,${ encodeBase64(buffer) }`
 
     return (
         <div class = 'Button' >
