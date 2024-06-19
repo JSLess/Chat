@@ -25,7 +25,6 @@ const Frame =
 
     const { content , style , slug } = context
 
-
     return (
         <div class = 'Button' >
 

@@ -60,23 +60,10 @@ function FrameComponent <
         ref : ( uuid : string ) =>
             references.get(uuid) ,
 
-        component : ( args : { uuid : string } ) => {
-
-            const children = content({
+        component : ( args : { uuid : string } ) =>
+            content({
                 slug , ... args
             })
-
-            return <>
-
-                <style
-                    dangerouslySetInnerHTML = {{
-                        __html : style ?? ''
-                    }}
-                />
-
-                { children }
-            </>
-        }
     })
 
 
