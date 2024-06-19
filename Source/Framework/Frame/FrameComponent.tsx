@@ -22,11 +22,18 @@ interface Args <ComponentArgs> {
 
 
 interface FrameContext {
+
+    style ?: string
+
+    content :
+        ( args : ContentContext ) => JSX.Element
+
     slug : string
     uuid : string
 }
 
 interface ContentContext {
+    style ?: string
     slug : string
     uuid : string
 }
@@ -53,19 +60,10 @@ function FrameComponent <
         ref : ( uuid : string ) =>
             references.get(uuid) ,
 
-        component : ( args : { uuid : string } ) => {
-
-            const children = content({
+        component : ( args : { uuid : string } ) =>
+            content({
                 slug , ... args
             })
-
-            return <>
-
-                <style children = { style } />
-
-                { children }
-            </>
-        }
     })
 
 
@@ -75,6 +73,6 @@ function FrameComponent <
 
         references.set(uuid,{ args , uuid })
 
-        return frame({ slug , uuid })(args)
+        return frame({ content , style , slug , uuid })(args)
     }
 }

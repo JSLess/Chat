@@ -4,6 +4,9 @@ export { Content }
 import { ContentContext , Parameters } from 'Framework'
 
 
+const style = await Deno.readTextFile(`./Source/Static/Styles/MinimalReset.css`)
+
+
 function Content (
     args : ContentContext
 ){
@@ -25,9 +28,16 @@ function Content (
             name = 'color-scheme'
         />
 
-        <link
-            href = '/Asset/Styles/MinimalReset.css'
-            rel = 'stylesheet'
+        <style
+            dangerouslySetInnerHTML = {{
+                __html : style
+            }}
+        />
+
+        <style
+            dangerouslySetInnerHTML = {{
+                __html : args.style ?? ''
+            }}
         />
 
         <a
