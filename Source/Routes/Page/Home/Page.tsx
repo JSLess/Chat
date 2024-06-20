@@ -45,22 +45,25 @@ async function Component (
 
                         { ( hasSession ) && <>
 
-                            {/* <iframe
-                                style = 'display:none'
-                                src = '/Ping'
-                            /> */}
+                            <div style = {{
+                                gridAutoFlow : 'column' ,
+                                columnGap : '0.5rem' ,
+                                display : 'grid'
+                            }} >
 
-                            <Button
-                                onClick = { ( args ) => console.warn(`Button`,args) }
-                                icon = 'Reaction'
-                                uuid = 'Reaction-Button'
-                            />
+                                <Button
+                                    onClick = { ( args ) => console.warn(`Button`,args) }
+                                    icon = 'Reaction'
+                                    uuid = 'Reaction-Button'
+                                />
 
-                            <Button
-                                onClick = { ( args ) => console.warn(`Button`,args) }
-                                icon = 'Context'
-                                uuid = 'Reaction-Button'
-                            />
+                                <Button
+                                    onClick = { ( args ) => console.warn(`Button`,args) }
+                                    icon = 'Context'
+                                    uuid = 'Reaction-Button'
+                                />
+
+                            </div>
 
                         </> }
 
