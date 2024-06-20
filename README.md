@@ -22,6 +22,8 @@
 
 While technically a working chat, it's more of an Area69 testing ground.
 
+<br/>
+
 ### Hardmode
 
 While web technologies have advanced,   
@@ -61,11 +63,19 @@ Mechanics I have learned , found or created.
     and the backend recognizes the request as a click  
     if it has a parameter in the url.
 
+    <img width = 40% src = './Documentation/Assets/Single-Framed-Button.png' >
+
+    <br/>
+
 -   **Double Framed Buttons**
 
     Moving a framed buttons content below the iframe  
     into the parent context reduced the amount of requests ,  
     data & loading time spent on each click + no icon flickering.
+
+    <img width = 40% src = './Documentation/Assets/Double-Framed-Button.png' >
+
+    <br/>
 
 -   **Inline Frames**
 
