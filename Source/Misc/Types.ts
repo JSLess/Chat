@@ -1,8 +1,8 @@
 
 export type { PopArray }
-export type { Message , Session , Reaction }
+export type { Message , Reaction }
+export type { Session } from './Session.ts'
 
-import { AsyncResponse } from 'Misc/Async'
 
 
 type PopArray<Type> =
@@ -19,35 +19,6 @@ interface Message {
 
     message : string
     time : Date
-}
-
-
-interface ErrorInfo {
-    type : string
-}
-
-
-interface Session {
-
-    errors : Array<ErrorInfo>
-
-    selectedMessage ?: string
-    userId ?: string
-
-    sessionIds : Array<string>
-
-    frames : {
-        reactions_emoticons ?: AsyncResponse
-        reactions_window ?: AsyncResponse
-        reactions_groups ?: AsyncResponse
-        reactions ?: AsyncResponse
-        messages ?: AsyncResponse
-        home ?: AsyncResponse
-    },
-
-    contexts : {
-        reactions ?: Map<string,string>
-    }
 }
 
 

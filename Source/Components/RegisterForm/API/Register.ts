@@ -1,10 +1,10 @@
 
 export { middleware as routeAPI }
 
+import { in20Minutes , Pages } from 'Misc'
 import { createAccount } from 'AccountId'
 import { BaseState } from '../../../Routes/State.ts'
-import { sessions } from 'State'
-import { Session } from 'Misc/Types'
+import { Session } from 'Misc/Session'
 import { Context } from 'Oak'
 
 
@@ -12,32 +12,25 @@ async function middleware (
     context : Context<BaseState>
 ){
 
+    const { response , cookies } = context
+
     const account = await createAccount()
 
-    const sessionId = crypto.randomUUID()
-
-    const session = {
-        sessionIds : [] ,
-        contexts : {} ,
-        frames : {} ,
-        errors : []
-    } as Session
+    const session = new Session(account.userId)
 
 
-    sessions.set(sessionId,session)
+    response.headers.set(
+        'Cache-Control' ,
+        'no-cache="Set-Cookie"'
+    )
 
-    session.userId = account.userId
-
-
-    context.response.headers.set('Cache-Control','no-cache="Set-Cookie"')
-
-    await context.cookies.set('Session',sessionId,{
-        httpOnly : true ,
-        secure : false ,
+    await cookies.set('Session',session.id,{
         sameSite : 'lax' ,
-        path : '/' ,
-        expires : new Date(Date.now() + 1000 * 60 * 20)
+        httpOnly : true ,
+        expires : in20Minutes() ,
+        secure : false ,
+        path : '/'
     })
 
-    context.response.redirect('/')
+    response.redirect(Pages.Home)
 }
