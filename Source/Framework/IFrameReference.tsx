@@ -1,26 +1,25 @@
 
-export type { Props as IFrameReferenceProps }
-export { Component as IFrameReference }
+export type { IFrameReferenceProps }
+export { IFrameReference }
 
 import { JSX } from 'preact'
 
 
-interface Options {
+interface IFrameReferenceProps {
     name : string
 }
 
 
-type IFrameProps = JSX.HTMLAttributes<HTMLIFrameElement>
-
-type Props = Omit<IFrameProps,'src'>
+type IFrameArgs = Omit<JSX.HTMLAttributes<HTMLIFrameElement>,'src'>
 
 
-function Component ( options : Options ){
+function IFrameReference ( 
+    args : IFrameReferenceProps 
+){
 
-    return ( props : Props ) => (
-        <iframe
-            { ... props }
-            src = { `/Frame/${ options.name }` }
-        />
+    const src = `/Frame/${ args.name }`
+
+    return ( props : IFrameArgs ) => (
+        <iframe { ... { ... props , src }  } />
     )
 }

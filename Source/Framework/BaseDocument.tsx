@@ -1,20 +1,23 @@
 
-export type { Props as BaseDocumentProps }
-export { Component as BaseDocument }
+export type { BaseDocumentArgs }
+export { BaseDocument }
 
 import { ComponentChild } from 'preact'
 import { UTF8Meta } from 'UI/Parts'
+import { Stylesheet } from 'Misc';
 
 
-interface Props {
+interface BaseDocumentArgs {
     children : ComponentChild
     name : string
 }
 
 
-function Component ( props : Props ){
+function BaseDocument ( 
+    args : BaseDocumentArgs 
+){
 
-    const { children , name } = props
+    const { children , name } = args
 
     return (
         <html>
@@ -22,18 +25,13 @@ function Component ( props : Props ){
 
                 <UTF8Meta />
 
-                <link
-                    href = '/Asset/Styles/Reset.css'
-                    rel = 'stylesheet'
-                />
-
-                <link
-                    href = { `/Asset/Styles/${ name }.css` }
-                    rel = 'stylesheet'
-                />
+                <Stylesheet path = 'Reset' />
+                <Stylesheet path = { name } />
 
             </head>
-            <body children = { children } />
+            <body>
+                { children }
+            </body>
         </html>
     )
 }

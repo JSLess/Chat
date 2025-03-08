@@ -1,18 +1,18 @@
 
 :root {
-    --background : #1c1817 ;
-    --secondary : #1a2c2d ;
-    --primary : #5e6d6e ;
-    --accent : #bf3831 ;
-    --text : #f5f9f9 ;
-    --positive : green ;
+    --Background : #1c1817 ;
+    --Secondary : #1a2c2d ;
+    --Positive : green ;
+    --Primary : #5e6d6e ;
+    --Accent : #bf3831 ;
+    --Text : #f5f9f9 ;
 }
 
 
 * {
     font-family : monospace ;
     font-size : 18px ;
-    color : var( --text ) ;
+    color : var( --Text ) ;
     box-sizing: border-box;
 }
 
@@ -43,12 +43,12 @@ form > input {
     padding-top : 16px ;
     background : transparent ;
     outline : none ;
-    color : var( --text ) ;
+    color : var( --Text ) ;
     font-size : 1em ;
     transition : 0.24s ;
     letter-spacing: 1px;
     text-align: center;
-    border : 1px solid var( --primary ) ;
+    border : 1px solid var( --Primary ) ;
     border-radius : 5px ;
 }
 
@@ -60,14 +60,14 @@ input[ type = submit ]{
     padding: 10px;
     cursor: pointer;
     transition : 0.25s ;
-    color : var( --primary ) ;
+    color : var( --Primary ) ;
     font-weight : bold ;
 }
 
 
 input[ type = submit ]:hover {
-    border-color : var( --primary ) ;
-    background : var(--primary) ;
+    border-color : var( --Primary ) ;
+    background : var(--Primary) ;
     color : white ;
 }
 

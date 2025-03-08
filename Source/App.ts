@@ -1,6 +1,6 @@
 
 import { Application } from 'Oak'
-import { router } from './Routes/mod.ts'
+import { router } from 'Routes'
 
 
 const app = new Application({

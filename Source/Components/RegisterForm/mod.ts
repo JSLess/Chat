@@ -1,7 +1,7 @@
 
 export {
-    Reference as RegisterForm ,
-    router as register_form_router
+    RegisterForm ,
+    register_form_router
 }
 
 import { initState , determineCookies , determineSession } from '../../Routes/mod.ts'
@@ -18,5 +18,9 @@ router.post('/API/RegisterForm',initState,determineSession,determineCookies,only
 router.get('/Frame/RegisterForm',onlyFrames,initState,determineSession,determineCookies,onlyWithCookies,routeFrame)
 router.get('/Asset/Styles/RegisterForm.css',... routeStyle({ meta : import.meta , file : 'Style.css' }))
 
+const register_form_router = router
 
-const Reference = IFrameReference({ name : 'RegisterForm' })
+
+const RegisterForm = IFrameReference({ 
+    name : 'RegisterForm' 
+})

@@ -1,34 +1,37 @@
 
+export type { RouteStyleArgs }
 export { routeStyle }
 
 import { onlySameSite } from '../Routes/Asset/SameSite.ts'
 import { Context } from 'Oak'
+import { Status } from 'Misc'
 
 
-interface Props {
+interface RouteStyleArgs {
     meta : ImportMeta
     file : string
 }
 
 
 function routeStyle ( 
-    props : Props 
+    props : RouteStyleArgs 
 ){
 
-    return [ onlySameSite , async ( context : Context ) => {
+    const { meta , file } = props
+
+    const sendFile = async ( 
+        context : Context 
+    ) => {
 
         const { response } = context
 
-        try {
+        await context.send({
+            root : meta.dirname! ,
+            path : file
+        }).catch(() => {
+            response.status = Status.NotFound
+        })
+    }
 
-            await context.send({
-                root : props.meta.dirname! ,
-                path : props.file
-            })
-
-        } catch {
-            response.status = 404
-        }
-
-    }] as const
+    return [ onlySameSite , sendFile ] as const
 }

@@ -1,10 +1,11 @@
 
-export { Component as Frame }
+export { RegisterFrame }
 
 import { BaseDocument } from 'Framework'
+import { apiUrl } from 'Misc'
 
 
-function Component (){
+function RegisterFrame (){
 
     return (
         <BaseDocument
@@ -12,8 +13,8 @@ function Component (){
         >
 
             <form
+                action = { apiUrl('RegisterForm') }
                 target = '_parent'
-                action = '/API/RegisterForm'
                 method = 'post'
                 id = 'Register'
             >

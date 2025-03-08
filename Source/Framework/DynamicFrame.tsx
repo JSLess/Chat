@@ -17,27 +17,38 @@ interface Props {
 }
 
 
+const Duration_1_Hour = 60 * 60
+
+
+/**
+ *  Creates a long term connection,
+ *  registers the frame in the session
+ *  and sends the rendered items off.
+ */
+
 function Component (
     props : Props
 ){
 
-    const { context , frameId , children } = props
-
+    const { children , context , frameId } = props
     const { response , state } = context
-
-    const wrapper = Fragment({ children })!
-
-    const html = render(wrapper)
 
 
     const { headers } = response
     headers.set('Content-Type','text/html;charset=utf-8')
     headers.set('Connection','keep-alive')
-    headers.set('Keep-Alive',`timeout=${ 60 * 60 }`)
+    headers.set('Keep-Alive',`timeout=${ Duration_1_Hour }`)
 
 
     const frame = new AsyncResponse
     response.body = frame.readable
+
     state.session.frames[ frameId ] = frame
+
+
+    const fragment = Fragment({ children })!
+
+    const html = render(fragment)
+
     frame.write(html)
 }

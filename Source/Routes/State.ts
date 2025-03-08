@@ -31,7 +31,9 @@ type CookieState =
     | DisabledCookies
 
 
-type BaseState = CookieState & SessionState
+type BaseState = 
+    & SessionState
+    & CookieState 
 
 interface WithSession {
     hasSession : true

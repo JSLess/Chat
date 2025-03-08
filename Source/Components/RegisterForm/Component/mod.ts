@@ -1,11 +1,13 @@
 
 export { middleware as routeFrame }
 
+import { RegisterFrame } from './Frame.tsx'
 import { Context } from 'Oak'
 import { render } from 'Render'
-import { Frame } from './Frame.tsx'
 
 
-async function middleware ( context : Context ){
-    context.response.body = render(Frame())
+async function middleware ( 
+    { response } : Context 
+){
+    response.body = render(RegisterFrame())
 }

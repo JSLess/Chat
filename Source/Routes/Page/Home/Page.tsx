@@ -6,6 +6,7 @@ import { AccountId , UTF8Meta } from 'UI/Parts'
 import { MessageInputForm } from '../../../Components/MessageInputForm/mod.ts'
 import { BaseState } from '../../State.ts'
 import { Button } from '../../../Frames/Button/mod.ts'
+import { CSS } from 'Misc';
 
 
 type Props = BaseState
@@ -134,13 +135,13 @@ async function Component (
 
                     <div id = 'Overlay' />
 
-                    <style dangerouslySetInnerHTML = {{ __html : `
-
+                    <CSS content = { `
+                            
                         #Overlay:active {
-                            list-style-image : url('/API/Spark?Scope=General:Overlay&Action=Click&Time=${ Date.now() }') ;
+                            list-style-image : url('${ '/API/Spark' }?${ new URLSearchParams({ Scope : 'General:Overlay' , Action : 'Click' , Time : String(Date.now()) }).toString() }') ;
                         }
 
-                    `}} />
+                    ` } />
 
                 </> }
 

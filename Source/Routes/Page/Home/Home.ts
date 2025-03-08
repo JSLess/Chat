@@ -19,7 +19,8 @@ async function middleware (
     if( state.hasSession ){
 
         DynamicFrame({
-            children , context : context as Context<WithSession> ,
+            children , 
+            context : context as Context<WithSession> ,
             frameId : 'home'
         })
 

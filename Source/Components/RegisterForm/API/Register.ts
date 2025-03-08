@@ -1,10 +1,10 @@
 
 export { middleware as routeAPI }
 
-import { createAccount } from '../../../Security/AccountId.ts'
+import { createAccount } from 'AccountId'
 import { BaseState } from '../../../Routes/State.ts'
 import { sessions } from 'State'
-import { Session } from '../../../Misc/Types.ts'
+import { Session } from 'Misc/Types'
 import { Context } from 'Oak'
 
 

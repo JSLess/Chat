@@ -41,10 +41,14 @@
 
         "Misc/Routes" : "./Source/Routes/Misc/mod.ts" ,
         "Misc/Async" : "./Source/Misc/AsyncResponse.ts" ,
+        "Misc/Types" : "./Source/Misc/Types.ts" ,
         "Misc/Frame" : "./Source/Misc/Frame/mod.tsx" ,
         "Misc/Time" : "./Source/Misc/Time.ts" ,
+        "Misc" : "./Source/Misc/mod.ts" ,
 
         "UI/Parts" : "./Source/Components/mod.ts" ,
+
+        "AccountId" : "./Source/Security/AccountId.ts" ,
 
         "Framework" : "./Source/Framework/mod.ts" ,
         "Database" : "./Source/Database/mod.ts" ,
