@@ -1,50 +1,38 @@
 
-export { Component as Frame }
+export { LogoutFrame }
 
-import { UTF8Meta } from 'UI/Parts'
+import { Stylesheet , apiUrl } from 'Misc'
+import { BaseDocument } from 'Framework'
 
 
-function Component (){
+function LogoutFrame (){
 
     return (
 
-        <html>
-            <head>
+        <BaseDocument
 
-                <UTF8Meta />
+            name = 'LogoutForm'
+            
+            header = {
+                <Stylesheet path = 'Frame' />
+            }
 
-                <link
-                    href = '/Asset/Styles/Frame.css'
-                    rel = 'stylesheet'
-                />
+            body = {
 
-                <link
-                    href = '/Asset/Styles/Logout.css'
-                    rel = 'stylesheet'
-                />
+                <form
+                    action = { apiUrl('LogoutForm') }
+                    target = '_parent'
+                    method = 'post'
+                    id = 'Logout'
+                >
 
-            </head>
-            <body>
+                    <input
+                        value = 'Logout'
+                        type = 'submit'
+                    />
 
-                <div>
-
-                    <form
-                        target = '_parent'
-                        action = '/API/LogoutForm'
-                        method = 'post'
-                        id = 'Logout'
-                    >
-
-                        <input
-                            value = 'Logout'
-                            type = 'submit'
-                        />
-
-                    </form>
-
-                </div>
-
-            </body>
-        </html>
+                </form>
+            }
+        />
     )
 }

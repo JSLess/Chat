@@ -47,6 +47,8 @@
         "Misc/Time" : "./Source/Misc/Time.ts" ,
         "Misc" : "./Source/Misc/mod.ts" ,
 
+        "Routes/State" : "./Source/Routes/State.ts" ,
+
         "UI/Parts" : "./Source/Components/mod.ts" ,
 
         "AccountId" : "./Source/Security/AccountId.ts" ,

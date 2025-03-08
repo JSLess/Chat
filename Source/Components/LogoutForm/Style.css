@@ -1,0 +1,63 @@
+
+:root {
+    --Background : #1c1817 ;
+    --Primary : #5e6d6e ;
+    --Accent : #bf3831 ;
+    --Text : #f5f9f9 ;
+}
+
+
+* {
+    font-family : monospace ;
+    font-size : 18px ;
+    color : var( --Text ) ;
+}
+
+html {
+    overflow : hidden ;
+}
+
+body {
+    justify-content : center ;
+    align-items : center ;
+    display : flex ;
+}
+
+form {
+    margin : 0 ;
+}
+
+input[ type = submit ]{
+    
+    background : transparent ;
+    outline : none ;
+    border : none ;
+
+    border-radius : 5px ;
+    border : 1px solid var( --Primary ) ;
+    
+    padding : 10px ;
+
+    height : 100dvh ;
+    width : 100dvw ;
+
+    cursor : pointer ;
+
+    transition : 0.25s ;
+
+    font-weight : bold ;
+    color : var( --Primary ) ;
+}
+
+input[ type = submit ]:focus-within {
+    border-color : var( --Accent ) ;
+    color : var( --Accent ) ;
+}
+
+input[ type = submit ]:hover {
+    border-color : var( --Primary ) ;
+    background : var(--Primary) ;
+    color : white ;
+}
+
+

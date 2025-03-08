@@ -1,11 +1,11 @@
 
-export { middleware as routeFrame }
+export { routeFrame }
 
+import { LogoutFrame } from './Frame.tsx'
 import { Context } from 'Oak'
 import { render } from 'Render'
-import { Frame } from './Frame.tsx'
 
 
-async function middleware ( context : Context ){
-    context.response.body = render(Frame())
+async function routeFrame ( context : Context ){
+    context.response.body = render(LogoutFrame())
 }

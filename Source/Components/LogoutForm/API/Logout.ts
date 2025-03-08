@@ -1,11 +1,11 @@
 
 export type { Credentials }
-export { middleware as routeAPI }
+export { routeAPI }
 
-import { BaseState } from '../../../Routes/State.ts'
+import { startTimer , Cookies , Pages } from 'Misc'
+import { BaseState } from 'Routes/State'
 import { sessions } from 'State'
 import { Context } from 'Oak'
-import { delay } from 'Async'
 
 
 interface Credentials {
@@ -13,23 +13,21 @@ interface Credentials {
 }
 
 
-async function middleware (
+async function routeAPI (
     context : Context<BaseState>
 ){
 
-    const before = Date.now()
+    const { response , cookies , state } = context
 
-    if( context.state.hasSession )
-        sessions.delete(context.state.sessionId)
+    const timer = startTimer(100)
 
-    const after = Date.now()
+    if( state.hasSession )
+        sessions.delete(state.sessionId)
 
-    const remaining = 100 - ( after - before )
-
-    await delay(remaining)
+    timer.waitRemaining()
 
 
-    await context.cookies.delete('Session')
+    await cookies.delete(Cookies.Session)
 
-    context.response.redirect('/')
+    response.redirect(Pages.Home)
 }

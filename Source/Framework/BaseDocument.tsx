@@ -8,8 +8,12 @@ import { Stylesheet } from 'Misc';
 
 
 interface BaseDocumentArgs {
-    children : ComponentChild
+    
+    children ?: ComponentChild
     name : string
+    
+    header ?: ComponentChild
+    body ?: ComponentChild
 }
 
 
@@ -17,7 +21,7 @@ function BaseDocument (
     args : BaseDocumentArgs 
 ){
 
-    const { children , name } = args
+    const { children , header , body , name } = args
 
     return (
         <html>
@@ -28,9 +32,12 @@ function BaseDocument (
                 <Stylesheet path = 'Reset' />
                 <Stylesheet path = { name } />
 
+                { header }
+
             </head>
             <body>
                 { children }
+                { body }
             </body>
         </html>
     )

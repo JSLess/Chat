@@ -1,8 +1,5 @@
 
-export {
-    Reference as LogoutForm ,
-    router as logout_form_router
-}
+export { logout_form_router , LogoutForm }
 
 import { initState , determineCookies , determineSession } from '../../Routes/mod.ts'
 import { IFrameReference , routeStyle } from 'Framework'
@@ -18,5 +15,9 @@ router.post('/API/LogoutForm',initState,determineSession,determineCookies,onlyWi
 router.get('/Frame/LogoutForm',onlyFrames,initState,determineSession,determineCookies,onlyWithCookies,routeFrame)
 router.get('/Asset/Styles/LogoutForm.css',... routeStyle({ meta : import.meta , file : 'Style.css' }))
 
+const logout_form_router = router
 
-const Reference = IFrameReference({ name : 'LogoutForm' })
+
+const LogoutForm = IFrameReference({ 
+    name : 'LogoutForm' 
+})
