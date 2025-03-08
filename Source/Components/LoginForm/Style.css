@@ -1,19 +1,21 @@
 
 :root {
-    --background : #1c1817 ;
-    --secondary : #1a2c2d ;
-    --primary : #5e6d6e ;
-    --accent : #bf3831 ;
-    --text : #f5f9f9 ;
-    --positive : green ;
+    --Background : #1c1817 ;
+    --Secondary : #1a2c2d ;
+    --Positive : green ;
+    --Primary : #5e6d6e ;
+    --Accent : #bf3831 ;
+    --Text : #f5f9f9 ;
 }
 
 
 * {
+    
+    box-sizing : border-box ;
+
     font-family : monospace ;
     font-size : 18px ;
-    color : var( --text ) ;
-    box-sizing: border-box;
+    color : var( --Text ) ;
 }
 
 html {
@@ -30,9 +32,12 @@ body {
 
 
 form {
+    
     position : relative ;
+
+    justify-content : center ;
     display : flex ;
-    justify-content: center;
+    
     margin-top : 0.3em ;
 }
 
@@ -44,12 +49,12 @@ form > input {
     padding-top : 16px ;
     background : transparent ;
     outline : none ;
-    color : var( --text ) ;
+    color : var( --Text ) ;
     font-size : 1em ;
     transition : 0.24s ;
     letter-spacing: 1px;
     text-align: center;
-    border : 1px solid var( --primary ) ;
+    border : 1px solid var( --Primary ) ;
     border-radius : 5px ;
 }
 
@@ -59,18 +64,18 @@ form > input[ type = password ]:is( :valid , :focus-within ){
 
 input[ type = password ]:not(:placeholder-shown):invalid ~ label ,
 input[ type = password ]:not(:placeholder-shown):invalid {
-    border-color : var( --accent ) ;
+    border-color : var( --Accent ) ;
 }
 
 input[ type = password ]:valid ~ label ,
 input[ type = password ]:valid {
-        border-color : var( --positive ) ;
+        border-color : var( --Positive ) ;
 }
 
 form > label {
     position : absolute ;
     pointer-events : none ;
-    color : var( --text ) ;
+    color : var( --Text ) ;
     font-size : 0.6em ;
     border-radius : 2px ;
     letter-spacing : 0.2em ;
@@ -95,18 +100,18 @@ input[ type = submit ]{
     padding: 10px;
     cursor: pointer;
     transition : 0.25s ;
-    color : var( --primary ) ;
+    color : var( --Primary ) ;
     font-weight : bold ;
 }
 
 input[ type = submit ]:focus-within {
-    border-color : var( --accent ) ;
-    color : var( --accent ) ;
+    border-color : var( --Accent ) ;
+    color : var( --Accent ) ;
 }
 
 input[ type = submit ]:hover {
-    border-color : var( --primary ) ;
-    background : var(--primary) ;
+    border-color : var( --Primary ) ;
+    background : var(--Primary) ;
     color : white ;
 }
 

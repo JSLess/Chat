@@ -1,10 +1,7 @@
 
-export {
-    Reference as LoginForm ,
-    router as login_form_router
-}
+export { login_form_router , LoginForm }
 
-import { initState , determineCookies , determineSession } from '../../Routes/mod.ts'
+import { initState , determineCookies , determineSession } from 'Routes'
 import { IFrameReference , routeStyle } from 'Framework'
 import { validateCredentials } from './API/Validate.tsx'
 import { onlyWithCookies } from 'Misc/Routes'
@@ -19,5 +16,9 @@ router.post('/API/LoginForm',initState,determineSession,determineCookies,onlyWit
 router.get('/Frame/LoginForm',onlyFrames,initState,determineSession,determineCookies,onlyWithCookies,routeFrame)
 router.get('/Asset/Styles/LoginForm.css',... routeStyle({ meta : import.meta , file : 'Style.css' }))
 
+const login_form_router = router
 
-const Reference = IFrameReference({ name : 'LoginForm' })
+
+const LoginForm = IFrameReference({ 
+    name : 'LoginForm' 
+})

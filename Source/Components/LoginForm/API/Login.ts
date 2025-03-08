@@ -1,47 +1,50 @@
 
 export type { Credentials }
-export { middleware as routeAPI }
+export { routeAPI }
 
+import { in20Minutes , Cookies , Pages } from 'Misc'
 import { deleteCookie , setCookie } from 'HTTP'
 import { userIdByAccount } from 'Database'
-import { sessions } from 'State'
-import { Context, Middleware, RouterMiddleware } from 'Oak'
-import { Session } from "../../../Misc/Types.ts";
+import { Session } from 'Misc/Session'
+import { Context } from 'Oak'
 
 
 interface Credentials {
     accountId : string
 }
 
+interface Error {
+    type : string
+}
 
-async function middleware (
+
+async function routeAPI (
     context : Context<Credentials>
 ){
 
-    const { accountId } = context.state
+    const { response , request , cookies , state } = context
+
+    const { accountId } = state
 
     const id = BigInt(accountId)
 
     const userId = await userIdByAccount(id)
 
-    console.log('AccountId',accountId,id)
+    console.debug('AccountId',accountId,id)
 
     if( ! userId.value ){
 
-        context.response.headers.set('Cache-Control','no-cache="Set-Cookie"')
+        response.headers.set('Cache-Control','no-cache="Set-Cookie"')
 
-        deleteCookie(context.response.headers,'Session',{
+        deleteCookie(response.headers,Cookies.Session,{
             path : '/'
         })
 
-        interface Error {
-            type : string
-        }
-
+        
         let errors : Array<Error>
 
         try {
-            errors = JSON.parse(atob(context.request.headers.get('Errors') ?? '') ?? '[]')
+            errors = JSON.parse(atob(request.headers.get('Errors') ?? '') ?? '[]')
         } catch {
             errors = []
         }
@@ -50,48 +53,38 @@ async function middleware (
             type : 'Invalid AccountId'
         })
 
-        setCookie(context.response.headers,{
-            name : 'Errors' ,
-            value : btoa(JSON.stringify(errors)) ,
-            path : '/' ,
-            httpOnly : true ,
-            secure : false ,
+        setCookie(response.headers,{
             sameSite : 'Lax' ,
-            expires : new Date(Date.now() + 1000 * 60 * 20)
+            httpOnly : true ,
+            expires : in20Minutes() ,
+            secure : false ,
+            value : btoa(JSON.stringify(errors)) ,
+            name : Cookies.Errors ,
+            path : '/' ,
         })
 
-
-
-        context.response.redirect('/')
+        response.redirect(Pages.Home)
 
         return
     }
 
-    const sessionId = crypto.randomUUID()
+    const session = new Session(userId.value)
 
-    const session = {
-        sessionIds : [] ,
-        contexts : {} ,
-        frames : {}
-    } as Session
+    console.log('AccountId',session,accountId)
 
 
-    sessions.set(sessionId,session)
+    response.headers.set(
+        'Cache-Control' , 
+        'no-cache="Set-Cookie"'
+    )
 
-    session.userId = userId.value
-
-    console.log('AccountId',sessionId,session,accountId)
-
-
-    context.response.headers.set('Cache-Control','no-cache="Set-Cookie"')
-
-    await context.cookies.set('Session',sessionId,{
-        httpOnly : true ,
-        secure : false ,
+    await cookies.set(Cookies.Session,session.id,{
         sameSite : 'lax' ,
-        path : '/' ,
-        expires : new Date(Date.now() + 1000 * 60 * 20)
+        httpOnly : true ,
+        expires : in20Minutes() ,
+        secure : false ,
+        path : '/'
     })
 
-    context.response.redirect('/')
+    response.redirect(Pages.Home)
 }

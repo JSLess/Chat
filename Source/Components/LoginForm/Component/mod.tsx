@@ -1,6 +1,10 @@
 
-export { Component as Login }
+export { Login }
 
+
+interface LoginArgs {
+    notices : Array<Notice>
+}
 
 interface Notice {
     description : string
@@ -8,18 +12,15 @@ interface Notice {
 }
 
 
-interface Props {
-    notices : Array<Notice>
-}
-
-
-function Component ( props : Props ){
+function Login ( 
+    args : LoginArgs 
+){
 
     return (
 
         <div>
 
-            { props.notices.map(( notice ) => (
+            { args.notices.map(( notice ) => (
 
                 <div>
 
@@ -39,16 +40,19 @@ function Component ( props : Props ){
             >
 
                 <input
+
+                    minlength = { 16 }
+                    maxlength = { 16 }
+                    size = { 19 }
+                    
                     autocomplete = 'current-password'
                     placeholder = '0000 0000 0000 0000'
                     inputmode = 'numeric'
-                    minlength = { 16 }
-                    maxlength = { 16 }
-                    required = { true }
                     pattern = '\d{16}'
                     type = 'password'
                     name = 'Account'
-                    size = { 19 }
+
+                    required
                 />
 
                 <label> Account Id </label>

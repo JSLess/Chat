@@ -1,5 +1,5 @@
 
-export { middleware as validateCredentials }
+export { validateCredentials }
 
 import { deleteCookie , setCookie } from 'HTTP'
 import { Context , Next } from 'Oak'
@@ -7,7 +7,7 @@ import { Credentials } from './Login.ts'
 import { BaseState } from '../../../Routes/State.ts'
 
 
-async function middleware (
+async function validateCredentials (
     context : Context<BaseState & Credentials> ,
     next : Next
 ){

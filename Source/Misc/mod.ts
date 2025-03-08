@@ -25,7 +25,8 @@ const Pages = {
 export { Cookies }
 
 const Cookies = {
-    Session : 'Session'
+    Session : 'Session' ,
+    Errors : 'Errors'
 }
 
 
