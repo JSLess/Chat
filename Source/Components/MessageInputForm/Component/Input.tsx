@@ -1,39 +1,43 @@
 
-export { Component as Input }
+export { InputFrame }
 
-import { BaseDocument } from '../../../Framework/BaseDocument.tsx'
+import { BaseDocument } from 'Framework'
+import { apiUrl } from 'Misc'
 
 
-function Component (){
+function InputFrame (){
 
     return (
 
         <BaseDocument
             name = 'MessageInputForm'
-        >
+            
+            body = {
+                
+                <form
+                    encType = 'multipart/form-data'
+                    action = { apiUrl('MessageInputForm') }
+                    target = '_self'
+                    method = 'post'
+                    id = 'Input'
+                >
 
-            <form
-                encType = 'multipart/form-data'
-                action = '/API/MessageInputForm'
-                target = '_self'
-                method = 'post'
-                id = 'Input'
-            >
+                    <input
+                        
+                        maxLength = { 500 }
+                        minLength = { 1 }
 
-                <input
-                    placeholder = 'Message'
-                    spellCheck = { true }
-                    autofocus = { true }
-                    maxLength = { 500 }
-                    minLength = { 1 }
-                    required = { true }
-                    name = 'message'
-                    type = 'text'
-                />
+                        placeholder = 'Message'
+                        name = 'message'
+                        type = 'text'
 
-            </form>
+                        spellCheck
+                        autofocus
+                        required
+                    />
 
-        </BaseDocument>
-
+                </form>
+            }
+        />
     )
 }

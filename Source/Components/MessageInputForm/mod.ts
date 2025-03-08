@@ -1,10 +1,7 @@
 
-export {
-    Reference as MessageInputForm ,
-    router as message_input_form_router
-}
+export { message_input_form_router , MessageInputForm }
 
-import { initState , determineCookies , determineSession } from '../../Routes/mod.ts'
+import { initState , determineCookies , determineSession } from 'Routes'
 import { onlyWithCookies , onlySessions } from 'Misc/Routes'
 import { IFrameReference , routeStyle } from 'Framework'
 import { onlyAuthenticated } from '../../Routes/Misc/OnlyAuthenticated.ts'
@@ -19,5 +16,9 @@ router.post('/API/MessageInputForm',initState,determineSession,determineCookies,
 router.get('/Frame/MessageInputForm',onlyFrames,initState,determineSession,determineCookies,onlyWithCookies,routeFrame)
 router.get('/Asset/Styles/MessageInputForm.css',... routeStyle({ meta : import.meta , file : 'Style.css' }))
 
+const message_input_form_router = router
 
-const Reference = IFrameReference({ name : 'MessageInputForm' })
+
+const MessageInputForm = IFrameReference({ 
+    name : 'MessageInputForm' 
+})

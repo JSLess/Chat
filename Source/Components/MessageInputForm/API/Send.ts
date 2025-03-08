@@ -1,42 +1,45 @@
 
-export { middleware as routeSend }
+export { routeSend }
 
-import { BaseState, WithSession } from '../../../Routes/State.ts'
-import { messages , sessions } from 'State'
+import { BaseState, WithSession } from 'Routes'
+import { newMessage, sessions } from 'State'
 import { render , redraw } from 'Render'
+import { InputFrame } from '../Component/Input.tsx'
 import { Context } from 'Oak'
-import { Input } from '../Component/Input.tsx'
+import { Status } from 'Misc'
 
 
 const Message_Maximum_Length = 500
 
 
-async function middleware
+async function routeSend
 < State extends BaseState > (
     context : Context<State>
 ){
+
+    const { response } = context
 
     const state = context.state as WithSession
 
     const form = await context.request.body.formData()
 
-    const message = form.get('message')?.toString()
+    const content = form.get('message')?.toString()
 
-    if( ! message ){
+    if( ! content ){
 
-        context.response.status = 400
-        context.response.body = JSON
+        response.status = Status.NotAcceptable
+        response.body = JSON
             .stringify({
-                problem : `The message field is missing`
+                problem : `No message has been given.`
             })
 
         return
     }
 
-    if( message.length > Message_Maximum_Length ){
+    if( content.length > Message_Maximum_Length ){
 
-        context.response.status = 400
-        context.response.body = JSON
+        response.status = Status.NotAcceptable
+        response.body = JSON
             .stringify({
                 problem : `Messages cannot be longer than ${ Message_Maximum_Length } characters`
             })
@@ -49,21 +52,12 @@ async function middleware
 
     const userId = session.userId!
 
+    const message = newMessage(userId,content)
 
-    const messageId = crypto
-        .randomUUID()
 
-    messages.set(messageId,{
-        messageId : messageId ,
-        userId : userId ,
-        time : new Date ,
-        message : message
-    })
+    session.selectedMessage ??= message.messageId
 
-    session.selectedMessage ??= messageId
-
-    context.response.body = render(Input())
-
+    response.body = render(InputFrame())
 
     redraw()
 }

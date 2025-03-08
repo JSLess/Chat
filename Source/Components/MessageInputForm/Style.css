@@ -1,18 +1,20 @@
 
 :root {
-    --background : #1c1817 ;
-    --secondary : #1a2c2d ;
-    --primary : #5e6d6e ;
-    --accent : #bf3831 ;
-    --text : #f5f9f9 ;
+    --Background : #1c1817 ;
+    --Secondary : #1a2c2d ;
+    --Primary : #5e6d6e ;
+    --Accent : #bf3831 ;
+    --Text : #f5f9f9 ;
 }
 
 
 * {
+    
+    box-sizing : border-box ;
+
     font-family : monospace ;
     font-size : 18px ;
-    color : var( --text ) ;
-    box-sizing : border-box ;
+    color : var( --Text ) ;
 }
 
 body {
@@ -22,9 +24,9 @@ body {
 
 #Input {
 
-    height : 100vh ;
+    height : 100dvh ;
 
-    background : var( --secondary ) ;
+    background : var( --Secondary ) ;
 
     border-radius : 8px ;
 
@@ -38,16 +40,19 @@ body {
 }
 
 #Input [ name = message ]{
+    
     background : transparent ;
-    border : none ;
-    color : var( --text ) ;
-    font-size : 20px ;
-    padding : 0.25rem 0.25rem ;
     outline : none ;
+    border : none ;
     resize : none ;
+    
+    font-size : 20px ;
+    color : var( --Text ) ;
+    
+    padding : 0.25rem 0.25rem ;
     height : 100% ;
 }
 
 #Input [ name = message ]::placeholder {
-    color : var( --primary ) ;
+    color : var( --Primary ) ;
 }

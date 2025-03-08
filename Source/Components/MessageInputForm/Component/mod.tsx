@@ -1,13 +1,13 @@
 
-export { middleware as routeFrame }
+export { routeFrame }
 
+import { InputFrame } from './Input.tsx'
 import { Context } from 'Oak'
 import { render } from 'Render'
-import { Input } from './Input.tsx'
 
 
-async function middleware (
+async function routeFrame (
     context : Context
 ){
-    context.response.body = render(Input())
+    context.response.body = render(InputFrame())
 }
