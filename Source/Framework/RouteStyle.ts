@@ -1,9 +1,8 @@
 
 export { routeStyle }
 
-import { onlySameSite } from '../Routes/Asset/SameSite.ts';
-import { Context } from 'Oak';
-
+import { onlySameSite } from '../Routes/Asset/SameSite.ts'
+import { Context } from 'Oak'
 
 
 interface Props {
@@ -12,7 +11,9 @@ interface Props {
 }
 
 
-function routeStyle ( props : Props ){
+function routeStyle ( 
+    props : Props 
+){
 
     return [ onlySameSite , async ( context : Context ) => {
 

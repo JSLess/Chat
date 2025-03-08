@@ -7,7 +7,7 @@ import { delay } from 'Async'
 import { ulid } from 'ULID'
 
 
-function bufferToBigInt (
+function toBigInt (
     buffer : Uint8Array
 ){
 
@@ -20,7 +20,7 @@ function bufferToBigInt (
 }
 
 
-function clampLength (
+function clamp (
     number : bigint
 ){
     const clamped = number
@@ -37,7 +37,7 @@ function randomDigits (){
 
     crypto.getRandomValues(buffer)
 
-    return clampLength(bufferToBigInt(buffer))
+    return clamp(toBigInt(buffer))
 }
 
 

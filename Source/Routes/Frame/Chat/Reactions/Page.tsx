@@ -1,7 +1,7 @@
-import { Groups } from "../../../../Reactions/Groups.ts";
 
 export { Component as Page }
 
+import { Groups } from '../../../../Reactions/Groups.ts'
 
 
 function Component (){

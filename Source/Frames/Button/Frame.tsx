@@ -6,7 +6,7 @@ import { FrameContext } from 'Framework'
 import { encodeBase64 } from 'Encoding'
 import { Isolate } from '../../Wrapped/Isolate.tsx'
 import { Session } from '../../Misc/Types.ts'
-import { Content } from './Content.tsx';
+import { Content } from './Content.tsx'
 
 
 interface Args {

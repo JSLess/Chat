@@ -2,11 +2,10 @@
 
 export { middleware as handleSparks }
 
-import { messages , reactions, sessions } from 'State'
+import { messages , reactions } from 'State'
+import { WithSession } from '../../State.ts'
 import { Context } from 'Oak'
 import { redraw } from 'Render'
-import { WithSession } from "../../State.ts";
-
 
 
 async function middleware (

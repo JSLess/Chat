@@ -2,7 +2,6 @@
 export { sparkTo }
 
 
-
 function sparkTo (){
     return `/API/Spark`
 }

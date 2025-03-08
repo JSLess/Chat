@@ -4,7 +4,8 @@ export { reactions , messages , database , sessions }
 import type { Message , Session , Reaction } from './Types.ts'
 
 
-const database = await Deno.openKv('./Database/Storage.db');
+const database = await Deno
+    .openKv('./Database/Storage.db')
 
 
 const reactions = new Map<string,Array<Reaction>>

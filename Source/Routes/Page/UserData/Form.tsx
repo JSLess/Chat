@@ -6,7 +6,9 @@ import { Context } from 'Oak'
 import { JSX } from 'preact'
 
 
-async function toArray < Type > ( iterable : AsyncIterable<Type> ){
+async function toArray < Type > ( 
+    iterable : AsyncIterable<Type> 
+){
 
     const array = new Array<Type>
 
@@ -16,7 +18,9 @@ async function toArray < Type > ( iterable : AsyncIterable<Type> ){
     return array
 }
 
-async function Route ( context : Context ){
+async function Route ( 
+    context : Context 
+){
 
     const entries = context.cookies.entries()
 

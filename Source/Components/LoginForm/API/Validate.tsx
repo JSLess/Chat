@@ -4,7 +4,7 @@ export { middleware as validateCredentials }
 import { deleteCookie , setCookie } from 'HTTP'
 import { Context , Next } from 'Oak'
 import { Credentials } from './Login.ts'
-import { BaseState } from "../../../Routes/State.ts";
+import { BaseState } from '../../../Routes/State.ts'
 
 
 async function middleware (
@@ -41,13 +41,13 @@ async function middleware (
         })
 
         setCookie(context.response.headers,{
-            name : 'Errors' ,
-            value : btoa(JSON.stringify(errors)) ,
-            path : '/' ,
-            httpOnly : true ,
-            secure : false ,
             sameSite : 'Lax' ,
-            expires : new Date(Date.now() + 1000 * 60 * 20)
+            httpOnly : true ,
+            expires : new Date(Date.now() + 1000 * 60 * 20) ,
+            secure : false ,
+            value : btoa(JSON.stringify(errors)) ,
+            name : 'Errors' ,
+            path : '/'
         })
 
         return

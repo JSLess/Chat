@@ -5,7 +5,6 @@ import { render } from 'Preact/Render'
 import { VNode } from 'preact'
 
 
-
 interface Events {
     'close' : CustomEvent
 }
@@ -30,8 +29,6 @@ const TypedTarget = EventTarget as {
     prototype : Target
     new () : Target
 }
-
-
 
 
 class AsyncResponse

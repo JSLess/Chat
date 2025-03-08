@@ -27,7 +27,7 @@ type Group = Omit<Manifest,'Icon'> & {
     Icon : Icon[]
 }
 
-type Icon = Manifest['Icon'][number] & {
+type Icon = Manifest[ 'Icon' ][ number ] & {
     id : string
 }
 

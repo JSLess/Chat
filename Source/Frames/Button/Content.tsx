@@ -4,7 +4,8 @@ export { Content }
 import { ContentContext , Parameters } from 'Framework'
 
 
-const style = await Deno.readTextFile(`./Source/Static/Styles/MinimalReset.css`)
+const style = await Deno
+    .readTextFile(`./Source/Static/Styles/MinimalReset.css`)
 
 
 function Content (

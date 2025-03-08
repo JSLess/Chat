@@ -1,9 +1,9 @@
 
 export { handle as handlePing }
 
-import { Context, ServerSentEvent } from 'Oak';
-import { WithSession } from 'Routes';
-import { AsyncResponse } from 'Misc/Async';
+import { AsyncResponse } from 'Misc/Async'
+import { WithSession } from 'Routes'
+import { Context } from 'Oak'
 
 
 async function handle (

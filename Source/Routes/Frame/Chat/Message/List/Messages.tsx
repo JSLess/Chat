@@ -12,7 +12,9 @@ interface Props {
 }
 
 
-async function Messages ( props : Props ){
+async function Messages ( 
+    props : Props 
+){
 
     const { messages , session } = props
 

@@ -1,8 +1,13 @@
 
-export type { WithoutSession , WithSession , SessionState , BaseState , CookieState ,
+export type { 
     DisabledCookies ,
     EnabledCookies ,
-    UnknownCookies
+    WithoutSession , 
+    UnknownCookies ,
+    SessionState , 
+    WithSession , 
+    CookieState ,
+    BaseState
 }
 
 import { Session } from '../Misc/Types.ts'

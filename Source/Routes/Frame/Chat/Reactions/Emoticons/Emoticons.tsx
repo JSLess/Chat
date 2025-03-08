@@ -14,8 +14,6 @@ function Component ( props : Props ){
 
     const { groupId } = props
 
-    // console.log('Emoticons',groupId,Groups)
-
     const group = Groups
         .find(( group ) => group.id === groupId )
 

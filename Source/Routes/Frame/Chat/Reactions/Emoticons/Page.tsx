@@ -5,7 +5,9 @@ import { Emoticons } from './Emoticons.tsx'
 import { Context } from 'Oak'
 
 
-function Component ( context : Context ){
+function Component ( 
+    context : Context 
+){
 
     const search = context.request.url.searchParams
 

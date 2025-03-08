@@ -26,9 +26,9 @@ async function Component ( props : Props ){
             />
 
             <label
-                for = { 'AccountId' }
-                style = {{ color : 'transparent' }}
                 children = { String(user.value.accountId) }
+                style = {{ color : 'transparent' }}
+                for = { 'AccountId' }
             />
 
         </div>

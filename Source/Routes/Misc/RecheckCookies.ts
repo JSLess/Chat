@@ -14,17 +14,18 @@ function middleware (
     if( context.state.hasCookies === 'Unknown' ){
 
         setCookie(context.response.headers,{
-            name : 'CheckCookie' ,
-            value : 'Dummy' ,
-            path : '/' ,
-            httpOnly : true ,
-            secure : false ,
             sameSite : 'Lax' ,
-            expires : new Date(Date.now() + 1000 * 10)
+            httpOnly : true ,
+            expires : new Date(Date.now() + 1000 * 10) ,
+            secure : false ,
+            value : 'Dummy' ,
+            name : 'CheckCookie' ,
+            path : '/'
         })
 
         const url = context.request.url
         url.searchParams.set('CheckCookie','')
+        
         context.response.redirect(url)
 
         return
