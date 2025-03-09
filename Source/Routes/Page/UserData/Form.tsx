@@ -1,12 +1,13 @@
 
-export { Route as UserDataRoute }
+export { UserDataRoute }
 
+import { Stylesheet } from 'Misc'
 import { UTF8Meta } from 'UI/Parts'
 import { Context } from 'Oak'
 import { JSX } from 'preact'
 
 
-async function toArray < Type > ( 
+async function toArray <Type> ( 
     iterable : AsyncIterable<Type> 
 ){
 
@@ -18,7 +19,8 @@ async function toArray < Type > (
     return array
 }
 
-async function Route ( 
+
+async function UserDataRoute ( 
     context : Context 
 ){
 
@@ -66,7 +68,7 @@ async function Route (
 
                     <h2> Other Cookies </h2>
 
-                    <ul children = { other } />
+                    <ul>{ other }</ul>
 
                 </section>
 
@@ -80,15 +82,14 @@ async function Route (
 
                 <UTF8Meta />
 
-                <link
-                    href = '/Asset/Styles/UserData.css'
-                    rel = 'stylesheet'
-                />
+                <Stylesheet path = 'UserData' />
 
             </head>
             <body>
 
-                <h1 style = 'margin-bottom:0rem' > Cookies </h1>
+                <h1 style = 'margin-bottom:0rem' > 
+                    Cookies 
+                </h1>
 
                 <p> Data that is temporarily saved in your browser. </p>
 

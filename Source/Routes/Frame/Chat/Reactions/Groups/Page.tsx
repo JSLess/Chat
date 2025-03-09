@@ -1,10 +1,11 @@
 
-export { Component as Page }
+export { Page }
 
-import { Groups } from "../../../../../Reactions/Groups.ts";
+import { Stylesheet , CSS } from 'Misc'
+import { Groups } from '../../../../../Reactions/Groups.ts'
 
 
-function Component (){
+function Page (){
 
     const style = Groups
         .map(( group ) => `
@@ -22,22 +23,11 @@ function Component (){
     return <>
         <head>
 
-            <link
-                href = '/Asset/Styles/Reset.css'
-                rel = 'stylesheet'
-            />
+            <Stylesheet path = 'Reset' />
+            <Stylesheet path = 'Misc' />
+            <Stylesheet path = 'Reactions/Groups' />
 
-            <link
-                href = '/Asset/Styles/Misc.css'
-                rel = 'stylesheet'
-            />
-
-            <link
-                href = '/Asset/Styles/Reactions/Groups.css'
-                rel = 'stylesheet'
-            />
-
-            <style dangerouslySetInnerHTML = {{ __html : style }} />
+            <CSS content = { style } />
 
         </head>
         <body>
@@ -48,14 +38,6 @@ function Component (){
                 method = 'post'
                 class = 'List'
             >
-
-                {/* <button
-                    data-group = 'Favorites'
-                    children = 'Favorites'
-                    class = 'Group'
-                    name = 'Group'
-                    value = 'Favorites'
-                /> */}
 
                 { Groups.map(( group ) => (
 

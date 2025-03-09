@@ -12,7 +12,7 @@ async function middleware (
     context : Context<BaseState>
 ){
 
-    const { state } = context
+    const { response , state } = context
 
     const children = await Page(context.state)
 
@@ -25,6 +25,6 @@ async function middleware (
         })
 
     } else {
-        context.response.body = render(children)
+        response.body = render(children)
     }
 }

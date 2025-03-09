@@ -21,6 +21,7 @@ interface FrameArgs {
 const Frame = 
     ( { style , slug } : FrameContext ) =>
     ( { icon , uuid } : FrameArgs ) => (
+        
         <div class = 'Button' >
 
             <Icon name = { icon } />

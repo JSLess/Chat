@@ -1,28 +1,18 @@
 
-export { Component as Page }
+export { Page }
 
+import { Stylesheet } from 'Misc';
 import { Groups } from '../../../../Reactions/Groups.ts'
 
 
-function Component (){
+function Page (){
 
     return <>
         <head>
 
-            <link
-                href = '/Asset/Styles/Reset.css'
-                rel = 'stylesheet'
-            />
-
-            <link
-                href = '/Asset/Styles/Misc.css'
-                rel = 'stylesheet'
-            />
-
-            <link
-                href = '/Asset/Styles/Reactions/Window.css'
-                rel = 'stylesheet'
-            />
+            <Stylesheet path = 'Reset' />
+            <Stylesheet path = 'Misc' />
+            <Stylesheet path = 'Reactions/Window' />
 
         </head>
         <body>
