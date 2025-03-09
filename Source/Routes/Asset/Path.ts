@@ -1,13 +1,14 @@
 
-export { middleware as withValidPath }
+export { withValidPath }
 
 import { Context } from 'Oak'
+import { Status } from 'Misc'
 
 
 const Pattern = /^\/Asset\/([-_A-z0-9]+\/)*[-_A-z0-9]+\.[a-z]+$/
 
 
-function middleware (
+function withValidPath (
     context : Context ,
     next : () => Promise<any>
 ){
@@ -18,5 +19,5 @@ function middleware (
     if( Pattern.test(pathname) )
         return next()
 
-    response.status = 403
+    response.status = Status.Forbidden
 }

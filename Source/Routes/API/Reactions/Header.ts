@@ -1,17 +1,20 @@
 
-export { middleware as handleHeader }
+export { handleHeader }
 
-import { WithSession } from '../../State.ts'
+import { WithSession } from 'Routes/State'
 import { Context } from 'Oak'
+import { Status } from 'Misc'
 
 
-
-async function middleware (
+async function handleHeader (
     context : Context<WithSession>
 ){
+
+    const { response , state } = context
+
     console.debug(`Header Action`)
 
-    context.state.session.frames.reactions_window?.refresh()
+    state.session.frames.reactions_window?.refresh()
 
-    context.response.status = 200
+    response.status = Status.OK
 }

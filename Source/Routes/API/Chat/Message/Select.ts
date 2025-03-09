@@ -3,6 +3,7 @@ export { middleware as routeSelectMessage }
 
 import { messages , sessions } from 'State'
 import { Context } from 'Oak'
+import { Status } from 'Misc'
 import { z } from 'Zod'
 
 
@@ -45,5 +46,5 @@ async function middleware (
         session.frames.messages?.write(html)
     }
 
-    context.response.status = 200
+    context.response.status = Status.OK
 }

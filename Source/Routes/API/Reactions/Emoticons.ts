@@ -1,17 +1,17 @@
 
-export { middleware as handleEmoticons }
+export { handleEmoticons }
 
-import { WithSession } from '../../State.ts'
+import { WithSession } from 'Routes/State'
 import { Context } from 'Oak'
+import { Status } from 'Misc'
 
 
-
-async function middleware (
+async function handleEmoticons (
     context : Context<WithSession>
 ){
     console.debug(`Emoticons Action`)
 
 
 
-    context.response.status = 200
+    context.response.status = Status.OK
 }

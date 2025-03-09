@@ -1,26 +1,29 @@
 
 
-export { middleware as handleSparks }
+export { handleSparks }
 
 import { messages , reactions } from 'State'
-import { WithSession } from '../../State.ts'
+import { WithSession } from 'Routes/State'
 import { Context } from 'Oak'
 import { redraw } from 'Render'
+import { Status } from 'Misc'
 
 
-async function middleware (
+async function handleSparks (
     context : Context<WithSession>
 ){
 
-    const { session } = context.state
+    const { response , request , state } = context
 
-    const search = context.request.url.searchParams
+    const { session } = state
+
+    const search = request.url.searchParams
 
     const action = search.get('Action')
     const scope = search.get('Scope')
 
     if( ! action || ! scope ){
-        context.response.status = 400
+        response.status = Status.BadRequest
         return
     }
 
@@ -82,7 +85,8 @@ async function middleware (
 
                             const reacts = reactions.get(message.messageId)!
 
-                            const react = reacts.find(( react ) => react.emoteId === reactionId )
+                            const react = reacts.find(( react ) => 
+                                react.emoteId === reactionId )
 
 
                             if( ! react )
@@ -189,5 +193,5 @@ async function middleware (
         }
     }
 
-    context.response.status = 200
+    response.status = Status.OK
 }

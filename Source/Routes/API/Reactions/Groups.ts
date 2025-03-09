@@ -1,16 +1,18 @@
 
-export { middleware as handleGroups }
+export { handleGroups }
 
 import { WithSession } from '../../State.ts'
 import { Context } from 'Oak'
+import { Status } from 'Misc'
 
 
-
-async function middleware (
+async function handleGroups (
     context : Context<WithSession>
 ){
 
-    const form = await context.request.body.formData()
+    const { response , request , state } = context
+
+    const form = await request.body.formData()
 
     const groupId = form.get('Group')!
 
@@ -19,11 +21,11 @@ async function middleware (
 
     const url = `/Frame/Chat/Reactions/Emoticons?Group=${ groupId }`
 
-    const frame = context.state.session.frames.reactions_emoticons
+    const frame = state.session.frames.reactions_emoticons
 
     frame?.redirect(url)
 
     frame?.close()
 
-    context.response.status = 200
+    response.status = Status.OK
 }

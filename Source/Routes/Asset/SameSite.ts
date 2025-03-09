@@ -1,7 +1,8 @@
 
-export { middleware as onlySameSite }
+export { onlySameSite }
 
 import { Context } from 'Oak'
+import { Status } from 'Misc'
 
 
 const notice = `
@@ -10,16 +11,18 @@ const notice = `
 `
 
 
-function middleware (
+function onlySameSite (
     context : Context ,
     next : () => Promise<any>
 ){
 
-    const referer = context.request.headers.get('referer')
+    const { response , request } = context
+
+    const referer = request.headers.get('referer')
 
     if( ! referer ){
-        context.response.status = 421
-        context.response.body = notice
+        response.status = Status.MisdirectedRequest
+        response.body = notice
         return
     }
 
@@ -28,16 +31,16 @@ function middleware (
         const url = new URL(referer)
 
         if( url.host !== context.request.url.host ){
-            context.response.status = 421
-            context.response.body = notice
+            response.status = Status.MisdirectedRequest
+            response.body = notice
             return
         }
 
         return next()
 
     } catch {
-        context.response.status = 400
-        context.response.body = `Malformed Referer`
+        response.status = Status.BadRequest
+        response.body = `Malformed Referer`
         return
     }
 }

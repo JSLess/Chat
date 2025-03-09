@@ -1,18 +1,18 @@
 
-export type { Args as IsolateArgs }
-export { Component as Isolate }
+export type { IsolateArgs }
+export { Isolate }
 
 import { render } from 'Render'
 import { VNode } from 'preact'
 
 
-type Args =
+type IsolateArgs =
     | { children : VNode }
     | { html : string }
 
 
-function Component (
-    args : Args
+function Isolate (
+    args : IsolateArgs
 ){
 
     const html = ( 'children' in args )

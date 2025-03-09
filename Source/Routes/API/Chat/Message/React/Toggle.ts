@@ -1,9 +1,10 @@
 
-export { middleware as routeReactToggle }
+export { routeReactToggle }
 
 import { messages , reactions , sessions } from 'State'
 import { Context } from 'Oak'
 import { redraw } from 'Render'
+import { Status } from 'Misc'
 import { z } from 'Zod'
 
 
@@ -12,7 +13,7 @@ const ReactToggleForm = z.object({
 })
 
 
-async function middleware (
+async function routeReactToggle (
     context : Context
 ){
 
@@ -26,13 +27,11 @@ async function middleware (
 
     if( ! form.success ){
         console.error(form.error)
-        context.response.status = 400
+        context.response.status = Status.BadRequest
         return
     }
 
     const emoteId = form.data.emote
-
-    console.log('React',emoteId)
 
     const session = sessions.get(context.state.sessionId)!
 
@@ -42,22 +41,25 @@ async function middleware (
 
     if( selectedMessage ){
 
-        const message = messages.get(selectedMessage)
+        const message = messages
+            .get(selectedMessage)
 
         if( message ){
 
             if( ! reactions.has(message.messageId) )
                 reactions.set(message.messageId,[])
 
-            const reacts = reactions.get(message.messageId)!
+            const reacts = reactions
+                .get(message.messageId)!
 
-            const react = reacts.find(( react ) => react.emoteId === emoteId )
+            const react = reacts.find(( react ) => 
+                react.emoteId === emoteId )
 
             if( ! react )
                 reacts.push({
-                    count : 1 ,
-                    emoteId ,
-                    users : new Set([ userId ])
+                    emoteId : emoteId ,
+                    users : new Set([ userId ]) ,
+                    count : 1
                 })
             else {
 
@@ -74,5 +76,5 @@ async function middleware (
         }
     }
 
-    context.response.status = 200
+    context.response.status = Status.OK
 }

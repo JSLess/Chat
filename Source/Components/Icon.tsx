@@ -10,7 +10,7 @@ interface IconArgs {
 }
 
 
-function Icon ( 
+function Icon (
     args : IconArgs 
 ){
 
