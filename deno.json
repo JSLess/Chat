@@ -55,6 +55,7 @@
 
         "Framework" : "./Source/Framework/mod.ts" ,
         "Database" : "./Source/Database/mod.ts" ,
+        "Frames" : "./Source/Frames/mod.ts" ,
         "Render" : "./Source/Misc/Render/mod.ts" ,
         "Routes" : "./Source/Routes/mod.ts" ,
         "Dummy" : "./Source/Misc/Dummy/mod.ts" ,

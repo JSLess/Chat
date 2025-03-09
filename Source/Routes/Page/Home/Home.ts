@@ -1,8 +1,8 @@
 
 export { middleware as routeHome }
 
-import { BaseState, WithSession } from '../../State.ts'
-import { DynamicFrame } from '../../../Framework/DynamicFrame.tsx'
+import { WithSession , BaseState } from 'Routes/State'
+import { DynamicFrame } from 'Framework'
 import { Context } from 'Oak'
 import { render } from 'Render'
 import { Page } from './Page.tsx'

@@ -1,35 +1,40 @@
 
-export type { Props as AccountIdProps }
-export { Component as AccountId }
+export type { AccountIdProps }
+export { AccountId }
 
 import { userById } from 'Database'
 
 
-interface Props {
+interface AccountIdProps {
     userId : string
 }
 
 
-async function Component ( props : Props ){
+async function AccountId ( 
+    args : AccountIdProps 
+){
 
-    const user = await userById(props.userId)
+    const { userId } = args
+
+    const user = await userById(userId)
 
     if( ! user.value )
         return
+
+    const { accountId } = user.value
 
     return (
         <div class = 'AccountId' >
 
             <input
-                id = 'AccountId'
                 type = 'checkbox'
+                id = 'AccountId'
             />
 
             <label
-                children = { String(user.value.accountId) }
                 style = {{ color : 'transparent' }}
-                for = { 'AccountId' }
-            />
+                for = 'AccountId'
+            >{ accountId }</label>
 
         </div>
     )

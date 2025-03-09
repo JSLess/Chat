@@ -1,151 +1,144 @@
 
-export { Component as Page }
+export { Page }
 
 import { RegisterForm , LogoutForm , LoginForm } from 'UI/Parts'
-import { AccountId , UTF8Meta } from 'UI/Parts'
-import { MessageInputForm } from '../../../Components/MessageInputForm/mod.ts'
-import { BaseState } from '../../State.ts'
-import { Button } from '../../../Frames/Button/mod.ts'
-import { CSS } from 'Misc';
+import { MessageInputForm } from 'UI/Parts'
+import { BaseDocument } from 'Framework';
+import { AccountId } from 'UI/Parts'
+import { BaseState } from 'Routes/State'
+import { Button } from 'Frames'
+import { CSS } from 'Misc'
 
 
-type Props = BaseState
+type PageArgs = BaseState
 
 
-async function Component (
-    props : Props
+async function Page (
+    args : PageArgs
 ){
 
-    const { hasSession , hasCookies } = props
+    const { hasSession , hasCookies } = args
 
-    return <>
+    return (
 
-        <html>
-            <head>
+        <BaseDocument
 
-                <title> Chat </title>
+            name = 'Style'
 
-                <UTF8Meta />
+            header = {
+                <title> Chat </title> 
+            }
 
-                <link
-                    href = '/Asset/Styles/Reset.css'
-                    rel = 'stylesheet'
-                />
+            body = {
 
-                <link
-                    href = '/Asset/Styles/Style.css'
-                    rel = 'stylesheet'
-                />
+                <>
+                    <main>
 
-            </head>
-            <body>
+                        <div class = 'Main' >
 
-                <main>
+                            { ( hasSession ) && <>
 
-                    <div class = 'Main' >
+                                <div style = {{
+                                    gridAutoFlow : 'column' ,
+                                    columnGap : '0.5rem' ,
+                                    display : 'grid'
+                                }} >
 
-                        { ( hasSession ) && <>
-
-                            <div style = {{
-                                gridAutoFlow : 'column' ,
-                                columnGap : '0.5rem' ,
-                                display : 'grid'
-                            }} >
-
-                                <Button
-                                    onClick = { ( args ) => console.warn(`Button`,args) }
-                                    icon = 'Reaction'
-                                    uuid = 'Reaction-Button'
-                                />
-
-                                <Button
-                                    onClick = { ( args ) => console.warn(`Button`,args) }
-                                    icon = 'Context'
-                                    uuid = 'Reaction-Button'
-                                />
-
-                            </div>
-
-                        </> }
-
-                        { ( hasCookies === 'Enabled' ) && <>
-
-                            { ( hasSession ) ? <>
-
-                                <div id = 'LoggedIn' >
-
-                                    <LogoutForm
-                                        id = 'Logout'
+                                    <Button
+                                        onClick = { ( args ) => console.warn(`Button`,args) }
+                                        uuid = 'Reaction-Button'
+                                        icon = 'Reaction'
                                     />
 
-                                    { await AccountId({ userId : props.session.userId! }) }
-
-                                </div>
-
-                            </> : <>
-
-                                <div id = 'Auth' >
-
-                                    <RegisterForm
-                                        id = 'Register'
-                                    />
-
-                                    <b> or </b>
-
-                                    <LoginForm
-                                        id = 'Login'
+                                    <Button
+                                        onClick = { ( args ) => console.warn(`Button`,args) }
+                                        uuid = 'Reaction-Button'
+                                        icon = 'Context'
                                     />
 
                                 </div>
 
                             </> }
 
-                        </> }
+                            { ( hasCookies === 'Enabled' ) && <>
+
+                                { ( hasSession ) ? <>
+
+                                    <div id = 'LoggedIn' >
+
+                                        <LogoutForm
+                                            id = 'Logout'
+                                        />
+
+                                        { await AccountId({ userId : args.session.userId! }) }
+
+                                    </div>
+
+                                </> : <>
+
+                                    <div id = 'Auth' >
+
+                                        <RegisterForm
+                                            id = 'Register'
+                                        />
+
+                                        <b> or </b>
+
+                                        <LoginForm
+                                            id = 'Login'
+                                        />
+
+                                    </div>
+
+                                </> }
+
+                            </> }
 
 
-                        { ( hasSession ) && <>
+                            { ( hasSession ) && <>
 
-                            <MessageInputForm
-                                id = 'Input'
-                            />
-
-                            <div id = 'Chatting' >
-
-                                <iframe
-                                    loading = 'lazy'
-                                    src = { `/Frame/Chat/Message/List` }
-                                    id = 'Messages'
+                                <MessageInputForm
+                                    id = 'Input'
                                 />
 
-                                <iframe
-                                    loading = 'lazy'
-                                    src = { `/Frame/Chat/Reactions` }
-                                    id = 'Reactions_Window'
-                                />
+                                <div id = 'Chatting' >
 
-                            </div>
+                                    <iframe
+                                        loading = 'lazy'
+                                        src = { `/Frame/Chat/Message/List` }
+                                        id = 'Messages'
+                                    />
 
-                        </> }
+                                    <iframe
+                                        loading = 'lazy'
+                                        src = { `/Frame/Chat/Reactions` }
+                                        id = 'Reactions_Window'
+                                    />
 
-                    </div>
+                                </div>
 
-                </main>
+                            </> }
 
-                { ( hasSession ) && <>
+                        </div>
 
-                    <div id = 'Overlay' />
+                    </main>
 
-                    <CSS content = { `
-                            
-                        #Overlay:active {
-                            list-style-image : url('${ '/API/Spark' }?${ new URLSearchParams({ Scope : 'General:Overlay' , Action : 'Click' , Time : String(Date.now()) }).toString() }') ;
-                        }
+                    { ( hasSession ) && <>
 
-                    ` } />
+                        <div id = 'Overlay' />
 
-                </> }
+                        <CSS content = { `
+                                
+                            #Overlay:active {
+                                list-style-image : url('${ '/API/Spark' }?${ new URLSearchParams({ Scope : 'General:Overlay' , Action : 'Click' , Time : String(Date.now()) }).toString() }') ;
+                            }
 
-            </body>
-        </html>
-    </>
+                        ` } />
+
+                        </> 
+                    }
+                </>
+            }
+        />
+    )
 }
