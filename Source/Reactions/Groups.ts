@@ -1,5 +1,5 @@
 
-export type { Group , Icon }
+export type { IconType , Group }
 export { Reactions , Groups }
 
 import { parse } from 'TOML'
@@ -24,15 +24,15 @@ type Manifest = typeof Manifest._type
 type Group = Omit<Manifest,'Icon'> & {
     preview : string
     id : string
-    Icon : Icon[]
+    Icon : IconType[]
 }
 
-type Icon = Manifest[ 'Icon' ][ number ] & {
+type IconType = Manifest[ 'Icon' ][ number ] & {
     id : string
 }
 
 
-const Reactions = new Map<string,Icon>
+const Reactions = new Map<string,IconType>
 const Groups = [] as Array<Group>
 
 const root = `${ Deno.cwd() }/Source/Static/Emotes`
@@ -53,7 +53,7 @@ for await ( const folder of folders ){
 
     const config = await Manifest.parseAsync(toml) as Group
 
-    for ( const icon of config.Icon as Icon[] ){
+    for ( const icon of config.Icon as IconType[] ){
         icon.file = join(`Asset`,`Emotes`,folder.name,`Emotes`,icon.file)
         icon.id = crypto.randomUUID()
         Reactions.set(icon.id,icon)

@@ -1,12 +1,12 @@
 
 export { Component as Emote }
 
-import { Icon } from '../../../../../Reactions/Groups.ts'
+import { IconType } from '../../../../../Reactions/Groups.ts'
 
 
 interface Props {
     count : number
-    icon : Icon
+    icon : IconType
 }
 
 

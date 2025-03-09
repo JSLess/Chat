@@ -1,15 +1,15 @@
 
-export { middleware as routeMessages }
+export { routeMessages }
 
 import { DynamicFrame } from 'Framework'
-import { WithSession } from '../../../../State.ts'
+import { WithSession } from 'Routes/State'
 import { Messages } from './Messages.tsx'
 import { sessions } from 'State'
 import { messages } from 'State'
 import { Context } from 'Oak'
 
 
-async function middleware (
+async function routeMessages (
     context : Context<WithSession>
 ){
 
@@ -19,11 +19,13 @@ async function middleware (
     const msgs = [ ... messages.values() ].reverse()
 
     const children = await Messages({
-        messages : msgs , session
+        messages : msgs , 
+        session : session
     })
 
     DynamicFrame({
-        children , context ,
+        children , 
+        context ,
         frameId : 'messages'
     })
 }

@@ -1,17 +1,19 @@
 
-export { middleware as routeUserData }
+export { routeUserData }
 
 import { UserDataRoute } from './Form.tsx'
-import { WithSession } from '../../State.ts'
+import { WithSession } from 'Routes/State'
 import { Context } from 'Oak'
 import { render } from 'Render'
 
 
-async function middleware (
+async function routeUserData (
     context : Context<WithSession>
 ){
 
-    const html = render( await UserDataRoute(context) )
+    const element = await UserDataRoute(context)
+
+    const html = render(element)
 
     context.response.body = html
 }

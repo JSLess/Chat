@@ -1,25 +1,27 @@
 
 export { Component as Message }
 
-import { Message , Session } from '../../../../../Misc/Types.ts'
-import { Icon, Reactions } from '../../../../../Reactions/Groups.ts'
+import { Reactions , IconType } from '../../../../../Reactions/Groups.ts'
+import { Message , Session } from 'Misc/Types'
 import { toAgoString } from 'Misc/Time'
 import { reactions } from 'State'
 import { userById } from 'Database'
 import { Emote } from './Emote.tsx'
+import { Icon } from 'UI/Parts'
+import { CSS } from 'Misc';
 
 
-interface Props {
+interface MessageArgs {
     message : Message ,
     session : Session
 }
 
 
 async function Component (
-    props : Props
+    args : MessageArgs
 ){
 
-    const { message , session } = props
+    const { message , session } = args
 
     const { messageId , time } = message
 
@@ -33,8 +35,11 @@ async function Component (
 
     const elements = ( emotes ?? [] )
         .filter(( reaction ) => reaction.count )
-        .map(( reaction ) => [ Reactions.get(reaction.emoteId) , reaction.count ] as const )
-        .filter(( value ) : value is [ Icon , number ] => !! value[0] )
+        .map(( reaction ) => [ 
+            Reactions.get(reaction.emoteId) , 
+            reaction.count 
+        ] as const )
+        .filter(( value ) : value is [ IconType , number ] => !! value[0] )
         .map(([ reaction , count ]) => (
             <Emote
                 count = { count }
@@ -76,31 +81,30 @@ async function Component (
 
                     <p> { name } : { message.message } </p>
 
-                    <span children = { local } />
+                    <span> { local } </span>
 
                     { ( !! elements.length ) && (
 
-                        <div
-                            children = { elements }
-                            class = 'Emotes'
-                        />
+                        <div class = 'Emotes' >
+                            { elements } 
+                        </div>
 
                     ) }
 
                     <div class = 'Options' >
 
                         <div data-option = 'Context' >
-                            <img src = '/Asset/Icons/Context.webp' />
+                            <Icon name = 'Context' />
                         </div>
 
                         <div data-option = 'React' >
-                            <img src = '/Asset/Icons/Reaction.webp' />
+                            <Icon name = 'Reaction' />
                         </div>
 
                     </div>
 
-                    <style dangerouslySetInnerHTML = {{ __html : `
-
+                    <CSS content = { `
+                    
                         [ data-option = Context ]:active {
                             list-style-image : url('/API/Spark?Scope=Message:Option&Action=Click&Option=Context&Message=${ messageId }&Time=${ Date.now() }') ;
                         }
@@ -108,8 +112,8 @@ async function Component (
                         [ data-option = React ]:active {
                             list-style-image : url('/API/Spark?Scope=Message:Option&Action=Click&Option=React&Message=${ messageId }&Time=${ Date.now() }') ;
                         }
-
-                    ` }} />
+                    
+                    ` } />
 
                 </div>
             </form>

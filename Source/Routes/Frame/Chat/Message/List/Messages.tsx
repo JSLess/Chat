@@ -1,22 +1,24 @@
 
+export type { MessagesArgs }
 export { Messages }
 
 import { Message as MessageComp } from './Message.tsx'
-import { Message , Session } from '../../../../../Misc/Types.ts'
+import { Message , Session } from 'Misc/Types'
 import { BaseDocument } from 'Framework'
+import { CSS } from 'Misc';
 
 
-interface Props {
+interface MessagesArgs {
     messages : Array<Message>
     session : Session
 }
 
 
 async function Messages ( 
-    props : Props 
+    args : MessagesArgs 
 ){
 
-    const { messages , session } = props
+    const { messages , session } = args
 
     const elements = await Promise.all(messages
         .map(( message ) => MessageComp({ message , session })))
@@ -38,17 +40,21 @@ async function Messages (
                 method = 'post'
             >
 
-                <div
-                    children = { elements }
-                    class = 'Messages'
-                />
+                <div class = 'Messages' >
+                    { elements }
+                </div>
 
             </form>
 
             <iframe name = 'void' />
 
-            <style children = { `
-                :root { --Selected_Message : ${ selected } ; color : red ; }
+            <CSS content = { `
+                
+                :root { 
+                    --Selected_Message : ${ selected } ; 
+                    color : red ; 
+                }
+
             ` } />
 
         </BaseDocument>

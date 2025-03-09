@@ -1,10 +1,12 @@
 
 export { Page }
 
-import { RegisterForm , LogoutForm , LoginForm } from 'UI/Parts'
-import { MessageInputForm } from 'UI/Parts'
-import { BaseDocument } from 'Framework';
-import { AccountId } from 'UI/Parts'
+import { 
+    MessageInputForm , RegisterForm , 
+    LogoutForm , LoginForm , AccountId 
+} from 'UI/Parts'
+
+import { BaseDocument } from 'Framework'
 import { BaseState } from 'Routes/State'
 import { Button } from 'Frames'
 import { CSS } from 'Misc'
