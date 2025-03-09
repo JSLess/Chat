@@ -2,7 +2,7 @@
 export { Content }
 
 import { ContentContext , Parameters } from 'Framework'
-import { CSS } from 'Misc';
+import { CSS } from 'Misc'
 
 
 const style = await Deno

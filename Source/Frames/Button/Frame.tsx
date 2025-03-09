@@ -3,47 +3,35 @@ export type { FrameArgs }
 export { Frame }
 
 import { FrameContext } from 'Framework'
-import { encodeBase64 } from 'Encoding'
 import { Isolate } from '../../Wrapped/Isolate.tsx'
 import { Content } from './Content.tsx'
 import { Session } from 'Misc/Types'
+import { Icon } from 'UI/Parts'
 
 
 interface FrameArgs {
 
-    onClick :
-        ( args : { session : Session } ) => void
+    onClick : ( args : { session : Session } ) => void
 
     icon : string
     uuid : string
 }
 
 
-const Frame =
-    ( context : FrameContext ) =>
-    ( args : FrameArgs ) => {
-
-    const { style , slug } = context
-
-    const path = `./Source/Static/Icons/${ args.icon }.webp`
-
-    const buffer = Deno.readFileSync(path)
-
-    const uri = `data:image/webp;base64,${ encodeBase64(buffer) }`
-
-    return (
+const Frame = 
+    ( { style , slug } : FrameContext ) =>
+    ( { icon , uuid } : FrameArgs ) => (
         <div class = 'Button' >
 
-            <img src = { uri } />
+            <Icon name = { icon } />
 
             <Isolate>
                 <Content
                     style = { style }
+                    uuid = { uuid }
                     slug = { slug }
-                    uuid = { args.uuid }
                 />
             </Isolate>
 
         </div>
     )
-}

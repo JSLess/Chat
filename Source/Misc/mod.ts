@@ -55,3 +55,20 @@ function startTimer (
         }
     }
 }
+
+
+export { readIconAsDataURI }
+
+import { encodeBase64 } from 'Encoding'
+
+function readIconAsDataURI (
+    icon : string
+){
+    const path = `./Source/Static/Icons/${ icon }.webp`
+
+    const buffer = Deno.readFileSync(path)
+
+    const uri = `data:image/webp;base64,${ encodeBase64(buffer) }`
+
+    return uri
+}

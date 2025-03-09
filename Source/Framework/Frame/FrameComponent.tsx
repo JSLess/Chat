@@ -51,17 +51,17 @@ function FrameComponent <
 
     frames.set(slug,{
 
-        ref : ( uuid : string ) =>
-            references.get(uuid) ,
-
         component : ( args : { uuid : string } ) =>
-            content({
-                slug , ... args
-            })
+            content({ slug , ... args }),
+
+        ref : ( uuid : string ) =>
+            references.get(uuid)
     })
 
 
-    return ( args : ComponentArgs ) => {
+    return ( 
+        args : ComponentArgs 
+    ) => {
 
         const { uuid } = args
 
