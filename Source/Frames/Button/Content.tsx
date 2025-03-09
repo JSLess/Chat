@@ -2,6 +2,7 @@
 export { Content }
 
 import { ContentContext , Parameters } from 'Framework'
+import { CSS } from 'Misc';
 
 
 const style = await Deno
@@ -15,7 +16,7 @@ function Content (
     const { slug , uuid } = args
 
     const search = new URLSearchParams({
-        [ Parameters.Reference] : uuid ,
+        [ Parameters.Reference ] : uuid ,
         [ Parameters.Event ] : 'Click' ,
         [ Parameters.Frame ] : slug
     })
@@ -29,17 +30,9 @@ function Content (
             name = 'color-scheme'
         />
 
-        <style
-            dangerouslySetInnerHTML = {{
-                __html : style
-            }}
-        />
+        <CSS content = { style } />
 
-        <style
-            dangerouslySetInnerHTML = {{
-                __html : args.style ?? ''
-            }}
-        />
+        { ( args.style ) && <CSS content = { args.style } /> }
 
         <a
             draggable = { false }

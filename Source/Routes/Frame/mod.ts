@@ -7,6 +7,7 @@ import { onlySessions } from 'Misc/Routes'
 import { WithSession } from 'Routes'
 import { Parameters } from '../../Framework/Frame/Parameters.ts'
 import { render } from 'Render'
+import { Status } from 'Misc'
 import { VNode } from 'preact'
 import { chat } from './Chat/mod.ts'
 
@@ -20,51 +21,62 @@ const frames = new Map<string,{
 const router = new Router
 
 router.use('/Chat',onlySessions,chat.routes())
-router.get('/',onlySessions,( context : Context<WithSession> ) => {
 
-    const search = context.request.url.searchParams
+router.get('/',onlySessions,( 
+    context : Context<WithSession> 
+) => {
+
+    const { response , request , state } = context
+
+    const search = request.url.searchParams
+
 
     const type = search.get(Parameters.Frame)
 
     if( ! type ){
         console.warn(`No Type`)
-        context.response.status = 400
+        response.status = Status.BadRequest
         return
     }
 
-    console.debug(`Getting frame`,type)
 
     const frame = frames.get(type)
 
     if( ! frame ){
         console.warn(`No frame slug`)
-        context.response.status = 404
+        response.status = Status.NotFound
         return
     }
 
+    
     const reference = search.get(Parameters.Reference)
 
     if( ! reference ){
         console.warn(`No frame reference`)
-        context.response.status = 400
+        response.status = Status.BadRequest
         return
     }
 
+    
     const referenced = frame.ref(reference)
 
     if( ! referenced ){
         console.warn(`No frame under this reference`)
-        context.response.status = 400
+        response.status = Status.BadRequest
         return
     }
 
+
     const { args , uuid } = referenced
 
-    context.response.body = render(frame.component({ ... args , uuid }))
+    const element = frame.component({ ... args , uuid })
+
+    response.body = render(element)
+
 
     const action = search.get(Parameters.Event)
 
-    const { session } = context.state
+    const { session } = state
 
     if( action === 'Click' )
         args.onClick({ session })

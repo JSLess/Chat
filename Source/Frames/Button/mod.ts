@@ -1,14 +1,14 @@
 
-export type { Args as ButtonArgs }
-export { Component as Button }
+export type { ButtonArgs }
+export { Button }
 
-import { FrameArgs as Args } from './Frame.tsx'
+import { FrameArgs as ButtonArgs } from './Frame.tsx'
 import { FrameComponent } from 'Framework'
 import { Content } from './Content.tsx'
 import { Frame } from './Frame.tsx'
 
 
-const Component = FrameComponent<Args>({
+const Button = FrameComponent<ButtonArgs>({
 
     content : Content ,
     frame : Frame ,

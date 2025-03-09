@@ -1,15 +1,15 @@
 
-export type { Args as FrameArgs }
+export type { FrameArgs }
 export { Frame }
 
 import { FrameContext } from 'Framework'
 import { encodeBase64 } from 'Encoding'
 import { Isolate } from '../../Wrapped/Isolate.tsx'
-import { Session } from '../../Misc/Types.ts'
 import { Content } from './Content.tsx'
+import { Session } from 'Misc/Types'
 
 
-interface Args {
+interface FrameArgs {
 
     onClick :
         ( args : { session : Session } ) => void
@@ -21,7 +21,7 @@ interface Args {
 
 const Frame =
     ( context : FrameContext ) =>
-    ( args : Args ) => {
+    ( args : FrameArgs ) => {
 
     const { style , slug } = context
 

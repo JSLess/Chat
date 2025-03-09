@@ -1,13 +1,12 @@
 
-export type { ContentContext , FrameContext }
-export type { Args as FrameComponentArgs }
+export type { FrameComponentArgs , ContentContext , FrameContext }
 export { FrameComponent }
 
 import { frames } from '../../Routes/Frame/mod.ts'
 import { JSX } from 'preact'
 
 
-interface Args <ComponentArgs> {
+interface FrameComponentArgs <ComponentArgs> {
 
     content :
         ( args : ContentContext ) => JSX.Element
@@ -22,7 +21,6 @@ interface Args <ComponentArgs> {
 
 
 interface FrameContext {
-
     style ?: string
     slug : string
     uuid : string
@@ -42,7 +40,7 @@ interface ContentContext {
 function FrameComponent <
     ComponentArgs extends { uuid : string }
 >(
-    { content , frame , style , slug } : Args<ComponentArgs>
+    { content , frame , style , slug } : FrameComponentArgs<ComponentArgs>
 ){
 
     const references = new Map<string,{
