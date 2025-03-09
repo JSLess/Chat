@@ -31,7 +31,7 @@ function InputFrame (){
                         name = 'message'
                         type = 'text'
 
-                        spellCheck
+                        spellcheck
                         autofocus
                         required
                     />

@@ -1,8 +1,8 @@
 
-export type { Props as FrameProps }
-export { Component as DynamicFrame }
+export type { FrameProps }
+export { DynamicFrame }
 
-import { ComponentChildren, Fragment } from 'preact'
+import { ComponentChildren , h } from 'preact'
 import { AsyncResponse } from 'Misc/Async'
 import { WithSession } from '../Routes/State.ts'
 import { Session } from '../Misc/Types.ts'
@@ -10,7 +10,7 @@ import { Context } from 'Oak'
 import { render } from 'Render'
 
 
-interface Props {
+interface FrameProps {
     children : ComponentChildren
     context : Context<WithSession>
     frameId : keyof Session['frames']
@@ -26,11 +26,11 @@ const Duration_1_Hour = 60 * 60
  *  and sends the rendered items off.
  */
 
-function Component (
-    props : Props
+function DynamicFrame (
+    args : FrameProps
 ){
 
-    const { children , context , frameId } = props
+    const { children , context , frameId } = args
     const { response , state } = context
 
 
@@ -46,7 +46,7 @@ function Component (
     state.session.frames[ frameId ] = frame
 
 
-    const fragment = Fragment({ children })!
+    const fragment = h('html',{ children })
 
     const html = render(fragment)
 

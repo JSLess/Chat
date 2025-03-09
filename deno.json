@@ -22,22 +22,22 @@
 
     "imports" : {
 
-        "Encoding" : "jsr:@std/encoding@0.224.3" ,
-        "Async" : "jsr:@std/async@0.224.1" ,
-        "HTTP" : "jsr:@std/http@0.224.2" ,
-        "Path" : "jsr:@std/path@0.225.1" ,
-        "TOML" : "jsr:@std/toml@0.224.0" ,
-        "ULID" : "jsr:@std/ulid@0.224.1" ,
+        "Encoding" : "jsr:@std/encoding@^1.0.7" ,
+        "Async" : "jsr:@std/async@^1.0.11" ,
+        "HTTP" : "jsr:@std/http@^1.0.13" ,
+        "Path" : "jsr:@std/path@^1.0.8" ,
+        "TOML" : "jsr:@std/toml@^1.0.2" ,
+        "ULID" : "jsr:@std/ulid@^1.0.0" ,
 
-        "Preact/Render": "npm:preact-render-to-string@6.5.3" ,
+        "Preact/Render": "npm:preact-render-to-string@^6.5.13" ,
 
-        "preact/jsx-runtime" : "npm:preact@10.22.0/jsx-runtime" ,
-        "preact" : "npm:preact@10.22.0" ,
+        "preact/jsx-runtime" : "npm:preact@^10.26.4/jsx-runtime" ,
+        "preact" : "npm:preact@^10.26.4" ,
 
-        "Oak" : "jsr:@oak/oak@16.1.0" ,
+        "Oak" : "jsr:@oak/oak@^17.1.4" ,
 
-        "Moment" : "npm:moment@2.30.1" ,
-        "Zod" : "npm:zod@3.23.8" ,
+        "Moment" : "npm:moment@^2.30.1" ,
+        "Zod" : "npm:zod@^3.24.2" ,
 
         "Misc/Session" : "./Source/Misc/Session.ts" ,
         "Misc/Routes" : "./Source/Routes/Misc/mod.ts" ,
@@ -70,7 +70,7 @@
         "lib": [
             "deno.unstable" ,
             "deno.window" ,
-            "es2023" ,
+            "es2024" ,
             "dom"
         ]
     }
