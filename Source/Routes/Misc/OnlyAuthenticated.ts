@@ -1,11 +1,12 @@
 
-export { middleware as onlyAuthenticated }
+export { onlyAuthenticated }
 
-import { BaseState } from '../State.ts'
+import { BaseState } from 'Routes/State'
 import { Context } from 'Oak'
 
 
-async function middleware < State extends BaseState > (
+async function onlyAuthenticated 
+< State extends BaseState > (
     context : Context<State> ,
     next : () => Promise<any>
 ){

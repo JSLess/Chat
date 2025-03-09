@@ -1,17 +1,21 @@
 
 export { onlyWithCookies }
 
-import { CookieState } from '../State.ts'
+import { CookieState } from 'Routes/State'
 import { Context } from 'Oak'
+import { Status } from 'Misc'
 
 
-function onlyWithCookies < State extends CookieState > (
+function onlyWithCookies 
+< State extends CookieState > (
     context : Context<State> ,
     next : () => Promise<any>
 ){
 
-    if( context.state.hasCookies === 'Enabled' )
+    const { response , state } = context
+
+    if( state.hasCookies === 'Enabled' )
         return next()
 
-    context.response.status = 403
+    response.status = Status.Forbidden
 }

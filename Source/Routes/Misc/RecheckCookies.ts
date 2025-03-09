@@ -1,32 +1,35 @@
 
-export { middleware as recheckCookies }
+export { recheckCookies }
 
-import { BaseState } from '../State.ts'
+import { in10Seconds } from 'Misc'
+import { BaseState } from 'Routes/State'
 import { setCookie } from 'HTTP'
 import { Context } from 'Oak'
 
 
-function middleware (
+function recheckCookies (
     context : Context<BaseState> ,
     next : () => Promise<any>
 ){
 
-    if( context.state.hasCookies === 'Unknown' ){
+    const { response , request , state } = context
 
-        setCookie(context.response.headers,{
+    if( state.hasCookies === 'Unknown' ){
+
+        setCookie(response.headers,{
             sameSite : 'Lax' ,
             httpOnly : true ,
-            expires : new Date(Date.now() + 1000 * 10) ,
+            expires : in10Seconds() ,
             secure : false ,
             value : 'Dummy' ,
             name : 'CheckCookie' ,
             path : '/'
         })
 
-        const url = context.request.url
+        const url = request.url
         url.searchParams.set('CheckCookie','')
         
-        context.response.redirect(url)
+        response.redirect(url)
 
         return
     }

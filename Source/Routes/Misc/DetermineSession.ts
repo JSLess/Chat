@@ -1,17 +1,19 @@
 
-export { middleware as determineSession }
+export { determineSession }
 
-import { BaseState } from '../State.ts'
+import { BaseState } from 'Routes/State'
 import { sessions } from 'State'
 import { Context } from 'Oak'
 
 
-async function middleware (
+async function determineSession (
     context : Context<BaseState> ,
     next : () => Promise<any>
 ){
 
-    const sessionId = await context.cookies.get('Session')
+    const { cookies , state } = context
+
+    const sessionId = await cookies.get('Session')
 
     if( ! sessionId )
         return await next()
@@ -30,7 +32,7 @@ async function middleware (
         return await next()
 
     context.state = {
-        ... context.state ,
+        ... state ,
         hasSession : true ,
         sessionId : sessionId ,
         session : session

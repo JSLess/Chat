@@ -1,23 +1,25 @@
 
-export { middleware as determineCookies }
+export { determineCookies }
 
-import { BaseState } from '../State.ts'
+import { BaseState } from 'Routes/State'
 import { Context } from 'Oak'
 
 
-async function middleware (
+async function determineCookies (
     context : Context<BaseState> ,
     next : () => Promise<any>
 ){
 
-    if( context.state.hasSession )
-        context.state.hasCookies = 'Enabled'
+    const { cookies , request , state } = context
 
-    if( context.request.url.searchParams.has('NoCookies') )
-        context.state.hasCookies = 'Disabled'
+    if( state.hasSession )
+        state.hasCookies = 'Enabled'
 
-    if( await context.cookies.size )
-        context.state.hasCookies = 'Enabled'
+    if( request.url.searchParams.has('NoCookies') )
+        state.hasCookies = 'Disabled'
+
+    if( await cookies.size )
+        state.hasCookies = 'Enabled'
 
     return await next()
 }

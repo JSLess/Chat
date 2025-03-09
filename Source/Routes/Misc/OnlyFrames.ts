@@ -1,10 +1,11 @@
 
-export { middleware as onlyFrames }
+export { onlyFrames }
 
 import { Context } from 'Oak'
+import { Pages } from 'Misc'
 
 
-function middleware (
+function onlyFrames (
     context : Context ,
     next : () => Promise<any>
 ){
@@ -21,5 +22,5 @@ function middleware (
     if( request.url.pathname === '/' )
         return
 
-    response.redirect('/')
+    response.redirect(Pages.Home)
 }

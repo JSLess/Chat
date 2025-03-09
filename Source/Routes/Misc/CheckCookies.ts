@@ -1,29 +1,38 @@
 
-export { middleware as checkCookies }
+export { checkCookies }
 
-import { BaseState } from '../State.ts'
+import { BaseState } from 'Routes/State'
 import { Context } from 'Oak'
 
 
-async function middleware (
+async function checkCookies (
     context : Context<BaseState> ,
     next : () => Promise<any>
 ){
+    
+    const { response , request , cookies } = context
 
-    if( context.request.url.searchParams.has('CheckCookie') ){
+    const url = new URL(request.url)
 
-        if( await context.cookies.size ){
-            const url = context.request.url
-            url.searchParams.delete('NoCookie')
-            url.searchParams.delete('CheckCookie')
-            context.response.redirect(url)
+    const search = url.searchParams
+
+    if( search.has('CheckCookie') ){
+
+        if( await cookies.size ){
+            
+            search.delete('NoCookie')
+            search.delete('CheckCookie')
+            
+            response.redirect(url)
+            
             return
         }
 
-        const url = context.request.url
-        url.searchParams.delete('CheckCookie')
-        url.searchParams.set('NoCookie','')
-        context.response.redirect(url)
+        search.delete('CheckCookie')
+        search.set('NoCookie','')
+
+        response.redirect(url)
+        
         return
     }
 

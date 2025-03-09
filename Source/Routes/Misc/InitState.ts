@@ -1,11 +1,11 @@
 
-export { middleware as initState }
+export { initState }
 
-import { BaseState } from '../State.ts'
+import { BaseState } from 'Routes/State'
 import { Context } from 'Oak'
 
 
-function middleware (
+function initState (
     context : Context<BaseState> ,
     next : () => Promise<any>
 ){

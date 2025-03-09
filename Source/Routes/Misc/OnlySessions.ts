@@ -1,17 +1,21 @@
 
 export { onlySessions }
 
-import { SessionState } from '../State.ts'
+import { SessionState } from 'Routes/State'
 import { Context } from 'Oak'
+import { Status } from 'Misc'
 
 
-function onlySessions < State extends SessionState > (
+function onlySessions 
+< State extends SessionState > (
     context : Context<State> ,
     next : () => Promise<any>
 ){
 
-    if( context.state.hasSession )
+    const { response , state } = context
+
+    if( state.hasSession )
         return next()
 
-    context.response.status = 403
+    response.status = Status.Forbidden
 }

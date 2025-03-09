@@ -1,10 +1,11 @@
 
-export { middleware as onlyDocument }
+export { onlyDocument }
 
 import { Context } from 'Oak'
+import { Status } from 'Misc'
 
 
-function middleware (
+function onlyDocument (
     context : Context ,
     next : () => Promise<any>
 ){
@@ -18,5 +19,5 @@ function middleware (
     if( inDocument )
         return next()
 
-    response.status = 500
+    response.status = Status.InternalServerError
 }
