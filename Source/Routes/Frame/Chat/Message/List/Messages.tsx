@@ -5,7 +5,7 @@ export { Messages }
 import { Message as MessageComp } from './Message.tsx'
 import { Message , Session } from 'Misc/Types'
 import { BaseDocument } from 'Framework'
-import { CSS } from 'Misc';
+import { CSS } from 'Misc'
 
 
 interface MessagesArgs {

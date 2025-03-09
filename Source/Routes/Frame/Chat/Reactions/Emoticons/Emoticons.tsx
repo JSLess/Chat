@@ -1,18 +1,21 @@
 
-export type { Props as EmoticonsProps }
-export { Component as Emoticons }
+export type { EmoticonsArgs }
+export { Emoticons }
 
 import { Groups } from '../../../../../Reactions/Groups.ts'
+import { apiUrl, CSS } from 'Misc'
 
 
-interface Props {
+interface EmoticonsArgs {
     groupId : string
 }
 
 
-function Component ( props : Props ){
+function Emoticons ( 
+    args : EmoticonsArgs 
+){
 
-    const { groupId } = props
+    const { groupId } = args
 
     const group = Groups
         .find(( group ) => group.id === groupId )
@@ -21,9 +24,8 @@ function Component ( props : Props ){
         return null
 
     const emoticons = group.Icon.map(( icon ) => (
-        <div
-            data-reaction = { icon.id }
-        >
+        
+        <div data-reaction = { icon.id } >
             <img
                 height = { 32 }
                 width = { 32 }
@@ -35,8 +37,9 @@ function Component ( props : Props ){
     const style = group.Icon.map(( icon ) => `
 
         [ data-reaction = '${ icon.id }' ]:active {
-            list-style-image : url('/API/Spark?Scope=Reactions:Use&Action=Click&Reaction=${ icon.id }&Time=${ Date.now() }') ;
+            list-style-image : url('${ apiUrl(`Spark?Scope=Reactions:Use&Action=Click&Reaction=${ icon.id }&Time=${ Date.now() }`) }') ;
         }
+        
     `).join('')
 
     return <>
@@ -45,6 +48,6 @@ function Component ( props : Props ){
             { emoticons }
         </div>
 
-        <style dangerouslySetInnerHTML = {{ __html : style }} />
+        <CSS content = { style } />
     </>
 }

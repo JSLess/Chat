@@ -1,35 +1,27 @@
 
-export { Component as Page }
+export { Page }
 
+import { Stylesheet } from 'Misc';
 import { Emoticons } from './Emoticons.tsx'
 import { Context } from 'Oak'
 
 
-function Component ( 
+function Page ( 
     context : Context 
 ){
 
-    const search = context.request.url.searchParams
+    const { request } = context
+
+    const search = request.url.searchParams
 
     const groupId = search.get('Group')
 
     return <>
         <head>
 
-            <link
-                href = '/Asset/Styles/Reset.css'
-                rel = 'stylesheet'
-            />
-
-            <link
-                href = '/Asset/Styles/Misc.css'
-                rel = 'stylesheet'
-            />
-
-            <link
-                href = '/Asset/Styles/Reactions/Emoticons.css'
-                rel = 'stylesheet'
-            />
+            <Stylesheet path = 'Reset' />
+            <Stylesheet path = 'Misc' />
+            <Stylesheet path = 'Reactions/Emoticons' />
 
         </head>
         <body>

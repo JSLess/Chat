@@ -3,12 +3,12 @@ export { Component as Message }
 
 import { Reactions , IconType } from '../../../../../Reactions/Groups.ts'
 import { Message , Session } from 'Misc/Types'
+import { apiUrl , CSS } from 'Misc'
 import { toAgoString } from 'Misc/Time'
 import { reactions } from 'State'
 import { userById } from 'Database'
 import { Emote } from './Emote.tsx'
 import { Icon } from 'UI/Parts'
-import { CSS } from 'Misc';
 
 
 interface MessageArgs {
@@ -58,8 +58,8 @@ async function Component (
 
         <input
             value = { message.messageId }
-            type = 'submit'
             name = 'MessageId'
+            type = 'submit'
             id = { `Submit-${ messageId }` }
         />
 
@@ -106,11 +106,11 @@ async function Component (
                     <CSS content = { `
                     
                         [ data-option = Context ]:active {
-                            list-style-image : url('/API/Spark?Scope=Message:Option&Action=Click&Option=Context&Message=${ messageId }&Time=${ Date.now() }') ;
+                            list-style-image : url('${ apiUrl(`Spark?Scope=Message:Option&Action=Click&Option=Context&Message=${ messageId }&Time=${ Date.now() }`) }') ;
                         }
 
                         [ data-option = React ]:active {
-                            list-style-image : url('/API/Spark?Scope=Message:Option&Action=Click&Option=React&Message=${ messageId }&Time=${ Date.now() }') ;
+                            list-style-image : url('${ apiUrl(`Spark?Scope=Message:Option&Action=Click&Option=React&Message=${ messageId }&Time=${ Date.now() }`) }') ;
                         }
                     
                     ` } />

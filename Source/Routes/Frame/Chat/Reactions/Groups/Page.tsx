@@ -48,7 +48,7 @@ function Page (){
                         value = { group.id }
                     >
                         <span />
-                        <span children = { group.name } />
+                        <span>{ group.name }</span>
                     </button>
 
                 )) }

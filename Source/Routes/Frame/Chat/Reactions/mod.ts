@@ -7,7 +7,6 @@ import { Context } from 'Oak'
 import { Page } from './Page.tsx'
 
 
-
 async function middleware (
     context : Context<WithSession>
 ){

@@ -1,25 +1,27 @@
 
-export { Component as Emote }
+export { Emote }
 
 import { IconType } from '../../../../../Reactions/Groups.ts'
 
 
-interface Props {
+interface EmoteArgs {
     count : number
     icon : IconType
 }
 
 
-function Component ( props : Props ){
+function Emote ( 
+    args : EmoteArgs 
+){
 
-    const { count , icon } = props
+    const { count , icon } = args
 
     return (
         <div class = 'Emote' >
 
             <img src = { `/${ icon.file }` } />
 
-            <span children = { count } />
+            <span>{ count }</span>
 
         </div>
     )
