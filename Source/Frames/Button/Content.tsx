@@ -2,7 +2,7 @@
 export { Content }
 
 import { ContentContext , Parameters } from 'Framework'
-import { CSS } from 'Misc'
+import { CSS, Stylesheet } from 'Misc'
 
 
 const style = await Deno
@@ -31,6 +31,8 @@ function Content (
         />
 
         <CSS content = { style } />
+
+        { ( args.sheet ) && <Stylesheet path = { args.sheet } /> }
 
         { ( args.style ) && <CSS content = { args.style } /> }
 

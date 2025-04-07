@@ -6,7 +6,12 @@ import { frames } from '../../Routes/Frame/mod.ts'
 import { JSX } from 'preact'
 
 
-interface FrameComponentArgs <ComponentArgs> {
+type FrameComponentArgs <ComponentArgs> = 
+    & FrameComponentFuncs<ComponentArgs>
+    & FrameComponentVars
+
+
+interface FrameComponentFuncs <ComponentArgs> {
 
     content :
         ( args : ContentContext ) => JSX.Element
@@ -14,13 +19,17 @@ interface FrameComponentArgs <ComponentArgs> {
     frame :
         ( args : FrameContext ) =>
         ( args : { uuid : string } & ComponentArgs ) => JSX.Element
+}
 
+interface FrameComponentVars {
     style ?: string
+    sheet ?: string
     slug : string
 }
 
 
 interface FrameContext {
+    sheet ?: string
     style ?: string
     slug : string
     uuid : string
@@ -28,6 +37,7 @@ interface FrameContext {
 
 interface ContentContext {
     style ?: string
+    sheet ?: string
     slug : string
     uuid : string
 }
@@ -38,13 +48,15 @@ interface ContentContext {
  */
 
 function FrameComponent <
-    ComponentArgs extends { uuid : string }
+    ComponentArgs extends { uuid : string } ,
 >(
-    { content , frame , style , slug } : FrameComponentArgs<ComponentArgs>
+    frameArgs : FrameComponentArgs<ComponentArgs>
 ){
 
+    const { content , frame , style , sheet , slug } = frameArgs
+
     const references = new Map<string,{
-        args : ComponentArgs
+        args : FrameComponentVars & ComponentArgs
         uuid : string
     }>
 
@@ -59,14 +71,17 @@ function FrameComponent <
     })
 
 
+    const vars = { sheet , style , slug }
+
+
     return ( 
         args : ComponentArgs 
     ) => {
 
         const { uuid } = args
 
-        references.set(uuid,{ args , uuid })
+        references.set(uuid,{ args : { ... vars , ... args }  , uuid })
 
-        return frame({ style , slug , uuid })(args)
+        return frame({ style , sheet , slug , uuid })(args)
     }
 }

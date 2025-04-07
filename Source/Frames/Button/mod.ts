@@ -9,26 +9,8 @@ import { Frame } from './Frame.tsx'
 
 
 const Button = FrameComponent<ButtonArgs>({
-
     content : Content ,
     frame : Frame ,
-    slug : 'Button' ,
-
-    style : /* css */ `
-
-        a {
-            border-radius : 4px ;
-            aspect-ratio : 1 ;
-            display : block ;
-            width : 100% ;
-        }
-
-        a:hover {
-            background : #ffffff1f ;
-        }
-
-        a:active {
-            background : #ffffff2f ;
-        }
-    `
+    sheet : 'Button-Link' ,
+    slug : 'Button'
 })

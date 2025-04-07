@@ -1,6 +1,6 @@
 
 
-.Button {
+:host {
 
     display : grid ;
 
@@ -8,10 +8,40 @@
     width : 32px ;
 }
 
-.Button > * {
+:host > * {
 
     grid-area : 1 / 1 ;
 
+    min-height : 0 ;
+    min-width : 0 ;
+
     height : 100% ;
     width : 100% ;
+
+    display : block ;
+}
+
+img {
+    object-position : center ;
+    object-fit : contain ;
+}
+
+iframe { 
+    border : none ;
+}
+
+
+iframe {
+    border-radius : 4px ;
+    aspect-ratio : 1 ;
+    display : block ;
+    width : 100% ;
+}
+
+iframe:hover {
+    background : #ffffff1f ;
+}
+
+iframe:active {
+    background : #ffffff2f ;
 }

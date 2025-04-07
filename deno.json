@@ -31,8 +31,8 @@
 
         "Preact/Render": "npm:preact-render-to-string@^6.5.13" ,
 
-        "preact/jsx-runtime" : "npm:preact@^10.26.4/jsx-runtime" ,
-        "preact" : "npm:preact@^10.26.4" ,
+        "preact/jsx-runtime" : "npm:preact@^10.26.5/jsx-runtime" ,
+        "preact" : "npm:preact@^10.26.5" ,
 
         "Oak" : "jsr:@oak/oak@^17.1.4" ,
 
