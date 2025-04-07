@@ -53,6 +53,29 @@ async function Component (
 
     const number = session.sessionIds.indexOf(messageId)
 
+    const params = new URLSearchParams
+    params.set('Scope','Message:Option')
+    params.set('Action','Click')
+    params.set('Time',Date.now().toString())
+    params.set('Message',messageId)
+    
+    const params_context = new URLSearchParams(params)
+    params_context.set('Option','Context')
+
+    const params_react = new URLSearchParams(params)
+    params_react.set('Option','React')
+
+
+    const css = `
+    
+        [ data-option = Context ]:active {
+            list-style-image : url('${ apiUrl(`Spark?${ params_context.toString() }`) }') ;
+        }
+
+        [ data-option = React ]:active {
+            list-style-image : url('${ apiUrl(`Spark?${ params_react.toString() }`) }']) ;
+        }
+    `
 
     return <>
 
@@ -103,17 +126,7 @@ async function Component (
 
                     </div>
 
-                    <CSS content = { `
-                    
-                        [ data-option = Context ]:active {
-                            list-style-image : url('${ apiUrl(`Spark?Scope=Message:Option&Action=Click&Option=Context&Message=${ messageId }&Time=${ Date.now() }`) }') ;
-                        }
-
-                        [ data-option = React ]:active {
-                            list-style-image : url('${ apiUrl(`Spark?Scope=Message:Option&Action=Click&Option=React&Message=${ messageId }&Time=${ Date.now() }`) }') ;
-                        }
-                    
-                    ` } />
+                    <CSS content = { css } />
 
                 </div>
             </form>
