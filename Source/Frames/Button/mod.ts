@@ -14,7 +14,7 @@ const Button = FrameComponent<ButtonArgs>({
     frame : Frame ,
     slug : 'Button' ,
 
-    style : /* CSS */ `
+    style : /* css */ `
 
         a {
             border-radius : 4px ;

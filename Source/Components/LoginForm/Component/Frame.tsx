@@ -2,7 +2,7 @@
 export { routeFrame }
 
 import { deleteCookie , setCookie } from 'HTTP'
-import { in20Minutes , Cookies } from 'Misc'
+import { in20Minutes , Cookies, Stylesheet } from 'Misc'
 import { BaseDocument } from 'Framework'
 import { Context } from 'Oak'
 import { render } from 'Render'
@@ -68,8 +68,12 @@ async function routeFrame (
     })
 
 
-    response.body = render(BaseDocument({
-        children : Login({ notices }) ,
-        name : 'LoginForm'
-    }))
+    const document = BaseDocument({
+        
+        header : Stylesheet({ path : 'LoginForm' }) ,
+
+        body : Login({ notices })
+    })
+
+    response.body = render(document)
 }

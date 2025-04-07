@@ -2,6 +2,7 @@
 export { Emote }
 
 import { IconType } from '../../../../../Reactions/Groups.ts'
+import { Server } from 'Config'
 
 
 interface EmoteArgs {
@@ -19,7 +20,7 @@ function Emote (
     return (
         <div class = 'Emote' >
 
-            <img src = { `/${ icon.file }` } />
+            <img src = { `/Asset/${ icon.file }` } />
 
             <span>{ count }</span>
 

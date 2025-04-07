@@ -31,33 +31,35 @@ async function Messages (
     return (
 
         <BaseDocument
-            name = 'Messages'
-        >
 
-            <form
-                action = '/API/Chat/Message/Select'
-                target = 'void'
-                method = 'post'
-            >
+            body = { 
+                <>
+                    <form
+                        action = '/API/Chat/Message/Select'
+                        target = 'void'
+                        method = 'post'
+                    >
 
-                <div class = 'Messages' >
-                    { elements }
-                </div>
+                        <div class = 'Messages' >
+                            { elements }
+                        </div>
 
-            </form>
+                    </form>
 
-            <iframe name = 'void' />
+                    <iframe name = 'void' />
 
-            <CSS content = { `
-                
-                :root { 
-                    --Selected_Message : ${ selected } ; 
-                    color : red ; 
-                }
+                    <CSS content = { `
+                        
+                        :root { 
+                            --Selected_Message : ${ selected } ; 
+                            color : red ; 
+                        }
 
-            ` } />
+                    ` } />
+                </>
+            }
 
-        </BaseDocument>
+        />
     )
 }
 

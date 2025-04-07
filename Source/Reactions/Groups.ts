@@ -54,14 +54,14 @@ for await ( const folder of folders ){
     const config = await Manifest.parseAsync(toml) as Group
 
     for ( const icon of config.Icon as IconType[] ){
-        icon.file = join(`Asset`,`Emotes`,folder.name,`Emotes`,icon.file)
+        icon.file = join('Asset','Emotes',folder.name,`Emotes`,icon.file)
         icon.id = crypto.randomUUID()
         Reactions.set(icon.id,icon)
     }
 
     Groups.push({
         ... config ,
-        preview : join(`Asset`,`Emotes`,folder.name,'Preview.png') ,
+        preview : join('Asset','Emotes',folder.name,'Preview.png') ,
         id : crypto.randomUUID()
     })
 }

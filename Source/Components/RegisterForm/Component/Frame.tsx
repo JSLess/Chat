@@ -1,31 +1,34 @@
 
 export { RegisterFrame }
 
+import { Stylesheet , apiUrl } from 'Misc'
 import { BaseDocument } from 'Framework'
-import { apiUrl } from 'Misc'
 
 
 function RegisterFrame (){
 
     return (
         <BaseDocument
-            name = 'RegisterForm'
-        >
 
-            <form
-                action = { apiUrl('RegisterForm') }
-                target = '_parent'
-                method = 'post'
-                id = 'Register'
-            >
+            header = {
+                <Stylesheet path = 'RegisterForm' />
+            }
+            
+            body = {
+                <form
+                    action = { apiUrl('RegisterForm') }
+                    target = '_parent'
+                    method = 'post'
+                    id = 'Register'
+                >
 
-                <input
-                    value = 'Create'
-                    type = 'submit'
-                />
+                    <input
+                        value = 'Create'
+                        type = 'submit'
+                    />
 
-            </form>
-
-        </BaseDocument>
+                </form>
+            }
+        />
     )
 }

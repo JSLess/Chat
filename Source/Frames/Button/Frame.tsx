@@ -7,6 +7,7 @@ import { Isolate } from '../../Wrapped/Isolate.tsx'
 import { Content } from './Content.tsx'
 import { Session } from 'Misc/Types'
 import { Icon } from 'UI/Parts'
+import { Stylesheet } from 'Misc';
 
 
 interface FrameArgs {
@@ -21,8 +22,10 @@ interface FrameArgs {
 const Frame = 
     ( { style , slug } : FrameContext ) =>
     ( { icon , uuid } : FrameArgs ) => (
-        
+
         <div class = 'Button' >
+
+            <Stylesheet path = 'Button' />
 
             <Icon name = { icon } />
 

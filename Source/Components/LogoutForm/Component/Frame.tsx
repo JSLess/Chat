@@ -11,10 +11,11 @@ function LogoutFrame (){
 
         <BaseDocument
 
-            name = 'LogoutForm'
-            
             header = {
-                <Stylesheet path = 'Frame' />
+                <>
+                    <Stylesheet path = 'Frame' />
+                    <Stylesheet path = 'LogoutForm' />
+                </>
             }
 
             body = {

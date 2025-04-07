@@ -3,17 +3,14 @@ export type { BaseDocumentArgs }
 export { BaseDocument }
 
 import { ComponentChild } from 'preact'
+import { Stylesheet } from 'Misc'
 import { UTF8Meta } from 'UI/Parts'
-import { Stylesheet } from 'Misc';
 
 
 interface BaseDocumentArgs {
     
-    children ?: ComponentChild
-    name : string
-    
     header ?: ComponentChild
-    body ?: ComponentChild
+    body : ComponentChild
 }
 
 
@@ -21,7 +18,7 @@ function BaseDocument (
     args : BaseDocumentArgs 
 ){
 
-    const { children , header , body , name } = args
+    const { header , body } = args
 
     return (
         <html>
@@ -30,13 +27,11 @@ function BaseDocument (
                 <UTF8Meta />
 
                 <Stylesheet path = 'Reset' />
-                <Stylesheet path = { name } />
 
                 { header }
 
             </head>
             <body>
-                { children }
                 { body }
             </body>
         </html>

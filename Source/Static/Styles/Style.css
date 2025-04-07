@@ -286,22 +286,3 @@ backface-visibility: hidden;
     z-index : 1100 ;
     display : none ;
 }
-
-
-
-
-.Button {
-
-    display : grid ;
-
-    aspect-ratio : 1 ;
-    width : 32px ;
-}
-
-.Button > * {
-
-    grid-area : 1 / 1 ;
-
-    height : 100% ;
-    width : 100% ;
-}

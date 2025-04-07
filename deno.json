@@ -47,6 +47,10 @@
         "Misc/Time" : "./Source/Misc/Time.ts" ,
         "Misc" : "./Source/Misc/mod.ts" ,
 
+        "Config" : "./Source/Config.ts" ,
+        
+        "Services" : "./Source/Services/mod.ts" ,
+
         "Routes/State" : "./Source/Routes/State.ts" ,
 
         "UI/Parts" : "./Source/Components/mod.ts" ,

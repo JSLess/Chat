@@ -72,3 +72,10 @@ function readIconAsDataURI (
 
     return uri
 }
+
+
+export { Headers }
+
+const Headers = {
+    Fetched_Data_Destination : 'Sec-Fetch-Dest'
+}

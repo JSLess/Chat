@@ -1,8 +1,8 @@
 
 export { InputFrame }
 
+import { Stylesheet , apiUrl } from 'Misc'
 import { BaseDocument } from 'Framework'
-import { apiUrl } from 'Misc'
 
 
 function InputFrame (){
@@ -10,8 +10,11 @@ function InputFrame (){
     return (
 
         <BaseDocument
-            name = 'MessageInputForm'
-            
+
+            header = {
+                <Stylesheet path = 'MessageInputForm' />
+            }
+
             body = {
                 
                 <form

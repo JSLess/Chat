@@ -6,10 +6,10 @@ import {
     LogoutForm , LoginForm , AccountId 
 } from 'UI/Parts'
 
+import { Stylesheet , CSS } from 'Misc'
 import { BaseDocument } from 'Framework'
 import { BaseState } from 'Routes/State'
 import { Button } from 'Frames'
-import { CSS } from 'Misc'
 
 
 type PageArgs = BaseState
@@ -25,10 +25,12 @@ async function Page (
 
         <BaseDocument
 
-            name = 'Style'
-
             header = {
-                <title> Chat </title> 
+                <>
+                    <title> Chat </title>
+                
+                    <Stylesheet path = 'Style' />
+                </>
             }
 
             body = {

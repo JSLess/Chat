@@ -1,23 +1,27 @@
 
-export { onlyDocument }
+export { onlyAllowDocuments }
 
+import { Headers , Status } from 'Misc'
 import { Context } from 'Oak'
-import { Status } from 'Misc'
 
 
-function onlyDocument (
+/**
+ *  Only allow the client to continue if 
+ *  they are trying to request a document.
+ */
+
+function onlyAllowDocuments (
     context : Context ,
     next : () => Promise<any>
 ){
-
+    
     const { response , request } = context
 
-    const destination = request.headers.get('sec-fetch-dest')
+    const destination = request.headers
+        .get(Headers.Fetched_Data_Destination)
 
-    const inDocument = ( destination === 'document' )
-
-    if( inDocument )
+    if( destination === 'document' )
         return next()
 
-    response.status = Status.InternalServerError
+    response.status = Status.NotAcceptable
 }
