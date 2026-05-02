@@ -48,7 +48,7 @@
         "Misc" : "./Source/Misc/mod.ts" ,
 
         "Config" : "./Source/Config.ts" ,
-        
+
         "Services" : "./Source/Services/mod.ts" ,
 
         "Routes/State" : "./Source/Routes/State.ts" ,
@@ -63,7 +63,9 @@
         "Render" : "./Source/Misc/Render/mod.ts" ,
         "Routes" : "./Source/Routes/mod.ts" ,
         "Dummy" : "./Source/Misc/Dummy/mod.ts" ,
-        "State" : "./Source/Misc/State.ts"
+        "State" : "./Source/Misc/State.ts" ,
+
+        "API/Routes" : "./Source/Routes/API/Routes.ts"
     },
 
     "compilerOptions" : {

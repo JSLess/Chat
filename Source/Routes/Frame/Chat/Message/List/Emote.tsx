@@ -2,20 +2,17 @@
 export { Emote }
 
 import { IconType } from '../../../../../Reactions/Groups.ts'
-import { Server } from 'Config'
 
 
-interface EmoteArgs {
+interface Args {
     count : number
     icon : IconType
 }
 
 
-function Emote ( 
-    args : EmoteArgs 
-){
-
-    const { count , icon } = args
+function Emote ({
+    count , icon
+} : Args ){
 
     return (
         <div class = 'Emote' >

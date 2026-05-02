@@ -1,6 +1,8 @@
 
 export { Login }
 
+import { API } from '../../../Routes/API/Routes.ts'
+
 
 interface LoginArgs {
     notices : Array<Notice>
@@ -12,8 +14,8 @@ interface Notice {
 }
 
 
-function Login ( 
-    args : LoginArgs 
+function Login (
+    args : LoginArgs
 ){
 
     return (
@@ -34,7 +36,7 @@ function Login (
             <form
                 autocomplete = 'on'
                 target = '_parent'
-                action = '/API/LoginForm'
+                action = { API.LoginForm }
                 method = 'post'
                 id = 'Login'
             >
@@ -44,7 +46,7 @@ function Login (
                     minlength = { 16 }
                     maxlength = { 16 }
                     size = { 19 }
-                    
+
                     autocomplete = 'current-password'
                     placeholder = '0000 0000 0000 0000'
                     inputmode = 'numeric'

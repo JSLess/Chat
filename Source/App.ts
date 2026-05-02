@@ -1,5 +1,6 @@
 
 import { Application } from 'Oak'
+import { Server } from 'Config'
 import { router } from 'Routes'
 
 
@@ -31,6 +32,6 @@ app.addEventListener('error',( event ) => {
 
 
 await app.listen({
-    port : 9000
+    port : Server.Port
 })
 

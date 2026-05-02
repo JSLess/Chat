@@ -1,8 +1,9 @@
 
 export { InputFrame }
 
-import { Stylesheet , apiUrl } from 'Misc'
 import { BaseDocument } from 'Framework'
+import { Stylesheet } from 'Misc'
+import { API } from '../../../Routes/API/Routes.ts'
 
 
 function InputFrame (){
@@ -16,17 +17,17 @@ function InputFrame (){
             }
 
             body = {
-                
+
                 <form
                     encType = 'multipart/form-data'
-                    action = { apiUrl('MessageInputForm') }
+                    action = { API.MessageInputForm }
                     target = '_self'
                     method = 'post'
                     id = 'Input'
                 >
 
                     <input
-                        
+
                         maxLength = { 500 }
                         minLength = { 1 }
 

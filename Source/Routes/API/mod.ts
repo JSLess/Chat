@@ -1,4 +1,6 @@
 
+export * from './Routes.ts'
+
 export { router as api }
 
 import { handleSparks } from './Spark/mod.ts'

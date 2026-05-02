@@ -2,18 +2,18 @@
 export * from './State.ts'
 export { router }
 
-export { 
-    determineSession , 
-    determineCookies , 
+export {
+    determineSession ,
+    determineCookies ,
     recheckCookies ,
-    checkCookies , 
-    initState 
+    checkCookies ,
+    initState
 }
 
 
 import {
-    determineSession , determineCookies , onlyWithCookies , 
-    initState , recheckCookies , onlyAllowDocuments , checkCookies , 
+    determineSession , determineCookies , onlyWithCookies ,
+    initState , recheckCookies , onlyAllowDocuments , checkCookies ,
     onlyFrames , onlySessions , onlyAuthenticated
 } from 'Misc/Routes'
 
@@ -27,7 +27,6 @@ import {
 import { AssetService } from 'Services'
 import { handlePing } from '../Misc/Ping.ts'
 import { routeHome } from './Page/Home/Home.ts'
-import { Server } from 'Config'
 import { Router } from 'Oak'
 import { frame } from './Frame/mod.ts'
 import { Pages } from 'Misc'
@@ -38,9 +37,9 @@ import { api } from './API/mod.ts'
 const router = new Router
 
 // router.use( async ( context , next ) => {
-    
+
 //     const host = context.request.url.hostname
-    
+
 //     const bits = host.split('.')
 
 //     const keep = bits.length - Server.Host.split('.').length

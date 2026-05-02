@@ -3,6 +3,7 @@ export { Page }
 
 import { Stylesheet } from 'Misc';
 import { Groups } from '../../../../Reactions/Groups.ts'
+import { API } from '../../../API/Routes.ts'
 
 
 function Page (){
@@ -18,7 +19,7 @@ function Page (){
         <body>
 
             <form
-                action = '/API/Reactions'
+                action = { API.Reactions.Query }
                 target = 'void'
                 method = 'post'
                 class = 'Header'

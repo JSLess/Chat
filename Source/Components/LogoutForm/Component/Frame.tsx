@@ -1,8 +1,9 @@
 
 export { LogoutFrame }
 
-import { Stylesheet , apiUrl } from 'Misc'
 import { BaseDocument } from 'Framework'
+import { Stylesheet } from 'Misc'
+import { API } from '../../../Routes/API/Routes.ts';
 
 
 function LogoutFrame (){
@@ -21,7 +22,7 @@ function LogoutFrame (){
             body = {
 
                 <form
-                    action = { apiUrl('LogoutForm') }
+                    action = { API.LogoutForm }
                     target = '_parent'
                     method = 'post'
                     id = 'Logout'

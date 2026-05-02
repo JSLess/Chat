@@ -1,24 +1,22 @@
 
-export type { MessagesArgs }
 export { Messages }
 
 import { Message as MessageComp } from './Message.tsx'
 import { Message , Session } from 'Misc/Types'
 import { BaseDocument } from 'Framework'
+import { API } from '../../../../API/Routes.ts'
 import { CSS } from 'Misc'
 
 
-interface MessagesArgs {
+interface Args {
     messages : Array<Message>
     session : Session
 }
 
 
-async function Messages ( 
-    args : MessagesArgs 
-){
-
-    const { messages , session } = args
+async function Messages ({
+    messages , session
+} : Args ){
 
     const elements = await Promise.all(messages
         .map(( message ) => MessageComp({ message , session })))
@@ -32,10 +30,10 @@ async function Messages (
 
         <BaseDocument
 
-            body = { 
+            body = {
                 <>
                     <form
-                        action = '/API/Chat/Message/Select'
+                        action = { API.Chat.Message.Select }
                         target = 'void'
                         method = 'post'
                     >
@@ -49,10 +47,10 @@ async function Messages (
                     <iframe name = 'void' />
 
                     <CSS content = { `
-                        
-                        :root { 
-                            --Selected_Message : ${ selected } ; 
-                            color : red ; 
+
+                        :root {
+                            --Selected_Message : ${ selected } ;
+                            color : red ;
                         }
 
                     ` } />

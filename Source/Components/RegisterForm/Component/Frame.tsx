@@ -1,8 +1,9 @@
 
 export { RegisterFrame }
 
-import { Stylesheet , apiUrl } from 'Misc'
 import { BaseDocument } from 'Framework'
+import { Stylesheet } from 'Misc'
+import { API } from '../../../Routes/API/Routes.ts';
 
 
 function RegisterFrame (){
@@ -13,10 +14,10 @@ function RegisterFrame (){
             header = {
                 <Stylesheet path = 'RegisterForm' />
             }
-            
+
             body = {
                 <form
-                    action = { apiUrl('RegisterForm') }
+                    action = { API.RegisterForm }
                     target = '_parent'
                     method = 'post'
                     id = 'Register'

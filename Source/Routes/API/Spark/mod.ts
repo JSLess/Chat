@@ -7,6 +7,7 @@ import { WithSession } from 'Routes/State'
 import { Context } from 'Oak'
 import { redraw } from 'Render'
 import { Status } from 'Misc'
+import { API } from 'API/Routes'
 
 
 async function handleSparks (
@@ -85,7 +86,7 @@ async function handleSparks (
 
                             const reacts = reactions.get(message.messageId)!
 
-                            const react = reacts.find(( react ) => 
+                            const react = reacts.find(( react ) =>
                                 react.emoteId === reactionId )
 
 
@@ -168,7 +169,7 @@ async function handleSparks (
                     frame?.write(`
                         <style>
                             [ data-option = ${ option } ] {
-                                list-style-image : url('/API/Spark?Scope=Message:Option&Action=Unclick&Option=${ option }&Message=${ messageId }&Time=${ Date.now() }') ;
+                                list-style-image : url('${ API.Spark }?Scope=Message:Option&Action=Unclick&Option=${ option }&Message=${ messageId }&Time=${ Date.now() }') ;
                             }
                         </style>
                     `)
@@ -180,7 +181,7 @@ async function handleSparks (
                     frame?.write(`
                         <style>
                             [ data-option = ${ option } ]:active {
-                                list-style-image : url('/API/Spark?Scope=Message:Option&Action=Click&Option=${ option }&Message=${ messageId }&Time=${ Date.now() }') ;
+                                list-style-image : url('${ API.Spark }?Scope=Message:Option&Action=Click&Option=${ option }&Message=${ messageId }&Time=${ Date.now() }') ;
                             }
                         </style>
                     `)

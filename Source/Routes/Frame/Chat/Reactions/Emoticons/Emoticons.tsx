@@ -3,7 +3,8 @@ export type { EmoticonsArgs }
 export { Emoticons }
 
 import { Groups } from '../../../../../Reactions/Groups.ts'
-import { apiUrl, CSS } from 'Misc'
+import { CSS } from 'Misc'
+import { API } from '../../../../API/Routes.ts';
 
 
 interface EmoticonsArgs {
@@ -11,8 +12,8 @@ interface EmoticonsArgs {
 }
 
 
-function Emoticons ( 
-    args : EmoticonsArgs 
+function Emoticons (
+    args : EmoticonsArgs
 ){
 
     const { groupId } = args
@@ -24,7 +25,7 @@ function Emoticons (
         return null
 
     const emoticons = group.Icon.map(( icon ) => (
-        
+
         <div data-reaction = { icon.id } >
             <img
                 height = { 32 }
@@ -37,9 +38,9 @@ function Emoticons (
     const style = group.Icon.map(( icon ) => `
 
         [ data-reaction = '${ icon.id }' ]:active {
-            list-style-image : url('${ apiUrl(`Spark?Scope=Reactions:Use&Action=Click&Reaction=${ icon.id }&Time=${ Date.now() }`) }') ;
+            list-style-image : url('${ API.Spark }?Scope=Reactions:Use&Action=Click&Reaction=${ icon.id }&Time=${ Date.now() }') ;
         }
-        
+
     `).join('')
 
     return <>

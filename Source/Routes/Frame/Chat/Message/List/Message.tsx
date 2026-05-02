@@ -3,25 +3,24 @@ export { Component as Message }
 
 import { Reactions , IconType } from '../../../../../Reactions/Groups.ts'
 import { Message , Session } from 'Misc/Types'
-import { apiUrl , CSS } from 'Misc'
 import { toAgoString } from 'Misc/Time'
 import { reactions } from 'State'
 import { userById } from 'Database'
 import { Emote } from './Emote.tsx'
 import { Icon } from 'UI/Parts'
+import { API } from '../../../../API/Routes.ts'
+import { CSS } from 'Misc'
 
 
-interface MessageArgs {
+interface Args {
     message : Message ,
     session : Session
 }
 
 
-async function Component (
-    args : MessageArgs
-){
-
-    const { message , session } = args
+async function Component ({
+    message , session
+} : Args ){
 
     const { messageId , time } = message
 
@@ -35,9 +34,9 @@ async function Component (
 
     const elements = ( emotes ?? [] )
         .filter(( reaction ) => reaction.count )
-        .map(( reaction ) => [ 
-            Reactions.get(reaction.emoteId) , 
-            reaction.count 
+        .map(( reaction ) => [
+            Reactions.get(reaction.emoteId) ,
+            reaction.count
         ] as const )
         .filter(( value ) : value is [ IconType , number ] => !! value[0] )
         .map(([ reaction , count ]) => (
@@ -58,7 +57,7 @@ async function Component (
     params.set('Action','Click')
     params.set('Time',Date.now().toString())
     params.set('Message',messageId)
-    
+
     const params_context = new URLSearchParams(params)
     params_context.set('Option','Context')
 
@@ -67,13 +66,13 @@ async function Component (
 
 
     const css = `
-    
-        [ data-option = Context ]:active {
-            list-style-image : url('${ apiUrl(`Spark?${ params_context.toString() }`) }') ;
+
+        [ data-option = 'Context' ]:active {
+            list-style-image : url('${ API.Spark }?${ params_context.toString() }') ;
         }
 
-        [ data-option = React ]:active {
-            list-style-image : url('${ apiUrl(`Spark?${ params_react.toString() }`) }']) ;
+        [ data-option = 'React' ]:active {
+            list-style-image : url('${ API.Spark }?${ params_react.toString() }']) ;
         }
     `
 
@@ -91,7 +90,7 @@ async function Component (
         >
 
             <form
-                action = '/Chat/React'
+                action = { API.Chat.React }
                 target = 'void'
                 method = 'post'
             >
@@ -109,7 +108,7 @@ async function Component (
                     { ( !! elements.length ) && (
 
                         <div class = 'Emotes' >
-                            { elements } 
+                            { elements }
                         </div>
 
                     ) }
