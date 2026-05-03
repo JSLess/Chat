@@ -1,4 +1,5 @@
 
+export type { MessageOption }
 export { Component as Message }
 
 import { Reactions , IconType } from '../../../../../Reactions/Groups.ts'
@@ -16,6 +17,14 @@ interface Args {
     message : Message ,
     session : Session
 }
+
+
+const Options = {
+    Context : 'Context' ,
+    React : 'React'
+} as const
+
+type MessageOption = typeof Options[ keyof typeof Options ]
 
 
 async function Component ({
@@ -67,11 +76,11 @@ async function Component ({
 
     const css = `
 
-        [ data-option = 'Context' ]:active {
+        [ data-option = '${ Options.Context }' ]:active {
             list-style-image : url('${ API.Spark }?${ params_context.toString() }') ;
         }
 
-        [ data-option = 'React' ]:active {
+        [ data-option = '${ Options.React }' ]:active {
             list-style-image : url('${ API.Spark }?${ params_react.toString() }']) ;
         }
     `

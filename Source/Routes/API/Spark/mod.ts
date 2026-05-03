@@ -3,6 +3,7 @@
 export { handleSparks }
 
 import { messages , reactions } from 'State'
+import { MessageOption } from '../../Frame/Chat/Message/List/Message.tsx'
 import { WithSession } from 'Routes/State'
 import { Context } from 'Oak'
 import { redraw } from 'Render'
@@ -114,7 +115,7 @@ async function handleSparks (
                     frame?.write(`
                         <style>
                             [ data-reaction = '${ reactionId }' ]:not(:active) {
-                                list-style-image : url('/API/Spark?Scope=Reactions:Use&Action=Unclick&Reaction=${ reactionId }&Time=${ Date.now() }') ;
+                                list-style-image : url('${ API.Spark }?Scope=Reactions:Use&Action=Unclick&Reaction=${ reactionId }&Time=${ Date.now() }') ;
                             }
                         </style>
                     `)
@@ -126,7 +127,7 @@ async function handleSparks (
                     frame?.write(`
                         <style>
                             [ data-reaction = '${ reactionId }' ]:active {
-                                list-style-image : url('/API/Spark?Scope=Reactions:Use&Action=Click&Reaction=${ reactionId }&Time=${ Date.now() }') ;
+                                list-style-image : url('${ API.Spark }?Scope=Reactions:Use&Action=Click&Reaction=${ reactionId }&Time=${ Date.now() }') ;
                             }
                         </style>
                     `)
@@ -143,7 +144,7 @@ async function handleSparks (
             const frame = session.frames.messages
 
             const messageId = search.get('Message')!
-            const option = search.get('Option')!
+            const option = search.get('Option') as MessageOption
 
             switch ( action ){
                 case 'Click' : {

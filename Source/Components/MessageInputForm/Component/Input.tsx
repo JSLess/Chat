@@ -3,7 +3,7 @@ export { InputFrame }
 
 import { BaseDocument } from 'Framework'
 import { Stylesheet } from 'Misc'
-import { API } from '../../../Routes/API/Routes.ts'
+import { API } from 'API/Routes'
 
 
 function InputFrame (){

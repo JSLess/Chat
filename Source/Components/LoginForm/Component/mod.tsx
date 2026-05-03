@@ -1,7 +1,7 @@
 
 export { Login }
 
-import { API } from '../../../Routes/API/Routes.ts'
+import { API } from 'API/Routes'
 
 
 interface LoginArgs {

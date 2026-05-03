@@ -4,8 +4,8 @@ export { Messages }
 import { Message as MessageComp } from './Message.tsx'
 import { Message , Session } from 'Misc/Types'
 import { BaseDocument } from 'Framework'
-import { API } from '../../../../API/Routes.ts'
-import { CSS } from 'Misc'
+import { Stylesheet , CSS } from 'Misc'
+import { API } from 'API/Routes'
 
 
 interface Args {
@@ -29,6 +29,10 @@ async function Messages ({
     return (
 
         <BaseDocument
+
+            header = {
+                <Stylesheet path = 'Messages' />
+            }
 
             body = {
                 <>
