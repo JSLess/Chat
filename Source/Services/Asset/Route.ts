@@ -1,6 +1,9 @@
 
 export { route }
 
+import { MessagesStyle } from '../../Routes/Frame/Chat/Message/List/Messages.tsx'
+import { MessageStyle } from '../../Routes/Frame/Chat/Message/List/Message.tsx'
+
 import { Context } from 'Oak'
 import { Status } from 'Misc'
 
@@ -13,6 +16,12 @@ const notice = `
 `
 
 const root = `${ Deno.cwd() }/Source/Static`
+
+
+const Dict = {
+    '/Asset/Styles/Messages.css' : MessagesStyle ,
+    '/Asset/Styles/Message.css' : MessageStyle
+} as Record<string,string>
 
 
 async function route (
@@ -50,6 +59,12 @@ async function route (
 
     if( ! Pattern.test(pathname) ){
         response.status = Status.Forbidden
+        return
+    }
+
+    if( pathname in Dict ){
+        response.headers.set('Content-Type','text/css')
+        response.body = Dict[ pathname ]
         return
     }
 
