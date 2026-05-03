@@ -12,6 +12,7 @@ import { Emote } from './Emote.tsx'
 import { Icon } from 'UI/Parts'
 import { API } from '../../../../API/Routes.ts'
 import { CSS } from 'Misc'
+import { SetVar } from 'Framework';
 
 
 interface Args {
@@ -107,7 +108,7 @@ async function Component ({
 
                 <div
                     data-message = { messageId }
-                    style = { `----Message_Index : ${ number }` }
+                    style = { SetVar('Message_Index',number,4) }
                     class = 'Message'
                 >
 

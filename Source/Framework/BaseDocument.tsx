@@ -8,14 +8,13 @@ import { UTF8Meta } from 'UI/Parts'
 
 
 interface BaseDocumentArgs {
-    
     header ?: ComponentChild
     body : ComponentChild
 }
 
 
-function BaseDocument ( 
-    args : BaseDocumentArgs 
+function BaseDocument (
+    args : BaseDocumentArgs
 ){
 
     const { header , body } = args

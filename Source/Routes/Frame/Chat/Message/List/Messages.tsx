@@ -3,8 +3,8 @@ export { Messages }
 export { Style as MessagesStyle }
 
 import { Message as MessageComp } from './Message.tsx'
+import { BaseDocument , SetVar } from 'Framework'
 import { Message , Session } from 'Misc/Types'
-import { BaseDocument } from 'Framework'
 import { Stylesheet , CSS } from 'Misc'
 import { API } from 'API/Routes'
 
@@ -56,7 +56,7 @@ async function Messages ({
                     <CSS content = { `
 
                         :root {
-                            --Selected_Message : ${ selected } ;
+                            ${ SetVar('Selected_Message',selected) } ;
                             color : red ;
                         }
 

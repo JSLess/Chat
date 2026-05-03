@@ -3,6 +3,7 @@ export { middleware as routeSelectMessage }
 
 import { messages , sessions } from 'State'
 import { Context } from 'Oak'
+import { SetVar } from 'Framework'
 import { Status } from 'Misc'
 import { z } from 'Zod'
 
@@ -16,7 +17,7 @@ type SelectForm = z.infer<typeof SelectForm>
 
 
 const Template_Selected_Message = ( messageIndex : number ) =>
-    `<style> :root { --Selected_Message : ${ messageIndex } ; } </style>`
+    `<style> :root { ${ SetVar('Selected_Message',messageIndex) } </style>`
 
 
 

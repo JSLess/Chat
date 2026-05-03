@@ -3,6 +3,7 @@ export { Page }
 
 import { Stylesheet , CSS } from 'Misc'
 import { Groups } from '../../../../../Reactions/Groups.ts'
+import { SetVar } from 'Framework'
 import { API } from '../../../../API/Routes.ts'
 
 
@@ -12,7 +13,7 @@ function Page (){
         .map(( group ) => `
 
             [ data-group = '${ group.id }' ]{
-                ---Tint : ${ group.tint } ;
+                ${ SetVar('Tint',group.tint) } ;
             }
 
             [ data-group = '${ group.id }' ] span:first-child {
